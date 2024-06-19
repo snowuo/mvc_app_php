@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  bdd:
+    image: mysql:5.7-debian
+    container_name: bdd
+    environment:
+      MYSQL_ROOT_PASSWORD: changeme
+    volumes:
+      - /root/proyectos/dcompose/volumen:/var/lib/mysql
+    networks:
+      - mired
+
+  myphp:
+    image: php:8.2.20-apache
+    container_name: myphp
+    volumes:
+      - /root/proyectos/dcompose/sources:/var/www/html
+    networks:
+      - mired
+    depends_on:
+      - bdd
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+networks:
+  mired:
+    driver: bridge
