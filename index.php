@@ -21,6 +21,11 @@
                 echo 'Sesión iniciada en index';
                 break;
             
+            case 'alta_queja':
+                include 'views/form_quejas.php';
+            
+                break;
+            
             case 'salir':
                 $controller->logout();
             break;
