@@ -23,11 +23,11 @@
                 echo 'Error: ' . $e->getMessage();
                 return false;
             }
+        }
 
-
-
-
-
+        public function get_quejas(){
+            $stmt = $this->db->query('SELECT * FROM quejas');
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
 
