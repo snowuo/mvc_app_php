@@ -18,6 +18,11 @@ class controller{
         }        
     }
 
+    public function menu_productos(){
+        return $this->model->get_productos();
+
+    }
+
     public function logout(){
 
         $_SESSION = array();

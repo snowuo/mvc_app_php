@@ -8,13 +8,14 @@
 
         public function log_in($username,$password){
             try {
-                $stmt = $this->db->prepare('SELECT id, username, password from user WHERE username = :username');
+                $stmt = $this->db->prepare('SELECT id, username, password, token from user WHERE username = :username');
                 $stmt->execute(['username' => $username]);
                 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
                 if ($user && $user['password'] == $password) {
                     $_SESSION['id'] = $user['id'];
                     $_SESSION['username'] = $user['username'];
+                    $_SESSION['token'] = $user['token'];
                     return true;
                 } else {
                     return false;
@@ -30,7 +31,16 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-
+        public function get_productos(){
+            try {    
+                $stmt = $this->db->query('SELECT productId, product FROM Productos');
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch(PDOException $e) {
+                // En caso de error en la conexión o consulta, mostrar el mensaje de error
+                echo "La conexión falló: " . $e->getMessage();
+                die();
+            }
+        }
 
 
     }

@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<?php
+    $token = isset($_SESSION['token']) ? $_SESSION['token'] : '';
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,14 +15,24 @@
   <div class="card" style="width: 90%;">
     <div class="card-body">
         <div class="table-responsive">
-            <form action="inicio.php" method="post">
+            <form id = "form_queja">
             <table class="table table-bordered">
                 <tr>
                     <td class="text-center w-50">
+                    <label for="QuejasDenominacion">Denominación:</label>
+                        <input type="text" name="QuejasDenominacion" id="QuejasDenominacion" value = "Sefi Estratégicos, S.A.P.I. de C.V., SOFOM, E.N.R." readonly>
+                    </td>
+                    <td class="text-center w-50">
+                        <label for="QuejasSector">Sector:</label>
+                        <input type="text" name="QuejasSector" id="QuejasSector" value = "Sociedades Financieras de Objeto Múltiple E.N.R." readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center w-50">                           
    
                             Mes a informar
 
-                            <select name="QuejasNoTrim" id="QuejasNoTrim" class="form-control" style="width: 50%;">
+                            <select name="QuejasNoMes" id="QuejasNoTrim" class="form-control" style="width: 50%;">
                                 <option value="1">Enero</option>
                                 <option value="2">Febrero</option>
                                 <option value="3">Marzo</option>
@@ -45,7 +57,7 @@
                 <tr>
                     <td class="text-center w-50">
                             <label for="QuejasNum">Folio de queja:</label>
-                            <input type="number" id="QuejasFolio" name="QuejasFolio" value="1" readonly>
+                            <input type="text" id="QuejasFolio" name="QuejasFolio" readonly>
                     </td>
                     <td class="text-center w-50">
                             <label for="quejasFecRecepcion">Fecha de la queja (dd/mm/aaaa):</label>
@@ -55,40 +67,35 @@
                 </tr>
                 <tr>
                     <td class="text-center w-50">
-                    <label for="MedioId">Medio de recepción o canal</label>
-                        <select name="MedioId" id="MedioId">
+                    <label for="QuejasMedio">Medio de recepción o canal</label>
+                        <select name="QuejasMedio" id="MedioId">
                             <option value="1">Al parecer hubo un error, intentalo mas tarde</option>
                         </select>
                    </td>
                     <td class="text-center w-50">
-                    <label for="NivelATId">Nivel de atención o contacto</label>
-                        <select name="NivelATId" id="nivelATSelect">
+                    <label for="QuejasNivelAT">Nivel de atención o contacto</label>
+                        <select name="QuejasNivelAT" id="nivelATSelect">
                             <option value="1">Al parecer hubo un error, intentalo mas tarde</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td class="text-center w-50">
-                        <label for="producto">Producto y/o servicio (máx. 12 caracteres):</label>
-                        <select id="producto" name="product">
-                        <?php
-                            // Verificar si hay resultados de la consulta
-                            if ($products) {
-                                // Iterar sobre los resultados y generar las opciones del select
-                                foreach ($products as $product) {
-                                    echo '<option value="' . $product["productId"] . '">' . $product["product"] . '</option>';
-                                }
-                            } else {
-                                // Si no hay resultados, mostrar un mensaje de error
-                                echo '<option value="1">Al parecer hubo un error, inténtalo más tarde</option>';
-                            }
-                            ?>
+                        <label for="QuejasProducto">Producto y/o servicio (máx. 12 caracteres):</label>
+                        <select id="QuejasProducto" name="product">
+
+                          <?php foreach ($productos as $producto): ?>
+                            <option value="<?= htmlspecialchars($producto['productId']) ?>">
+                                <?= htmlspecialchars($producto['product']) ?>
+                            </option>
+                        <?php endforeach; ?>
+                          
                         </select>
                         
                    </td>
                     <td class="text-center w-50">
-                        <label for="CausasId">Causa de la queja (máx. 4 caracteres):</label>
-                        <input type="text" id="causasId" name="CausasId" maxlength="4">
+                        <label for="QuejasCausa">Causa de la queja (máx. 4 caracteres):</label>
+                        <input type="text" id="causasId" name="QuejasCausa" maxlength="4">
                     </td>
                 </tr>
                 <tr>
@@ -135,8 +142,8 @@
                 </tr>
                 <tr>
                     <td class="text-center w-50">                        
-                        <label for="EstadosId">Entidad federativa:</label>
-                        <input type="number" id="EstadosId" name="EstadosId" value="1" readonly  style="display: none">
+                        <label for="QuejasEstados">Entidad federativa:</label>
+                        <input type="number" id="EstadosId" name="QuejasEstados" value="1" readonly  style="display: none">
                         <input type="text" id="Quejasestado" value = "Estado" readonly>
                    </td>
                     <td class="text-center w-50">
@@ -196,8 +203,8 @@
                             <input type="number" id="QuejasNumPenal" name="QuejasNumPenal" required>
                 </td>
                     <td class="text-center w-50">
-                    <label for="PenalizacionId">tipo de penalizacion:</label>
-                        <select name="PenalizacionId" id="PenalizacionId">
+                    <label for="QuejasPenalizacion">tipo de penalizacion:</label>
+                        <select name="QuejasPenalizacion" id="PenalizacionId">
                             <option value= 1>Contractuales - Cancelación del contrato</option>
                             <option value= 2>Contractuales - Reasignacion de cartera</option>
                             <option value= 3>Económicas - Multa</option>
@@ -215,6 +222,12 @@
 </div>
     
 
+<script type="text/javascript">
+        var token = "<?php echo htmlspecialchars($token, ENT_QUOTES, 'UTF-8'); ?>";
+        
+    </script>
     <?php echo $scripts?>
+    <script src="js/menus.js"></script>
+
 </body>
 </html>

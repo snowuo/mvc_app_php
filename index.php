@@ -4,6 +4,7 @@
     require 'controller.php';
     require_once 'views/partials/menu.php';
     $controller = new controller();
+    $productos = $controller->menu_productos();
     //revisamos la sesión vigente
     if(!isset($_SESSION['username'])){
         if(isset($_POST['username']) && isset($_POST['password']) ){
@@ -18,12 +19,11 @@
         switch ($action) {
             case 'index':
                 include 'views/main.php';
-                echo 'Sesión iniciada en index';
+                echo $_SESSION['token'];
                 break;
             
             case 'alta_queja':
-                include 'views/form_quejas.php';
-            
+                include 'views/form_quejas.php';            
                 break;
             
             case 'salir':
