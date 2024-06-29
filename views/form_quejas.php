@@ -82,7 +82,7 @@
                 <tr>
                     <td class="text-center w-50">
                         <label for="QuejasProducto">Producto y/o servicio (máx. 12 caracteres):</label>
-                        <select id="QuejasProducto" name="product">
+                        <select id="QuejasProducto" name="QuejasProducto">
 
                           <?php foreach ($productos as $producto): ?>
                             <option value="<?= htmlspecialchars($producto['productId']) ?>">
@@ -95,7 +95,9 @@
                    </td>
                     <td class="text-center w-50">
                         <label for="QuejasCausa">Causa de la queja (máx. 4 caracteres):</label>
-                        <input type="text" id="causasId" name="QuejasCausa" maxlength="4">
+                        <select  id="causasId" name="QuejasCausa" style="width: 200px;">
+                            <option value="0">Ocurrió un error</option>
+                        </select>
                     </td>
                 </tr>
                 <tr>

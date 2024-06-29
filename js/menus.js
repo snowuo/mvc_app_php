@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     actualiza_catalogo_nivat();
     actualiza_catalogo_Medio_rec();
     Crear_Folio();
+    menu_causas();
 });
 
 
@@ -286,9 +287,103 @@ document.getElementById('QuejasTipoPersona').addEventListener('change', function
         folio.value = `Sefi/${fecha.getMonth()}-${fecha.getFullYear()}/${generateShortUUID()}`;        
     }
 
-    function hola() {
-        console.log("hola");
-        console.log(token); // Puedes usar la variable en JavaScript
-    }
+document.getElementById('QuejasProducto').addEventListener('change',menu_causas)
 
-    hola();
+function menu_causas() {
+    const producto = document.getElementById('QuejasProducto').value;
+    const url = `https://api.condusef.gob.mx/catalogos/causas-list/?product=${producto}`;
+    document.getElementById('causasId').value = producto;
+    
+    fetch(url,{
+        method: 'GET',  // o 'POST' dependiendo de la solicitud que necesites hacer
+        headers: {
+            'Authorization': token,
+            'Content-Type': 'application/json'  // Dependiendo del tipo de contenido que la API espera
+        }
+    })
+
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);              
+
+            }else{
+                return response.json();
+            }
+        })
+        .then(data => {
+            const select = document.getElementById('causasId');
+            select.length = 0;
+            if (data.causas && data.causas.length > 0) {
+                data.causas.forEach(causa => {
+                    let option = new Option(causa.causa,causa.causaId);
+                    select.add(option);
+                })
+            }
+        })
+}
+
+// script.js
+// script.js
+
+
+
+            document.getElementById('form_queja').addEventListener('submit', function(event) {
+                event.preventDefault(); // Evita el envío del formulario
+            
+                let form = event.target;
+                let formData = new FormData(form);
+                let formObject = {};
+            
+                // Definir los nombres de los campos que deben ser numéricos
+                let numericFields = ['QuejasNoMes','QuejasNum', 'QuejasMedio', 'QuejasNivelAT', 'QuejasEstatus', 'QuejasCP', 'QuejasColId', 'QuejasLocId', 'QuejasMunId', 'QuejasEstados', 'QuejasTipoPersona','QuejasEdad', 'QuejasRespuesta', 'QuejasNumPenal', 'QuejasPenalizacion'];
+            
+                // Definir los nombres de los campos que deben ser fechas
+                let dateFields = ['QuejasFecRecepcion', 'QuejasFecResolucion', 'QuejasFecNotificacion'];
+            
+                formData.forEach((value, key) => {
+                    // Verificar si el campo debe ser numérico
+                    if (numericFields.includes(key)) {
+                        formObject[key] = Number(value);
+                    } 
+                    // Verificar si el campo debe ser una fecha
+                    else if (dateFields.includes(key)) {
+                        if (value === "") {
+                            formObject[key] = null; // Asignar null si el campo está vacío
+                        } else {
+                            formObject[key] = convertDateFormat(value);
+                        }
+                    } 
+                    else {
+                        formObject[key] = value;
+                    }
+                });
+            
+                let jsonString = JSON.stringify(formObject, null, 2);
+                downloadJSON(jsonString, 'formulario.json');
+            });
+            
+            function convertDateFormat(dateString) {
+                // Convertir fecha de yyyy-mm-dd a dd/mm/yyyy
+                let regex = /^(\d{4})-(\d{2})-(\d{2})$/;
+                let matches = dateString.match(regex);
+            
+                if (matches) {
+                    let year = matches[1];
+                    let month = matches[2];
+                    let day = matches[3];
+                    return `${day}/${month}/${year}`;
+                }
+                return dateString; // Si no coincide con el formato esperado, retornar la cadena original
+            }
+            
+            function downloadJSON(jsonString, filename) {
+                let blob = new Blob([jsonString], { type: 'application/json' });
+                let link = document.createElement('a');
+            
+                link.href = URL.createObjectURL(blob);
+                link.download = filename;
+                link.click();
+            
+                URL.revokeObjectURL(link.href);
+            }
+            
