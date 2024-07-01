@@ -42,6 +42,17 @@
             }
         }
 
+        public function set_queja($queja){
+            try{
+                $stmt = $this->db->prepare("INSERT INTO quejas_data (data_queja) VALUES (:queja)");        
+                $stmt->execute([':queja' => $queja]);
+            }catch(PDOException $e) {
+                // En caso de error en la conexión o consulta, mostrar el mensaje de error
+                echo "La conexión falló: " . $e->getMessage();
+                die();
+            }
+        }
+
 
     }
     

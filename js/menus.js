@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     actualiza_catalogo_Medio_rec();
     Crear_Folio();
     menu_causas();
+    actualizarOpcionesRespuesta('1');
 });
 
 
@@ -33,26 +34,58 @@ document.addEventListener('DOMContentLoaded', function() {
    // Función para actualizar las opciones de QuejasRespuesta
    function actualizarOpcionesRespuesta(valorEstatus) {
         const selectRespuesta = document.getElementById('QuejasRespuesta');
+        const quejasFecResolucion = document.getElementById('quejasFecResolucion');
+        const quejasFecNotificacion = document.getElementById('quejasFecNotificacion');
+        const QuejasNumPenal = document.getElementById('QuejasNumPenal');
+
         // Limpiar las opciones existentes
         selectRespuesta.innerHTML = '';
 
         // Definir las nuevas opciones basadas en el valor de QuejasEstatus
         if (valorEstatus === '2') {
+
+            selectRespuesta.disabled = false; 
+
+
             const opciones = [
                 { valor: '1', texto: 'Totalmente favorable al usuario' },
                 { valor: '2', texto: 'Desfavorable al usuario' },
                 { valor: '3', texto: 'Parcialmente favorable al usuario' }
             ];
-
             // Agregar las nuevas opciones al select
             opciones.forEach(opcion => {
                 const elementoOpcion = new Option(opcion.texto, opcion.valor);
                 selectRespuesta.add(elementoOpcion);
             });
+
+            quejasFecResolucion.type = 'date';
+            quejasFecResolucion.readOnly = false;
+            quejasFecNotificacion.type = 'date';
+            quejasFecNotificacion.readOnly = false;
+            QuejasNumPenal.value = 1;
+            QuejasNumPenal.readOnly = false;
+
         } else if (valorEstatus === '1') {
             // Solo se agrega una opción si el valor es '2'
-            const elementoOpcion = new Option('Pendiente', '1');
+            
+            quejasFecResolucion.type = 'text';
+            quejasFecResolucion.value = '';
+            quejasFecResolucion.readOnly = true; 
+
+            quejasFecNotificacion.type = 'text';
+            quejasFecNotificacion.value = '';
+            quejasFecNotificacion.readOnly = true; 
+
+            QuejasNumPenal.value = 0;
+            QuejasNumPenal.readOnly = true;
+
+            
+            const elementoOpcion = new Option('No aplica', '0');
             selectRespuesta.add(elementoOpcion);
+            
+
+            
+
 
         }
     }
@@ -244,26 +277,31 @@ document.getElementById('QuejasTipoPersona').addEventListener('change', function
     var tipoPersona = this.value;
     var edadInput = document.getElementById('QuejasEdad');
     var sexoSelect = document.getElementById('QuejasSexo');
+    sexoSelect.innerHTML = " ";
 
     if (tipoPersona === '2') { // Si es Persona Moral
 
+        const elementoOpcion = new Option('No disponible', '0');
+        sexoSelect.add(elementoOpcion);
+        edadInput.readOnly = true;
+        sexoSelect.readOnly = true;
 
-        // Desactivar los campos de edad y sexo
 
-
-        /*edadInput.readOnly = true;
-        sexoSelect.readOnly = true;*/
-        edadInput.disabled = true;
-        sexoSelect.disabled = true;
-
-                // Reiniciar el valor de la edad y sexo a null
-                edadInput.value = null;
-                sexoSelect.value = null;
+                edadInput.value = '0';
 
     } else {
-        // Habilitar los campos de edad y sexo
+
         edadInput.disabled = false;
         sexoSelect.disabled = false;
+        const opciones = [
+            { valor: 'H', texto: 'Hombre' },
+            { valor: 'M', texto: 'Mujer' },
+        ];
+        // Agregar las nuevas opciones al select
+        opciones.forEach(opcion => {
+            const elementoOpcion = new Option(opcion.texto, opcion.valor);
+            sexoSelect.add(elementoOpcion);
+        });
     }
 });
 // a partir de aqui se actualiza la fecha conforme al periodo de envío
@@ -335,15 +373,36 @@ function menu_causas() {
                 let formObject = {};
             
                 // Definir los nombres de los campos que deben ser numéricos
-                let numericFields = ['QuejasNoMes','QuejasNum', 'QuejasMedio', 'QuejasNivelAT', 'QuejasEstatus', 'QuejasCP', 'QuejasColId', 'QuejasLocId', 'QuejasMunId', 'QuejasEstados', 'QuejasTipoPersona','QuejasEdad', 'QuejasRespuesta', 'QuejasNumPenal', 'QuejasPenalizacion'];
+                let numericFields = ['QuejasNoMes','QuejasNum', 'QuejasMedio', 'QuejasNivelAT', 'QuejasEstatus', 'QuejasCP', 'QuejasColId', 'QuejasLocId', 'QuejasMunId', 'QuejasEstados', 'QuejasTipoPersona', 'QuejasPenalizacion'];
             
                 // Definir los nombres de los campos que deben ser fechas
                 let dateFields = ['QuejasFecRecepcion', 'QuejasFecResolucion', 'QuejasFecNotificacion'];
+
+                let qr = ['QuejasRespuesta', 'QuejasNumPenal','QuejasEdad']
+                let qrt = ['QuejasSexo']
             
                 formData.forEach((value, key) => {
                     // Verificar si el campo debe ser numérico
-                    if (numericFields.includes(key)) {
-                        formObject[key] = Number(value);
+                    if (qrt.includes(key)){
+                        if (value === "0") {
+                            formObject[key] = null                                                    
+                        }else{
+                            formObject[key] = value;
+                        }
+                    }else if (qr.includes(key)){
+                        if (value === "0") {
+                            formObject[key] = null                                                    
+                        }else{
+                            formObject[key] = Number(value);
+                        }
+                        
+                    }else if (numericFields.includes(key)) {
+                        if (value === "") {
+                            formObject[key] = null                                                    
+                        }else{
+                            formObject[key] = Number(value);
+                        }
+                        
                     } 
                     // Verificar si el campo debe ser una fecha
                     else if (dateFields.includes(key)) {
@@ -359,7 +418,25 @@ function menu_causas() {
                 });
             
                 let jsonString = JSON.stringify(formObject, null, 2);
-                downloadJSON(jsonString, 'formulario.json');
+
+                   //insertar el envío por formulario 
+
+                   fetch('http://localhost/app_php/index.php?action=save-form',{
+                    method: 'POST',
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    body:jsonString
+                   })
+                   .then(response => response.text())
+                   .then(data => {alert(data);})
+                   .catch(error => {console.error('Error',error);
+
+                   });
+                   //termina
+
+                   console.log('termina');
+                //downloadJSON(jsonString, 'formulario.json');
             });
             
             function convertDateFormat(dateString) {

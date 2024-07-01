@@ -25,7 +25,12 @@
             case 'alta_queja':
                 include 'views/form_quejas.php';            
                 break;
-            
+            case 'save-form':
+                echo 'Esto se envió a save-form: ';
+                $json = file_get_contents('php://input');
+                echo $json;
+                $controller->set_queja($json);
+                break;            
             case 'salir':
                 $controller->logout();
             break;

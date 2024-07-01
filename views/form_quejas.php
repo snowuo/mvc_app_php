@@ -194,7 +194,7 @@
                    </td>
                     <td class="text-center w-50">
                        <label for="QuejasRespuesta">Sentido de la resolucón:</label>
-                            <select name="QuejasRespuesta" id="QuejasRespuesta">
+                            <select name="QuejasRespuesta" id="QuejasRespuesta" required>
                                 <option value="1">Pendiente</option>
                             </select>
                     </td>

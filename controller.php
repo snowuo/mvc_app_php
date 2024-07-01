@@ -24,9 +24,7 @@ class controller{
     }
 
     public function logout(){
-
         $_SESSION = array();
-
         if (ini_get("session.use_cookies")) {
             $params = session_get_cookie_params();
             setcookie(session_name(), '', time() - 42000,
@@ -37,8 +35,10 @@ class controller{
         session_destroy();
         header("location: index.php");
         exit();
+    }
 
-
+    public function set_queja($queja){
+        $this->model->set_queja($queja);
     }
 }
 ?>
