@@ -53,6 +53,17 @@
             }
         }
 
+        public function get_listado_quejas(){
+            try {    
+                $stmt = $this->db->query('SELECT * FROM quejas_data');
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch(PDOException $e) {
+                // En caso de error en la conexión o consulta, mostrar el mensaje de error
+                echo "La conexión falló: " . $e->getMessage();
+                die();
+            }
+        }
+
 
     }
     

@@ -18,8 +18,7 @@
 
         switch ($action) {
             case 'index':
-                include 'views/main.php';
-                echo $_SESSION['token'];
+                include 'views/main.php';                
                 break;
             
             case 'alta_queja':

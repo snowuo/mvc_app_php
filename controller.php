@@ -40,5 +40,9 @@ class controller{
     public function set_queja($queja){
         $this->model->set_queja($queja);
     }
+
+    public function get_listado_quejas(){
+        return $this->model->get_listado_quejas();
+    }
 }
 ?>

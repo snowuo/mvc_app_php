@@ -429,7 +429,7 @@ function menu_causas() {
                     body:jsonString
                    })
                    .then(response => response.text())
-                   .then(data => {alert(data);})
+                   .then(data => {alert(data);window.location.href = 'http://localhost/app_php/index.php';})
                    .catch(error => {console.error('Error',error);
 
                    });
