@@ -9,6 +9,7 @@ async function fetchData(url) {
       console.error("Error al obtener los datos:", error);
       // Aquí podrías mostrar una alerta o mensaje indicando el problema con la aplicación
       alert("En este momento parece haber problemas con la aplicación, no responden los servidores de Condusef");
+      
     }
   }
   

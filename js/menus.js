@@ -416,8 +416,12 @@ function menu_causas() {
                         formObject[key] = value;
                     }
                 });
-            
-                let jsonString = JSON.stringify(formObject, null, 2);
+                
+                
+                paso2 = []
+                paso2.push(formObject)
+                jsonString = JSON.stringify(paso2,null,2)
+
 
                    //insertar el envío por formulario 
 

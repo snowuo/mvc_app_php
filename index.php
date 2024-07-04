@@ -18,6 +18,7 @@
 
         switch ($action) {
             case 'index':
+                $quejas = $controller->get_listado_quejas();
                 include 'views/main.php';                
                 break;
             
@@ -29,7 +30,11 @@
                 $json = file_get_contents('php://input');
                 echo $json;
                 $controller->set_queja($json);
-                break;            
+                break;       
+            case 'curl':
+                $id=$_GET['id'];                
+                $controller->set_queja_api_curl($id);
+            break;     
             case 'salir':
                 $controller->logout();
             break;
