@@ -7,44 +7,31 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <?php require 'partials/menu.php'; echo $menu; ?>    
-    <div class="card text-center">
-        <div class="card-header">
-            <h1>Quejas</h1>
-            <table class="table table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Queja</th>
-                    <th scope="col">Fecha de creación</th>
-                    <th scope="col">Acciones</th>
-
-                </tr>
-            </thead>
-            <tbody>
-            <?php foreach($quejas as $queja): ?>
-                <tr>                
-                    <td id="<?php echo htmlspecialchars($queja['id_quejas'])?>"><?php echo htmlspecialchars($queja['id_quejas'])?></td>
-                    <td id="<?php echo htmlspecialchars($queja['id_quejas'])?>"><?php echo htmlspecialchars($queja['data_queja'])?></td>
-                    <td id="<?php echo htmlspecialchars($queja['id_quejas'])?>"><?php echo htmlspecialchars($queja['fcreacion_queja'])?></td>
-                    <td id="<?php echo htmlspecialchars($queja['id_quejas'])?>"><?php if (!$queja['enviada']) { ?>
-                                                                                            <a href="index.php?action=curl&id=<?php echo $queja['id_quejas']; ?>" class="btn btn-primary">Enviar</a>
-                                                                                <?php } ?>
-
-                </tr>
-            <?php endforeach;  ?>
-            </tbody>
-        </table>
-
-                    
-
+    <?php require 'partials/menu.php'; echo $menu; ?>       
+        <div>
+            
+            <div></div>
         </div>
-        <div class="card-body">
-            <a href="index.php?action=alta_queja" class="btn btn-primary">Registrar Queja</a>
+        <div class="container card-container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    
+                    <div class="card-body">
+                        <a href="index.php?action=redeco"><img src="imges/LOGO-API-REDECO.png" class="card-img-top" alt="Imagen 1" ></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    
+                    <div class="card-body">
+                    <a href="index.php?action=reune"><img src="imges/LOGO-API-REUNE.png" class="card-img-top" alt="Imagen 2"></a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    
-
     <?php echo $scripts?>
 </body>
 </html>

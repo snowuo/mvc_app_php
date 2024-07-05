@@ -425,7 +425,7 @@ function menu_causas() {
 
                    //insertar el envío por formulario 
 
-                   fetch('http://localhost/app_php/index.php?action=save-form',{
+                   fetch('index.php?action=save-form',{
                     method: 'POST',
                     headers:{
                         'Content-Type':'application/json'
@@ -433,7 +433,7 @@ function menu_causas() {
                     body:jsonString
                    })
                    .then(response => response.text())
-                   .then(data => {alert(data);window.location.href = 'http://localhost/app_php/index.php';})
+                   .then(data => {alert(data);window.location.href = 'index.php?action=redeco';})
                    .catch(error => {console.error('Error',error);
 
                    });

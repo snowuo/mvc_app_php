@@ -1,10 +1,11 @@
 <?php
     session_start();
     $message = '';
+    $redeco_message = '';
     require 'controller.php';
     require_once 'views/partials/menu.php';
-    $controller = new controller();
-    $productos = $controller->menu_productos();
+    $controller = new controller();   
+    $productos = $controller->get_productos();
     //revisamos la sesión vigente
     if(!isset($_SESSION['username'])){
         if(isset($_POST['username']) && isset($_POST['password']) ){
@@ -18,29 +19,36 @@
 
         switch ($action) {
             case 'index':
-                $quejas = $controller->get_listado_quejas();
-                include 'views/main.php';                
+                include 'views/main.php'; 
                 break;
             
             case 'alta_queja':
                 include 'views/form_quejas.php';            
                 break;
             case 'save-form':
-                echo 'Esto se envió a save-form: ';
-                $json = file_get_contents('php://input');
-                echo $json;
+                echo 'La queja se guardó correctamente';
+                $json = file_get_contents('php://input');                
                 $controller->set_queja($json);
                 break;       
             case 'curl':
                 $id=$_GET['id'];                
                 $controller->set_queja_api_curl($id);
             break;     
+            case 'redeco':
+                if (isset($_GET['mensaje'])) {
+                    $mensaje = $_GET['mensaje'];
+                    echo "<script type='text/javascript'>alert('$mensaje');</script>";
+                } 
+                
+                $quejas = $controller->get_listado_quejas();
+                include 'views/redeco.php';   
+            break;
             case 'salir':
                 $controller->logout();
             break;
             default:
-            echo 'Sesión iniciada en index:default';
-                break;
+             include 'views/error404.php';
+            break;
         }
 
     }  

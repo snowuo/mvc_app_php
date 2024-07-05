@@ -25,23 +25,14 @@
                 return false;
             }
         }
-
+        public function get_productos(){
+            $stmt = $this->db->query('SELECT * FROM productos');
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
         public function get_quejas(){
             $stmt = $this->db->query('SELECT * FROM quejas');
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
-
-        public function get_productos(){
-            try {    
-                $stmt = $this->db->query('SELECT productId, product FROM Productos');
-                return $stmt->fetchAll(PDO::FETCH_ASSOC);
-            } catch(PDOException $e) {
-                // En caso de error en la conexión o consulta, mostrar el mensaje de error
-                echo "La conexión falló: " . $e->getMessage();
-                die();
-            }
-        }
-
         public function set_queja($queja){
             try{
                 $stmt = $this->db->prepare("INSERT INTO quejas_data (data_queja) VALUES (:queja)");        
@@ -69,6 +60,17 @@
                 $stmt = $this->db->prepare('SELECT data_queja FROM quejas_data WHERE id_quejas = :id');
                 $stmt->execute([':id' => $id]);
                 return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch(PDOException $e) {
+                // En caso de error en la conexión o consulta, mostrar el mensaje de error
+                echo "La conexión falló: " . $e->getMessage();
+                die();
+            }
+        }
+
+        public function update_enviada($id){
+            try {    
+                $stmt = $this->db->prepare('UPDATE quejas_data SET enviada = true WHERE id_quejas = :id');
+                $stmt->execute([':id' => $id]);
             } catch(PDOException $e) {
                 // En caso de error en la conexión o consulta, mostrar el mensaje de error
                 echo "La conexión falló: " . $e->getMessage();
