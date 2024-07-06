@@ -11,6 +11,25 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Redeco
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="index.php?action=redeco">Quejas</a>
+                    <a class="dropdown-item" href="#">Configuración</a>
+                </div>
+            </li>
+             <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Reune
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="index.php?action=reune_consultas">Consultas</a>
+                    <a class="dropdown-item" href="index.php?action=reune_reclamaciones">Reclamaciones</a>
+                    <a class="dropdown-item" href="index.php?action=reune_aclaraciones">Aclaraciones</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Configuración
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
