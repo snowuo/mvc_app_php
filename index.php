@@ -35,16 +35,37 @@
                 $controller->set_queja_api_curl($id);
             break;     
             case 'redeco':
+              
+                $quejas = $controller->get_listado_quejas();
+                include 'views/redeco.php';   
                 if (isset($_GET['mensaje'])) {
                     $mensaje = $_GET['mensaje'];
                     echo "<script type='text/javascript'>alert('$mensaje');</script>";
                 } 
-                
-                $quejas = $controller->get_listado_quejas();
-                include 'views/redeco.php';   
             break;
             case 'salir':
                 $controller->logout();
+            break;
+            case 'reune_consultas':
+                include 'views/reune_consultas.php';
+            break;
+            case 'reune_consultas_form':
+                include 'views/reune_consultas_form.php';
+            break;
+            case 'reune_reclamaciones':
+                include 'views/reune_reclamaciones.php';
+            break;
+            case 'reune_reclamaciones_form':
+                include 'views/reune_reclamaciones_form.php';
+            break;
+            case 'reune':
+               
+            break;
+            case 'reune_aclaraciones':
+                include 'views/reune_aclaraciones.php';
+            break;
+            case 'reune_aclaraciones_form':
+                include 'views/reune_aclaraciones_form.php';
             break;
             default:
              include 'views/error404.php';

@@ -11,6 +11,7 @@
                 $stmt = $this->db->prepare('SELECT id, username, password, token from user WHERE username = :username');
                 $stmt->execute(['username' => $username]);
                 $user = $stmt->fetch(PDO::FETCH_ASSOC);
+                
 
                 if ($user && $user['password'] == $password) {
                     $_SESSION['id'] = $user['id'];
@@ -26,7 +27,7 @@
             }
         }
         public function get_productos(){
-            $stmt = $this->db->query('SELECT * FROM productos');
+            $stmt = $this->db->query('SELECT productId, product FROM productos');
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         public function get_quejas(){
