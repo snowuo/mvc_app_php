@@ -9,6 +9,14 @@
 <body>
     <?php require 'partials/menu.php'; echo $menu; ?>       
 
+
+    
+
+    
+    <div class="card-body">
+            <a href="index.php?action=reune_aclaraciones_form" class="btn btn-primary">Registrar Nueva</a>
+        </div>
+
     <?php echo $scripts?>
 </body>
 </html>

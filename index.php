@@ -59,7 +59,7 @@
                 include 'views/reune_reclamaciones_form.php';
             break;
             case 'reune':
-               
+                include 'views/reune.php';
             break;
             case 'reune_aclaraciones':
                 include 'views/reune_aclaraciones.php';

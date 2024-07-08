@@ -12,7 +12,7 @@
 
 
     <div class="card-body">
-            <a href="index.php?action=" class="btn btn-primary">Registrar Nueva</a>
+            <a href="index.php?action=reune_reclamaciones_form" class="btn btn-primary">Registrar Nueva</a>
         </div>
     <?php echo $scripts?>
 </body>
