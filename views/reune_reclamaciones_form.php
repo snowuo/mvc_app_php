@@ -12,7 +12,7 @@
          <div class="card" style="width: 90%;">
            <div class="card-body">
                <div class="table-responsive">
-                   <form id = "form_queja">
+                   <form id = "form_rec">
                    <table class="table table-bordered">
                        <tr>
                            <td class="text-center w-50">
@@ -106,20 +106,20 @@
                             </td>
                             <td class="text-center w-50">
                             <label for="RecMunicipioAlcaldia">Municipio: </label>
-                                <input type="text" id="dspRecMunicipioAlcaldia">
-                                <input type="number" style="display:none" name="RecMunicipioAlcaldia" id="RecMunicipioAlcaldia" Value = "Selecciona el cdigo postal">
+                                <input type="text" id="dspRecMunicipioAlcaldia" Value = "Selecciona el código postal">
+                                <input type="number" style="display:none" name="RecMunicipioAlcaldia" id="RecMunicipioAlcaldia" ó>
                             </td>
                        </tr>
                        <tr>
                             <td class="text-center w-50">
                                 <label for="RecLocalidad">Localidad: </label>
-                                <input type="text" id="dspRecLocalidad">
-                                <input type="number" style="display:none" name="RecLocalidad" id="RecLocalidad" Value = "Selecciona el cdigo postal">
+                                <input type="text" id="dspRecLocalidad" Value = "Selecciona el código postal">
+                                <input type="number" style="display:none" name="RecLocalidad" id="RecLocalidad" ó>
                             </td>
                             <td class="text-center w-50">
                                 <label for="RecColonia">Colonia: </label>
-                                <input type="text" id="dspRecColonia">
-                                <input type="number" style="display:none" name="RecColonia" id="RecColonia" Value = "Selecciona el cdigo postal">
+                                <input type="text" id="dspRecColonia" Value = "Selecciona el código postal">
+                                <input type="number" style="display:none" name="RecColonia" id="RecColonia" ó>
                             </td>
                        </tr>
                        <tr>
@@ -220,7 +220,7 @@
         ?>
     </form>
     
-
+    <script src="js/reune_reclamaciones_form.js"></script>
     <?php echo $scripts?>
 </body>
 </html>

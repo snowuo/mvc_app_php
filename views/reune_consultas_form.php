@@ -12,7 +12,7 @@
          <div class="card" style="width: 90%;">
            <div class="card-body">
                <div class="table-responsive">
-                   <form id = "form_queja">
+                   <form id = "form_consultas">
                    <table class="table table-bordered">
                        <tr>
                            <td class="text-center w-50">
@@ -60,7 +60,7 @@
                            <td class="text-center w-50">
                                <label for="EstadosId">Entidad federativa:</label>
                                <input type="number" name="EstadosId" id="EstadosId" style="display: none" readonly>
-                               <input type="text" id="Dspestadosid">
+                               <input type="text" id="Dspestadosid" Value = "Selecciona el código postal">
                            </td>
                        </tr>
                        <tr>
@@ -84,7 +84,10 @@
                            </td>
                            <td class="text-center w-50">
                                <label for="CausaId">Causa o motivo:</label>
-                               <input type="text" name="CausaId" id="CausaId" required>
+                               <select name="CausaId" id="CausaId">
+                               <option value="">Ocurrió un error al consultar el catalogo</option>
+                               </select>
+                               
                            </td>
                        </tr>
                        <tr>
@@ -95,19 +98,19 @@
                            <td class="text-center w-50">
                                <label for="ConsultasMpioId ">Municipio:</label>                               
                                <input type="number" name="ConsultasMpioId" id="ConsultasMpioId" style="display:none"> 
-                                <input type="text"  id="dspConsultasMpioId">
+                                <input type="text"  id="dspConsultasMpioId" Value = "Selecciona el código postal">
                            </td>
                        </tr>
                        <tr>
                            <td class="text-center w-50">
                            <label for="ConsultasLocId">Localidad:</label>
                               <input type="number" name="ConsultasLocId" id="ConsultasLocId" style="display:none"> 
-                                <input type="text"  id="dspConsultasLocId">
+                                <input type="text"  id="dspConsultasLocId" Value = "Selecciona el código postal">
                            </td>
                            <td class="text-center w-50">
                                <label for="ConsultasColId">Colonia:</label>
                                <input type="number" name="ConsultasColId" id="ConsultasColId" style="display:none"> 
-                               <input type="text"  id="dspConsultasColId">
+                               <input type="text"  id="dspConsultasColId" Value = "Selecciona el código postal">
                            </td>
                        </tr>
                        <tr>
@@ -141,7 +144,7 @@
         ?>
     </form>
     
-
+    <script src="js/reune_consultas_form.js"></script>
     <?php echo $scripts?>
 </body>
 </html>

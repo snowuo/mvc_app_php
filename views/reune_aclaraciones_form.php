@@ -12,7 +12,7 @@
          <div class="card" style="width: 90%;">
            <div class="card-body">
                <div class="table-responsive">
-                   <form id = "form_queja">
+                   <form id = "form_aclaraciones">
                    <table class="table table-bordered">
                        <tr>
                            <td class="text-center w-50">
@@ -107,20 +107,20 @@
                             </td>
                             <td class="text-center w-50">
                                 <label for="AclaracionMunicipioAlcaldia">Municipio </label>
-                                <input type="text" id="dspAclaracionMunicipioAlcaldia">
-                                <input type="number" style="display:none" name="AclaracionMunicipioAlcaldia" id="AclaracionMunicipioAlcaldia" Value = "Selecciona el cdigo postal">                                                  
+                                <input type="text" id="dspAclaracionMunicipioAlcaldia" Value = "Selecciona el código postal">
+                                <input type="number" style="display:none" name="AclaracionMunicipioAlcaldia" id="AclaracionMunicipioAlcaldia" >                                                  
                             </td>
                        </tr>
                        <tr>
                             <td class="text-center w-50">
                                 <label for="AclaracionLocalidad">Localidad </label>
-                                <input type="text" id="dspAclaracionLocalidad">
-                                <input type="number" style="display:none" name="AclaracionLocalidad" id="AclaracionLocalidad" Value = "Selecciona el cdigo postal">    
+                                <input type="text" id="dspAclaracionLocalidad" Value = "Selecciona el código postal">
+                                <input type="number" style="display:none" name="AclaracionLocalidad" id="AclaracionLocalidad" >    
                             </td>
                             <td class="text-center w-50">
                                 <label for="AclaracionColonia">Colonia </label>
-                                <input type="text" id="dspAclaracionColonia">
-                                <input type="number" style="display:none" name="AclaracionColonia" id="AclaracionColonia" Value = "Selecciona el cdigo postal">    
+                                <input type="text" id="dspAclaracionColonia" Value = "Selecciona el código postal">
+                                <input type="number" style="display:none" name="AclaracionColonia" id="AclaracionColonia" >    
                             </td>
                        </tr>
                        <tr>
@@ -209,7 +209,7 @@
         ?>
     </form>
     
-
+    <script src="js/reune_aclaraciones_form.js"></script>
     <?php echo $scripts?>
 </body>
 </html>
