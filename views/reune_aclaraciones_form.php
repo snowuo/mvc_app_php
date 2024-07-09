@@ -96,7 +96,7 @@
                             </td>
                             <td class="text-center w-50">
                                 <label for="AclaracionEntidadFederativa">Entidad Federativa</label>
-                                <input type="text"  id="dspAclaracionEntidadFederativa" Value = "Selecciona el cdigo postal">                               
+                                <input type="text"  id="dspAclaracionEntidadFederativa" Value = "Selecciona el cdigo postal" readonly>                               
                                 <input type="number" name="AclaracionEntidadFederativa" id="AclaracionEntidadFederativa" style="display:none">
                             </td>
                        </tr>
@@ -107,20 +107,21 @@
                             </td>
                             <td class="text-center w-50">
                                 <label for="AclaracionMunicipioAlcaldia">Municipio </label>
-                                <input type="text" id="dspAclaracionMunicipioAlcaldia" Value = "Selecciona el código postal">
+                                <input type="text" id="dspAclaracionMunicipioAlcaldia" Value = "Selecciona el código postal" readonly>
                                 <input type="number" style="display:none" name="AclaracionMunicipioAlcaldia" id="AclaracionMunicipioAlcaldia" >                                                  
                             </td>
                        </tr>
                        <tr>
                             <td class="text-center w-50">
                                 <label for="AclaracionLocalidad">Localidad </label>
-                                <input type="text" id="dspAclaracionLocalidad" Value = "Selecciona el código postal">
+                                <input type="text" id="dspAclaracionLocalidad" Value = "Selecciona el código postal" readonly>
                                 <input type="number" style="display:none" name="AclaracionLocalidad" id="AclaracionLocalidad" >    
                             </td>
                             <td class="text-center w-50">
                                 <label for="AclaracionColonia">Colonia </label>
-                                <input type="text" id="dspAclaracionColonia" Value = "Selecciona el código postal">
-                                <input type="number" style="display:none" name="AclaracionColonia" id="AclaracionColonia" >    
+                                <select name="AclaracionColonia" id="AclaracionColonia">
+                                    <option value="">Introduce el codigo postal</option>
+                                </select>
                             </td>
                        </tr>
                        <tr>
@@ -191,8 +192,8 @@
                                 <td class="text-center w-50">
                                     <label for="AclaracionOperacionExtranjero">Operación en el extranjero:</label>
                                     <select name="AclaracionOperacionExtranjero" id="AclaracionOperacionExtranjero">
-                                        <option value="SI">Si</option>
-                                        <option value="NO">No</option>
+                                    <option value="NO">No</option>    
+                                    <option value="SI">Si</option>                                        
                                     </select>
                                 </td>
                        </tr>

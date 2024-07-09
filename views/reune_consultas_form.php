@@ -59,8 +59,8 @@
                            </td>
                            <td class="text-center w-50">
                                <label for="EstadosId">Entidad federativa:</label>
-                               <input type="number" name="EstadosId" id="EstadosId" style="display: none" readonly>
-                               <input type="text" id="Dspestadosid" Value = "Selecciona el código postal">
+                               <input type="number" name="EstadosId" id="EstadosId" style="display: none" >
+                               <input type="text" id="Dspestadosid" Value = "Selecciona el código postal" readonly>
                            </td>
                        </tr>
                        <tr>
@@ -92,25 +92,26 @@
                        </tr>
                        <tr>
                            <td class="text-center w-50">
-                           <label for="ConsultasCP ">Código postal:</label>
-                              <input type="number" name="ConsultasCP " id="ConsultasCP " required>
+                           <label for="ConsultasCP">Código postal:</label>
+                              <input type="number" name="ConsultasCP" id="ConsultasCP" required>
                            </td>
                            <td class="text-center w-50">
                                <label for="ConsultasMpioId ">Municipio:</label>                               
                                <input type="number" name="ConsultasMpioId" id="ConsultasMpioId" style="display:none"> 
-                                <input type="text"  id="dspConsultasMpioId" Value = "Selecciona el código postal">
+                                <input type="text"  id="dspConsultasMpioId" Value = "Selecciona el código postal" readonly>
                            </td>
                        </tr>
                        <tr>
                            <td class="text-center w-50">
                            <label for="ConsultasLocId">Localidad:</label>
                               <input type="number" name="ConsultasLocId" id="ConsultasLocId" style="display:none"> 
-                                <input type="text"  id="dspConsultasLocId" Value = "Selecciona el código postal">
+                                <input type="text"  id="dspConsultasLocId" Value = "Selecciona el código postal" readonly>
                            </td>
                            <td class="text-center w-50">
                                <label for="ConsultasColId">Colonia:</label>
-                               <input type="number" name="ConsultasColId" id="ConsultasColId" style="display:none"> 
-                               <input type="text"  id="dspConsultasColId" Value = "Selecciona el código postal">
+                                <select name="ConsultasColId" id="ConsultasColId">
+                                    <option value="">introduce el codigo postal</option>
+                                </select>
                            </td>
                        </tr>
                        <tr>

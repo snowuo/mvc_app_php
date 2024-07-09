@@ -118,8 +118,9 @@
                             </td>
                             <td class="text-center w-50">
                                 <label for="RecColonia">Colonia: </label>
-                                <input type="text" id="dspRecColonia" Value = "Selecciona el código postal">
-                                <input type="number" style="display:none" name="RecColonia" id="RecColonia" ó>
+                                <select name="RecColonia" id="RecColonia">
+                                    <option value="">Selecciona el código postal</option>
+                                </select>
                             </td>
                        </tr>
                        <tr>
