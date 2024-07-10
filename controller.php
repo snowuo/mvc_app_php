@@ -48,6 +48,42 @@ class controller{
         $this->model->update_enviada($id);
     }
 
+    public function get_reune_cmr(){
+        return $this->model->get_reune_cmr();
+    }
+
+    public function get_reune_catalogo_producto_consulta(){
+        try {
+            return $this->model->get_reune_catalogo_producto_consulta();
+        } catch (\Throwable $th) {
+            error_log("Error en la funcion controlador get_reune_catalogo_producto_consulta");
+            die("Error en la funcion controlador get_reune_catalogo_producto_consulta");
+        }
+    }
+
+    public function get_reune_catalogo_producto_reclamacion(){
+        try {
+            return $this->model->get_reune_catalogo_producto_reclamacion();
+        } catch (\Throwable $th) {
+            error_log("Error en la funcion controlador get_reune_catalogo_producto_consulta");
+            die("Error en la funcion controlador get_reune_catalogo_producto_consulta");
+        }
+    }
+
+    public function get_causas($prod){
+        return $this->model->get_causas($prod);
+    }
+
+    public function get_reune_catalogo_producto_aclaracion(){
+        try {
+            return $this->model->get_reune_catalogo_producto_aclaracion(); 
+       } catch (\Throwable $th) {
+            error_log("Error en la funcion controlador get_reune_catalogo_producto_consulta");
+            die("Error en la funcion controlador get_reune_catalogo_producto_consulta");
+        }
+    }
+
+
     public function set_queja_api_curl($id){
 
                 $url_queja = 'https://api.condusef.gob.mx/redeco/quejas';

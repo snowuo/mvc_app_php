@@ -66,13 +66,22 @@
                             <td class="text-center w-50">
                                 <label for="RecMedioRecepcionCanal">Medio de recepción o canal:</label>
                                 <select name="RecMedioRecepcionCanal" id="RecMedioRecepcionCanal" required>
-                                        <option value="">Ocurrió un error al consultar el catalogo</option>
+                                <?php foreach ($catalogo_reune_cmr as $cmr): ?>
+                                    <option value="<?= htmlspecialchars($cmr['clave']) ?>">
+                                    <?= htmlspecialchars($cmr['Descripcion']) ?>                               
+                                    </option>
+                                <?php endforeach; ?>
+                                        
                                 </select>
                             </td>
                             <td class="text-center w-50">
                                 <label for="RecProductoServicio">Producto y/o servicio :</label>
-                                    <select name="RecProductoServicio" id="RecProductoServicio" required>
-                                    <option value="">Ocurrió un error al consultar el catalogo</option>
+                                <select name="RecProductoServicio" id="RecProductoServicio" required>
+                                    <?php foreach ($catalogo as $cmr): ?>
+                                        <option value="<?= htmlspecialchars($cmr['codigo_producto']) ?>">
+                                        <?= htmlspecialchars($cmr['tipo_credito']) ?>  
+                                        </option>
+                                    <?php endforeach; ?>
                                 </select>
                             </td>
                        </tr>

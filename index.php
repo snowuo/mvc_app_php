@@ -1,11 +1,11 @@
 <?php
     session_start();
     $message = '';
-    $redeco_message = '';
     require 'controller.php';
     require_once 'views/partials/menu.php';
     $controller = new controller();   
     $productos = $controller->get_productos();
+    $catalogo_reune_cmr=$controller->get_reune_cmr();
     //revisamos la sesión vigente
     if(!isset($_SESSION['username'])){
         if(isset($_POST['username']) && isset($_POST['password']) ){
@@ -50,12 +50,14 @@
                 include 'views/reune_consultas.php';
             break;
             case 'reune_consultas_form':
+                $catalogo = $controller->get_reune_catalogo_producto_consulta();
                 include 'views/reune_consultas_form.php';
             break;
             case 'reune_reclamaciones':
                 include 'views/reune_reclamaciones.php';
             break;
             case 'reune_reclamaciones_form':
+                $catalogo = $controller->get_reune_catalogo_producto_aclaracion();
                 include 'views/reune_reclamaciones_form.php';
             break;
             case 'reune':
@@ -65,7 +67,11 @@
                 include 'views/reune_aclaraciones.php';
             break;
             case 'reune_aclaraciones_form':
+                $catalogo = $controller->get_reune_catalogo_producto_reclamacion();
                 include 'views/reune_aclaraciones_form.php';
+            break;
+            case 'causas':
+                
             break;
             default:
              include 'views/error404.php';
