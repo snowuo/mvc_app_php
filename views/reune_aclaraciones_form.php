@@ -88,7 +88,7 @@
                        <tr>
                            <td class="text-center w-50">
                                <label for="AclaracionCausaMotivo">Causa o motivo:</label>                               
-                               <select name="AclaracionCausaMotivo" id="AclaracionCausaMotivo" required>
+                               <select name="AclaracionCausaMotivo" id="AclaracionCausaMotivo" style="width: 200px" required>
                                     <option value="">Ocurrió un error al consultar el catalogo</option>
                                </select>
                            </td>
@@ -136,8 +136,8 @@
                             <td class="text-center w-50">
                                 <label for="AclaracionMonetario">Monetario:</label>
                                 <select name="AclaracionMonetario" id="AclaracionMonetario">
-                                    <option value="SI">Si</option>
                                     <option value="NO">No</option>
+                                    <option value="SI">Si</option>                                    
                                 </select>
                             </td>
                             <td class="text-center w-50">

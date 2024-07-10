@@ -1,9 +1,41 @@
 document.addEventListener('DOMContentLoaded', function() {
-
+    menu_causas();
     Crear_Folio();
 
 });
+document.getElementById('AclaracionProductoServicio').addEventListener('change',function(){
+    menu_causas();
+})
 console.log('Aclaraciones');
+
+function menu_causas() {
+    $producto = document.getElementById('AclaracionProductoServicio').value;
+    $url = `http://localhost/app_php/index.php?action=causas&producto=${$producto}`;        
+ 
+    fetch($url)
+    .then(response=>{
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        } else {            
+            return response.json();            
+        }
+    })
+    .then(data =>{
+        const select = document.getElementById('AclaracionCausaMotivo');
+        select.length = 0;       
+        if(data.causas && data.causas.length > 0){
+            data.causas.forEach(causa => {
+                let option = new Option(causa.causa,causa.codigo_causa);
+                select.add(option);
+            })
+        }else{
+            console.error('Incorrecta la respuesta del servidor');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
 
 function generateShortUUID() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {

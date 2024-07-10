@@ -1,8 +1,155 @@
 document.addEventListener('DOMContentLoaded', function() {
-
     Crear_Folio();
-
+    menu_causas();
+    actualiza_estado();
+    actualzia_ConsultasCP();
+    actualiza_fechas();
 });
+
+document.getElementById('Producto').addEventListener('change',function(){
+    menu_causas()
+})
+document.getElementById('ConsultasEstatusCon').addEventListener('change',actualiza_estado)
+document.getElementById('MediosId').addEventListener('change',actualzia_ConsultasCP);
+document.getElementById('ConsultasTrim ').addEventListener('change',()=>{
+    actualiza_fechas()
+    console.log('Se actualizó')
+});
+
+function actualiza_fechas() {
+    $trimestre = document.getElementById('ConsultasTrim ').value;
+    inputDate = document.getElementById('ConsultasFecRecepcion')
+    const currentYear = new Date().getFullYear();
+
+    switch ($trimestre){ 
+    case '1':
+             // Definir las fechas mínima y máxima usando el año en curso
+                minDate = `${currentYear}-01-01`;
+                maxDate = `${currentYear}-03-31`;
+                console.log(`El valor de trimestre es ${$trimestre}`)
+                // Establecer los atributos min y max
+                inputDate.min = minDate
+                inputDate.max = maxDate
+                inputDate.value = minDate
+        break;
+    case '2':
+                // Definir las fechas mínima y máxima
+                minDate = `${currentYear}-04-01`;
+                maxDate = `${currentYear}-06-30`;
+                console.log(`El valor de trimestre es ${$trimestre}`)
+                // Establecer los atributos min y max
+                inputDate.setAttribute('min', minDate);
+                inputDate.setAttribute('max', maxDate);
+                inputDate.value = minDate
+        break;
+    case '3':
+                // Definir las fechas mínima y máxima
+                minDate = `${currentYear}-07-01`;
+                maxDate = `${currentYear}-09-30`;
+                console.log(`El valor de trimestre es ${$trimestre}`)
+                // Establecer los atributos min y max
+                inputDate.setAttribute('min', minDate);
+                inputDate.setAttribute('max', maxDate);
+                inputDate.value = minDate
+        break;
+    case '4':
+                // Definir las fechas mínima y máxima
+                minDate = `${currentYear}-10-01`;
+                maxDate = `${currentYear}-12-31`;
+                console.log(`El valor de trimestre es ${$trimestre}`)
+                // Establecer los atributos min y max
+                inputDate.setAttribute('min', minDate);
+                inputDate.setAttribute('max', maxDate);
+                inputDate.value = minDate
+        break;
+
+    default:
+        break;
+}
+    
+}
+
+function actualiza_estado() {
+    $ConsultascatnivelatenId = document.getElementById('ConsultascatnivelatenId');
+    $estado = document.getElementById('ConsultasEstatusCon').value;
+    $fecha_atencion = document.getElementById('ConsultasFecAten');
+    $ConsultascatnivelatenId = document.getElementById('ConsultascatnivelatenId');
+    if ($estado === "2") {
+        console.log('Estado Concluido');
+        $fecha_atencion.type = 'date';
+        $fecha_atencion.readOnly = false;
+        $ConsultascatnivelatenId.disabled = false;
+        $ConsultascatnivelatenId.disabled = false;
+    } else {
+        console.log('Estado pendiente');
+        $fecha_atencion.type = 'text';
+        $fecha_atencion.value = "";
+        $fecha_atencion.readOnly = true;
+        $ConsultascatnivelatenId.disabled = true;
+        $ConsultascatnivelatenId.disabled = true;
+    }    
+}
+
+ConsultasCP
+function actualzia_ConsultasCP() {
+    $ConsultasCP = document.getElementById('ConsultasCP');
+    $MediosId = document.getElementById('MediosId');
+    $ConsultasLocId = document.getElementById('ConsultasLocId');
+    $ConsultasColId =  document.getElementById('ConsultasColId');
+    $dspConsultasLocId = document.getElementById('dspConsultasLocId');
+    $dspConsultasMpioId = document.getElementById('dspConsultasMpioId');
+    $valores = $MediosId.value;
+    const valoresPermitidos = ['5', '3', '17'];
+    if (valoresPermitidos.includes($valores)) {
+        console.log('requiere CP');
+        $ConsultasCP.readOnly=false;        
+        $ConsultasLocId.readOnly=false;     
+        $ConsultasColId.disabled=false;   
+    } else {
+        console.log('no requiere CP');
+        $ConsultasCP.readOnly=true;
+        $ConsultasCP.value = '';
+        $ConsultasLocId.readOnly=true;
+        $ConsultasLocId.value = '';
+        $ConsultasColId.disabled=true;
+        $ConsultasColId.value = '';
+        $dspConsultasLocId.value = "";
+        $dspConsultasMpioId.value = "";
+    }    
+}
+
+function menu_causas() {
+    $producto = document.getElementById('Producto').value;
+    $url = `http://localhost/app_php/index.php?action=causas&producto=${$producto}`;
+    prueba = document.getElementById('prueba');
+        
+    console.log($producto);
+
+    fetch($url)
+    .then(response=>{
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        } else {            
+            return response.json();            
+        }
+    })
+    .then(data =>{
+        const select = document.getElementById('CausaId');
+        select.length = 0;       
+        if(data.causas && data.causas.length > 0){
+            data.causas.forEach(causa => {
+                let option = new Option(causa.causa,causa.codigo_causa);
+                select.add(option);
+            })
+        }else{
+            console.error('Incorrecta la respuesta del servidor');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
 console.log('Consultas');
 
 function generateShortUUID() {

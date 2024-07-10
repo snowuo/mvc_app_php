@@ -92,8 +92,8 @@
                            </td>
                            <td class="text-center w-50">
                                <label for="CausaId">Causa o motivo:</label>
-                               <select name="CausaId" id="CausaId">
-                               <option value="">Ocurrió un error al consultar el catalogo</option>
+                               <select name="CausaId" id="CausaId" style="width: 200px;">
+                               <option value="">Ocurrió un error al consultar el catalogo</option>                               
                                </select>
                                
                            </td>
@@ -135,8 +135,8 @@
                            <td class="text-center w-50">
                                <label for="ConsultasPori">PORI:</label>
                                <select name="ConsultasPori" id="ConsultasPori" required>
-                                <option value="SI">Si</option>
-                                <option value="NO">No</option>
+                               <option value="NO">No</option>
+                                <option value="SI">Si</option>                                
                                </select>
                            </td>
                        </tr>

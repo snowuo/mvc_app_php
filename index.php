@@ -71,6 +71,25 @@
                 include 'views/reune_aclaraciones_form.php';
             break;
             case 'causas':
+                if (isset($_GET['producto']) && !empty($_GET['producto'])) {
+                    $causas = $controller->get_causas($_GET['producto']);
+                    $obj = new stdClass();
+
+                    //print_r($causas);
+                    if (empty($causas)) {
+                        http_response_code(404);
+                        echo json_encode(['message' => 'Causas no encontradas']);
+                    } else {
+                        $obj->causas=$causas;
+                        http_response_code(200);
+                        echo json_encode($obj,JSON_UNESCAPED_UNICODE);
+                    }
+                    
+                } else {
+                    http_response_code(500);
+                    echo json_encode(['message' => 'Causas no encontradas']);
+                }
+                
                 
             break;
             default:
