@@ -6,6 +6,7 @@
     $controller = new controller();   
     $productos = $controller->get_productos();
     $catalogo_reune_cmr=$controller->get_reune_cmr();
+    $entidades_federativas=$controller->get_listado_entidades_federativas();
     //revisamos la sesión vigente
     if(!isset($_SESSION['username'])){
         if(isset($_POST['username']) && isset($_POST['password']) ){

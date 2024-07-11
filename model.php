@@ -61,6 +61,17 @@
             }
         }
 
+        public function get_listado_entidades_federativas(){
+            try {    
+                $stmt = $this->db->query('SELECT * FROM entidades_federativas');
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch(PDOException $e) {
+                // En caso de error en la conexión o consulta, mostrar el mensaje de error
+                echo "La conexión falló: " . $e->getMessage();
+                die();
+            }
+        }
+
         public function get_queja_data($id){
             try {    
                 $stmt = $this->db->prepare('SELECT data_queja FROM quejas_data WHERE id_quejas = :id');

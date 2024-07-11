@@ -22,6 +22,11 @@ class controller{
     public function get_productos(){
         return $this->model->get_productos();
     }
+
+    public function get_listado_entidades_federativas(){
+        return $this->model->get_listado_entidades_federativas();
+    }
+
     public function logout(){
         $_SESSION = array();
         if (ini_get("session.use_cookies")) {

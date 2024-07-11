@@ -1,0 +1,1 @@
+tengo la siguiente duda, actualmente solo permite informar el mes de marzo, como si estuviera tomando en cuenta el trimestre, ya que julio pertenece al tercer trimestre

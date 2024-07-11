@@ -11,6 +11,7 @@
          <div class="container d-flex justify-content-center align-items-center" >
          <div class="card" style="width: 90%;">
            <div class="card-body">
+             <button id="ayuda" class="btn btn-primary">Ayuda</button>
                <div class="table-responsive">
                    <form id = "form_consultas">
                    <table class="table table-bordered">
@@ -58,9 +59,14 @@
                                <input type="date" name="ConsultasFecAten" id="ConsultasFecAten" pattern="\d{1,2}/\d{1,2}/\d{4}" required>
                            </td>
                            <td class="text-center w-50">
-                               <label for="EstadosId">Entidad federativa:</label>
-                               <input type="number" name="EstadosId" id="EstadosId" style="display: none" >
-                               <input type="text" id="Dspestadosid" Value = "Selecciona el código postal" readonly>
+                               <label for="EstadosId">Entidad federativa:</label>                               
+                               <select name="EstadosId" id="EstadosId">
+                                    <?php foreach ($entidades_federativas as $cmr): ?>
+                                            <option value="<?= htmlspecialchars($cmr['clave']) ?>">
+                                            <?= htmlspecialchars($cmr['descripcion']) ?> 
+                                            </option>
+                                    <?php endforeach; ?>
+                               </select>
                            </td>
                        </tr>
                        <tr>
@@ -100,7 +106,7 @@
                        </tr>
                        <tr>
                            <td class="text-center w-50">
-                           <label for="ConsultasCP">Código postal:</label>
+                           <label for="ConsultasCP" id = "lblcp">Código postal:</label>
                               <input type="number" name="ConsultasCP" id="ConsultasCP" required>
                            </td>
                            <td class="text-center w-50">
@@ -142,7 +148,7 @@
                        </tr>
                        <!-- Más filas y celdas aquí -->
                    </table>
-                       <button type="submit">Guardar Aclaración</button>
+                       <button class="btn btn-primary" type="submit">Guardar Aclaración</button>
                    </form>
                </div>
            </div>

@@ -1,22 +1,36 @@
-document.addEventListener('DOMContentLoaded', function() {
+$mensaje = `Consideraciones:
+
+Al seleccionar el trimestre a reportar, el campo "Fecha de consulta" se actualizará al valor del primer dia de ese trimestre, Hay que seleccionar la fecha en que se recibió la consulta.
+
+Cuando el estado de la queja es concluido, se deberá llenar el campo "Fecha de atención" y el campo "Nivel de atención"
+
+El campo "codigo postal" solo se habilitará cuando el "Medio de recepción" sea Sucursal, Oficina de atención ó UNE, de lo contrario no es necesario.`;
+
+document.addEventListener('DOMContentLoaded', function() {    
     Crear_Folio();
     menu_causas();
     actualiza_estado();
     actualzia_ConsultasCP();
-    actualiza_fechas();
+    actualiza_fechaRecepcion();    
 });
 
+document.getElementById('ayuda').addEventListener('click',()=>{alert($mensaje)})
 document.getElementById('Producto').addEventListener('change',function(){
     menu_causas()
 })
 document.getElementById('ConsultasEstatusCon').addEventListener('change',actualiza_estado)
 document.getElementById('MediosId').addEventListener('change',actualzia_ConsultasCP);
 document.getElementById('ConsultasTrim ').addEventListener('change',()=>{
-    actualiza_fechas()
-    console.log('Se actualizó')
-});
+    actualiza_fechaRecepcion()
+    actualiza_fecha_atencion()
 
-function actualiza_fechas() {
+});
+document.getElementById('ConsultasFecRecepcion').addEventListener('change',()=>{
+    //console.log('se actualiza la fecha de atencion')
+    actualiza_fecha_atencion()
+    ;})
+
+function actualiza_fechaRecepcion() {
     $trimestre = document.getElementById('ConsultasTrim ').value;
     inputDate = document.getElementById('ConsultasFecRecepcion')
     const currentYear = new Date().getFullYear();
@@ -26,7 +40,7 @@ function actualiza_fechas() {
              // Definir las fechas mínima y máxima usando el año en curso
                 minDate = `${currentYear}-01-01`;
                 maxDate = `${currentYear}-03-31`;
-                console.log(`El valor de trimestre es ${$trimestre}`)
+                //console.log(`El valor de trimestre es ${$trimestre}`)
                 // Establecer los atributos min y max
                 inputDate.min = minDate
                 inputDate.max = maxDate
@@ -36,7 +50,7 @@ function actualiza_fechas() {
                 // Definir las fechas mínima y máxima
                 minDate = `${currentYear}-04-01`;
                 maxDate = `${currentYear}-06-30`;
-                console.log(`El valor de trimestre es ${$trimestre}`)
+                //console.log(`El valor de trimestre es ${$trimestre}`)
                 // Establecer los atributos min y max
                 inputDate.setAttribute('min', minDate);
                 inputDate.setAttribute('max', maxDate);
@@ -46,7 +60,7 @@ function actualiza_fechas() {
                 // Definir las fechas mínima y máxima
                 minDate = `${currentYear}-07-01`;
                 maxDate = `${currentYear}-09-30`;
-                console.log(`El valor de trimestre es ${$trimestre}`)
+                //console.log(`El valor de trimestre es ${$trimestre}`)
                 // Establecer los atributos min y max
                 inputDate.setAttribute('min', minDate);
                 inputDate.setAttribute('max', maxDate);
@@ -56,7 +70,7 @@ function actualiza_fechas() {
                 // Definir las fechas mínima y máxima
                 minDate = `${currentYear}-10-01`;
                 maxDate = `${currentYear}-12-31`;
-                console.log(`El valor de trimestre es ${$trimestre}`)
+                //console.log(`El valor de trimestre es ${$trimestre}`)
                 // Establecer los atributos min y max
                 inputDate.setAttribute('min', minDate);
                 inputDate.setAttribute('max', maxDate);
@@ -67,6 +81,8 @@ function actualiza_fechas() {
         break;
 }
     
+
+
 }
 
 function actualiza_estado() {
@@ -75,22 +91,37 @@ function actualiza_estado() {
     $fecha_atencion = document.getElementById('ConsultasFecAten');
     $ConsultascatnivelatenId = document.getElementById('ConsultascatnivelatenId');
     if ($estado === "2") {
-        console.log('Estado Concluido');
+        //console.log('Estado Concluido');
         $fecha_atencion.type = 'date';
         $fecha_atencion.readOnly = false;
         $ConsultascatnivelatenId.disabled = false;
         $ConsultascatnivelatenId.disabled = false;
+        actualiza_fecha_atencion();
     } else {
-        console.log('Estado pendiente');
+        //console.log('Estado pendiente');
         $fecha_atencion.type = 'text';
+        $fecha_atencion.placeholder = 'No se utiliza.';
         $fecha_atencion.value = "";
         $fecha_atencion.readOnly = true;
         $ConsultascatnivelatenId.disabled = true;
         $ConsultascatnivelatenId.disabled = true;
     }    
 }
+function actualiza_fecha_atencion() {
+    $fecha = document.getElementById('ConsultasFecAten');
+    $fecha_rec = document.getElementById('ConsultasFecRecepcion');
+    $estado = document.getElementById('ConsultasEstatusCon').value;
+    minDate = $fecha_rec.value;
+    $fecha.min = minDate;
+    if($estado === "2"){
+        //console.log('se actualiza la fecha de atención')
+        $fecha.value = minDate;
+    }
+    
+    
+}
 
-ConsultasCP
+
 function actualzia_ConsultasCP() {
     $ConsultasCP = document.getElementById('ConsultasCP');
     $MediosId = document.getElementById('MediosId');
@@ -101,13 +132,19 @@ function actualzia_ConsultasCP() {
     $valores = $MediosId.value;
     const valoresPermitidos = ['5', '3', '17'];
     if (valoresPermitidos.includes($valores)) {
-        console.log('requiere CP');
-        $ConsultasCP.readOnly=false;        
+        //console.log('requiere CP');
+        $ConsultasCP.readOnly=false; 
+        $ConsultasCP.placeholder = 'Introduce el CP.';
+        $dspConsultasMpioId.placeholder = 'Introduce el CP.';
+        $dspConsultasLocId.placeholder = 'Introduce el CP.';
         $ConsultasLocId.readOnly=false;     
         $ConsultasColId.disabled=false;   
     } else {
-        console.log('no requiere CP');
+        //console.log('no requiere CP');
         $ConsultasCP.readOnly=true;
+        $ConsultasCP.placeholder = 'No se utiliza.';
+        $dspConsultasMpioId.placeholder = 'No se utiliza.';
+        $dspConsultasLocId.placeholder = 'No se utiliza.';
         $ConsultasCP.value = '';
         $ConsultasLocId.readOnly=true;
         $ConsultasLocId.value = '';
@@ -123,8 +160,6 @@ function menu_causas() {
     $url = `http://localhost/app_php/index.php?action=causas&producto=${$producto}`;
     prueba = document.getElementById('prueba');
         
-    console.log($producto);
-
     fetch($url)
     .then(response=>{
         if (!response.ok) {
@@ -150,8 +185,6 @@ function menu_causas() {
     });
 }
 
-console.log('Consultas');
-
 function generateShortUUID() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         var r = Math.random() * 16 | 0,
@@ -168,7 +201,7 @@ function Crear_Folio() {
 
 document.getElementById('ConsultasCP').addEventListener('change', function() {
     const cp = this.value;
-    console.log(cp);
+    //console.log(cp);
     if (cp && cp.length === 5) {
         const url = `https://api.condusef.gob.mx/sepomex/colonias/?cp=${cp}`;
 
@@ -202,10 +235,10 @@ document.getElementById('ConsultasCP').addEventListener('change', function() {
                     document.getElementById('dspConsultasLocId').value = firstColonia.tipoLocalidad;
                     document.getElementById('ConsultasMpioId').value = firstColonia.municipioId;
                     document.getElementById('dspConsultasMpioId').value = firstColonia.municipio;
-                    document.getElementById('EstadosId').value = firstColonia.estadoId;
-                    document.getElementById('Dspestadosid').value = firstColonia.estado;
+                    //document.getElementById('EstadosId').value = firstColonia.estadoId;
+                    
                 } else {
-                    console.log('No se encontraron colonias para el CP proporcionado.');
+                    console.error('No se encontraron colonias para el CP proporcionado.');
                 }
             })
             .catch(error => {
@@ -221,17 +254,17 @@ document.getElementById('ConsultasLocId').addEventListener('change', function() 
         document.getElementById('dspConsultasLocId').value = selectedOption.dataset.tipoLocalidad;
         document.getElementById('ConsultasMpioId').value = selectedOption.dataset.municipioId;
         document.getElementById('dspConsultasMpioId').value = selectedOption.dataset.municipio;
-        document.getElementById('EstadosId').value = selectedOption.dataset.estadoId;
-        document.getElementById('Dspestadosid').value = selectedOption.dataset.estado;
+        //document.getElementById('EstadosId').value = selectedOption.dataset.estadoId;
+       
     }
 });
 
 document.getElementById('form_consultas').addEventListener('submit',function(event) {
     event.preventDefault();
     let form = event.target;
-    console.log('form: ',form)
+    //console.log('form: ',form)
     let formData = new FormData(form);
-    console.log('formData: ',formData);
+    //console.log('formData: ',formData);
     let formObjet = {};
     let numericFields = ['ConsultasTrim','NumConsultas','ConsultasEstatusCon','EstadosId','MediosId','ConsultasCP','ConsultasMpioId','ConsultasLocId','ConsultasColId','ConsultascatnivelatenId',]
     let dateFields = ['ConsultasFecAten','ConsultasFecRecepcion',]
