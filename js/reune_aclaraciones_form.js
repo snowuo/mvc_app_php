@@ -1,12 +1,64 @@
 document.addEventListener('DOMContentLoaded', function() {
     menu_causas();
     Crear_Folio();
-
+    actualiza_estado();
+    actualiza_fechaRecepcion();
+    actualzia_ConsultasCP()
+    Estado_monetario();
 });
 document.getElementById('AclaracionProductoServicio').addEventListener('change',function(){
     menu_causas();
 })
+
+document.getElementById('AclaracionTrimestre ').addEventListener('change',()=>{
+    actualiza_fechaRecepcion();
+    actualiza_fecha_atencion();
+
+})
 console.log('Aclaraciones');
+document.getElementById('AclaracionEstadoConPend').addEventListener('change',actualiza_estado)
+function actualiza_estado() {
+    $ConsultascatnivelatenId = document.getElementById('AclaracionNivelAtencion');
+    $estado = document.getElementById('AclaracionEstadoConPend').value;
+    $fecha_atencion = document.getElementById('AclaracionFechaAtencion');
+    $AclaracionFechaResolucion = document.getElementById('AclaracionFechaResolucion');
+    $AclaracionFechaNotifiUsuario = document.getElementById('AclaracionFechaNotifiUsuario');
+    $AclaracionNivelAtencion = document.getElementById('AclaracionNivelAtencion');
+    if ($estado === "2") {
+        //console.log('Estado Concluido');
+        $fecha_atencion.type = 'date';
+        $fecha_atencion.readOnly = false;
+
+        $AclaracionFechaResolucion.readOnly = false;
+        $AclaracionFechaResolucion.type = 'date';
+
+        $AclaracionFechaNotifiUsuario.readOnly = false;
+        $AclaracionFechaNotifiUsuario.type = 'date';
+        
+        $ConsultascatnivelatenId.disabled = false;
+        $AclaracionNivelAtencion.disabled = false;
+        actualiza_fecha_atencion();
+    } else {
+        //console.log('Estado pendiente');
+        $fecha_atencion.type = 'text';
+        $fecha_atencion.placeholder = 'No se utiliza.';
+        $fecha_atencion.value = "";
+        $fecha_atencion.readOnly = true;
+
+        $AclaracionFechaResolucion.type = 'text';
+        $AclaracionFechaResolucion.placeholder = 'No se utiliza.';
+        $AclaracionFechaResolucion.value = "";
+        $AclaracionFechaResolucion.readOnly = true;
+
+        $AclaracionFechaNotifiUsuario.type = 'text';
+        $AclaracionFechaNotifiUsuario.placeholder = 'No se utiliza.';
+        $AclaracionFechaNotifiUsuario.value = "";
+        $AclaracionFechaNotifiUsuario.readOnly = true;
+
+        $ConsultascatnivelatenId.disabled = true;
+        $AclaracionNivelAtencion.disabled = true;
+    }    
+}
 
 function menu_causas() {
     $producto = document.getElementById('AclaracionProductoServicio').value;
@@ -49,6 +101,111 @@ function Crear_Folio() {
     folio = document.getElementById('AclaracionFolioAtencion');
     fecha = new Date();
     folio.value = `Sefi_aclaracion/${fecha.getMonth()}-${fecha.getFullYear()}/${generateShortUUID()}`;        
+}
+
+function actualiza_fechaRecepcion() {
+    $trimestre = document.getElementById('AclaracionTrimestre ').value;
+    inputDate = document.getElementById('AclaracionFechaReclamacion')
+    const currentYear = new Date().getFullYear();
+
+    switch ($trimestre){ 
+            case '1':
+                    // Definir las fechas mínima y máxima usando el año en curso
+                        minDate = `${currentYear}-01-01`;
+                        maxDate = `${currentYear}-03-31`;
+                        //console.log(`El valor de trimestre es ${$trimestre}`)
+                        // Establecer los atributos min y max
+                        inputDate.min = minDate
+                        inputDate.max = maxDate
+                        inputDate.value = minDate
+                break;
+            case '2':
+                        // Definir las fechas mínima y máxima
+                        minDate = `${currentYear}-04-01`;
+                        maxDate = `${currentYear}-06-30`;
+                        //console.log(`El valor de trimestre es ${$trimestre}`)
+                        // Establecer los atributos min y max
+                        inputDate.setAttribute('min', minDate);
+                        inputDate.setAttribute('max', maxDate);
+                        inputDate.value = minDate
+                break;
+            case '3':
+                        // Definir las fechas mínima y máxima
+                        minDate = `${currentYear}-07-01`;
+                        maxDate = `${currentYear}-09-30`;
+                        //console.log(`El valor de trimestre es ${$trimestre}`)
+                        // Establecer los atributos min y max
+                        inputDate.setAttribute('min', minDate);
+                        inputDate.setAttribute('max', maxDate);
+                        inputDate.value = minDate
+                break;
+            case '4':
+                        // Definir las fechas mínima y máxima
+                        minDate = `${currentYear}-10-01`;
+                        maxDate = `${currentYear}-12-31`;
+                        //console.log(`El valor de trimestre es ${$trimestre}`)
+                        // Establecer los atributos min y max
+                        inputDate.setAttribute('min', minDate);
+                        inputDate.setAttribute('max', maxDate);
+                        inputDate.value = minDate
+                break;
+
+            default:
+                break;
+        }  
+}
+
+document.getElementById('AclaracionMedioRecepcionCanal').addEventListener('change',actualzia_ConsultasCP);
+
+function actualzia_ConsultasCP() {
+    $ConsultasCP = document.getElementById('AclaracionCodigoPostal');
+    $MediosId = document.getElementById('AclaracionMedioRecepcionCanal');
+    $ConsultasLocId = document.getElementById('AclaracionLocalidad');
+    $ConsultasColId =  document.getElementById('AclaracionColonia');
+    $dspConsultasLocId = document.getElementById('dspAclaracionLocalidad');
+    $dspConsultasMpioId = document.getElementById('dspAclaracionMunicipioAlcaldia');
+    $AclaracionFolioCondusef = document.getElementById('AclaracionFolioCondusef');
+    $AclaracionReversa = document.getElementById('AclaracionReversa');
+    $valores = $MediosId.value;
+    const valoresPermitidos = ['5', '3', '17'];
+    const valores_sige = ['6','7']
+    if (valoresPermitidos.includes($valores)) {
+        //console.log('requiere CP');
+        $ConsultasCP.readOnly=false; 
+        $ConsultasCP.placeholder = 'Introduce el CP.';
+        $dspConsultasMpioId.placeholder = 'Introduce el CP.';
+        $dspConsultasLocId.placeholder = 'Introduce el CP.';
+        $ConsultasLocId.readOnly=false;     
+        $ConsultasColId.disabled=false;   
+    } else {
+        //console.log('no requiere CP');
+        $ConsultasCP.readOnly=true;
+        $ConsultasCP.placeholder = 'No se utiliza.';
+        $dspConsultasMpioId.placeholder = 'No se utiliza.';
+        $dspConsultasLocId.placeholder = 'No se utiliza.';
+        $ConsultasCP.value = '';
+        $ConsultasLocId.readOnly=true;
+        $ConsultasLocId.value = '';
+        $ConsultasColId.disabled=true;
+        $ConsultasColId.value = '';
+        $dspConsultasLocId.value = "";
+        $dspConsultasMpioId.value = "";
+    }    
+    if (valores_sige.includes($valores)) {
+        $AclaracionFolioCondusef.readonly = false;
+        $AclaracionFolioCondusef.placeholder = 'Introduce folio Condusef'
+        if($valores != '7'){
+            debugger
+            $AclaracionReversa.disabled = false;
+        }else{
+            $AclaracionReversa.disabled = true;
+        }
+    } else {
+        $AclaracionFolioCondusef.readonly = true;
+        $AclaracionFolioCondusef.placeholder = 'No se utiliza.'
+        $AclaracionFolioCondusef.value = ''
+        $AclaracionReversa.disabled = true;
+    }
 }
 
 document.getElementById('AclaracionCodigoPostal').addEventListener('change', function() {
@@ -122,3 +279,50 @@ document.getElementById('form_aclaraciones').addEventListener('submit',function(
     let dateFields = ['ConsultasFecAten','ConsultasFecRecepcion',]
 
 })
+
+document.getElementById('AclaracionFechaReclamacion').addEventListener('change',()=>{
+    //console.log('se actualiza la fecha de atencion')
+    actualiza_fecha_atencion()
+    ;})
+
+function actualiza_fecha_atencion() {
+    $fecha = document.getElementById('AclaracionFechaAtencion');
+    $fecha_rec = document.getElementById('AclaracionFechaReclamacion');
+    $estado = document.getElementById('AclaracionEstadoConPend').value;
+    minDate = $fecha_rec.value;
+    $fecha.min = minDate;
+    if($estado === "2"){
+        //console.log('se actualiza la fecha de atención')
+        $fecha.value = minDate;    }      
+}
+
+document.getElementById('AclaracionMonetario').addEventListener('change',Estado_monetario)
+function Estado_monetario() {
+    $AclaracionMonetario = document.getElementById('AclaracionMonetario').value;
+    $AclaracionMontoReclamado = document.getElementById('AclaracionMontoReclamado');
+    if ($AclaracionMonetario === "NO") {
+        $AclaracionMontoReclamado.type = 'text';
+        $AclaracionMontoReclamado.value= "";
+        $AclaracionMontoReclamado.readOnly = true;
+        $AclaracionMontoReclamado.placeholder = 'No se utiliza';
+    } else {
+        $AclaracionMontoReclamado.type = 'number';
+        $AclaracionMontoReclamado.readOnly = false;
+        $AclaracionMontoReclamado.placeholder = 'Introduce el monto reclamado';
+    }    
+}
+
+document.getElementById('AclaracionTipoPersona').addEventListener('change',function() {actualiza_tipo_persona()});
+function actualiza_tipo_persona() {
+    $tipopersona = document.getElementById('AclaracionTipoPersona');
+    $AclaracionEdad = document.getElementById('AclaracionEdad');
+    if ($tipopersona = '2') {
+        $AclaracionEdad.readOnly = true;
+        $AclaracionEdad.type = 'text';
+        $AclaracionEdad.placeholder = 'No se utiliza.'
+        $AclaracionEdad.value = '';
+    } else {
+        $AclaracionEdad.readOnly = false;
+        $AclaracionEdad.type = 'number';
+    }
+}

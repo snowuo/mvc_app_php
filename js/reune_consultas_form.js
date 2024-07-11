@@ -36,60 +36,56 @@ function actualiza_fechaRecepcion() {
     const currentYear = new Date().getFullYear();
 
     switch ($trimestre){ 
-    case '1':
-             // Definir las fechas mínima y máxima usando el año en curso
-                minDate = `${currentYear}-01-01`;
-                maxDate = `${currentYear}-03-31`;
-                //console.log(`El valor de trimestre es ${$trimestre}`)
-                // Establecer los atributos min y max
-                inputDate.min = minDate
-                inputDate.max = maxDate
-                inputDate.value = minDate
-        break;
-    case '2':
-                // Definir las fechas mínima y máxima
-                minDate = `${currentYear}-04-01`;
-                maxDate = `${currentYear}-06-30`;
-                //console.log(`El valor de trimestre es ${$trimestre}`)
-                // Establecer los atributos min y max
-                inputDate.setAttribute('min', minDate);
-                inputDate.setAttribute('max', maxDate);
-                inputDate.value = minDate
-        break;
-    case '3':
-                // Definir las fechas mínima y máxima
-                minDate = `${currentYear}-07-01`;
-                maxDate = `${currentYear}-09-30`;
-                //console.log(`El valor de trimestre es ${$trimestre}`)
-                // Establecer los atributos min y max
-                inputDate.setAttribute('min', minDate);
-                inputDate.setAttribute('max', maxDate);
-                inputDate.value = minDate
-        break;
-    case '4':
-                // Definir las fechas mínima y máxima
-                minDate = `${currentYear}-10-01`;
-                maxDate = `${currentYear}-12-31`;
-                //console.log(`El valor de trimestre es ${$trimestre}`)
-                // Establecer los atributos min y max
-                inputDate.setAttribute('min', minDate);
-                inputDate.setAttribute('max', maxDate);
-                inputDate.value = minDate
-        break;
+            case '1':
+                    // Definir las fechas mínima y máxima usando el año en curso
+                        minDate = `${currentYear}-01-01`;
+                        maxDate = `${currentYear}-03-31`;
+                        //console.log(`El valor de trimestre es ${$trimestre}`)
+                        // Establecer los atributos min y max
+                        inputDate.min = minDate
+                        inputDate.max = maxDate
+                        inputDate.value = minDate
+                break;
+            case '2':
+                        // Definir las fechas mínima y máxima
+                        minDate = `${currentYear}-04-01`;
+                        maxDate = `${currentYear}-06-30`;
+                        //console.log(`El valor de trimestre es ${$trimestre}`)
+                        // Establecer los atributos min y max
+                        inputDate.setAttribute('min', minDate);
+                        inputDate.setAttribute('max', maxDate);
+                        inputDate.value = minDate
+                break;
+            case '3':
+                        // Definir las fechas mínima y máxima
+                        minDate = `${currentYear}-07-01`;
+                        maxDate = `${currentYear}-09-30`;
+                        //console.log(`El valor de trimestre es ${$trimestre}`)
+                        // Establecer los atributos min y max
+                        inputDate.setAttribute('min', minDate);
+                        inputDate.setAttribute('max', maxDate);
+                        inputDate.value = minDate
+                break;
+            case '4':
+                        // Definir las fechas mínima y máxima
+                        minDate = `${currentYear}-10-01`;
+                        maxDate = `${currentYear}-12-31`;
+                        //console.log(`El valor de trimestre es ${$trimestre}`)
+                        // Establecer los atributos min y max
+                        inputDate.setAttribute('min', minDate);
+                        inputDate.setAttribute('max', maxDate);
+                        inputDate.value = minDate
+                break;
 
-    default:
-        break;
-}
-    
-
-
+            default:
+                break;
+        }  
 }
 
 function actualiza_estado() {
     $ConsultascatnivelatenId = document.getElementById('ConsultascatnivelatenId');
     $estado = document.getElementById('ConsultasEstatusCon').value;
     $fecha_atencion = document.getElementById('ConsultasFecAten');
-    $ConsultascatnivelatenId = document.getElementById('ConsultascatnivelatenId');
     if ($estado === "2") {
         //console.log('Estado Concluido');
         $fecha_atencion.type = 'date';
@@ -116,9 +112,7 @@ function actualiza_fecha_atencion() {
     if($estado === "2"){
         //console.log('se actualiza la fecha de atención')
         $fecha.value = minDate;
-    }
-    
-    
+    }      
 }
 
 

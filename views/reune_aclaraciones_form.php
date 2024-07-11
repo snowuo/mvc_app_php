@@ -11,6 +11,7 @@
          <div class="container d-flex justify-content-center align-items-center" >
          <div class="card" style="width: 90%;">
            <div class="card-body">
+           <button id="ayuda" class="btn btn-primary">Ayuda</button>
                <div class="table-responsive">
                    <form id = "form_aclaraciones">
                    <table class="table table-bordered">

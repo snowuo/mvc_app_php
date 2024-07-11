@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     menu_causas();
     Crear_Folio();
-
 });
 document.getElementById('RecProductoServicio').addEventListener('change',function(){
     menu_causas();
