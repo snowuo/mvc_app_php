@@ -34,7 +34,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="#">Usuarios</a>
-                    <a class="dropdown-item" href="#">Configuración</a>
+                    <a class="dropdown-item" href="index.php?action=sepomex">Catalogo SEPOMEX</a>
                 </div>
             </li>
             <li class="nav-item">
