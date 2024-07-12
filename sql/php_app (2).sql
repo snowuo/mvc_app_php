@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-07-2024 a las 00:41:23
+-- Tiempo de generación: 13-07-2024 a las 01:58:25
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -20,6 +20,19 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `php_app`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `aclaracion_data`
+--
+
+CREATE TABLE `aclaracion_data` (
+  `id` int(11) NOT NULL,
+  `data_json` longtext DEFAULT NULL,
+  `f_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
+  `enviada` tinyint(4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1216,6 +1229,19 @@ INSERT INTO `config_redeco` (`id`, `QuejasDenominacion`, `QuejasSector`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `consultas_data`
+--
+
+CREATE TABLE `consultas_data` (
+  `id` int(11) NOT NULL,
+  `data_json` longtext DEFAULT NULL,
+  `f_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
+  `enviada` tinyint(4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `entidades_federativas`
 --
 
@@ -1347,6 +1373,19 @@ INSERT INTO `quejas_data` (`id_quejas`, `data_queja`, `fcreacion_queja`, `enviad
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `reclamacion_data`
+--
+
+CREATE TABLE `reclamacion_data` (
+  `id` int(11) NOT NULL,
+  `data_json` longtext DEFAULT NULL,
+  `f_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
+  `enviada` tinyint(4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `user`
 --
 
@@ -1370,9 +1409,21 @@ INSERT INTO `user` (`id`, `username`, `password`, `token`) VALUES
 --
 
 --
+-- Indices de la tabla `aclaracion_data`
+--
+ALTER TABLE `aclaracion_data`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `config_redeco`
 --
 ALTER TABLE `config_redeco`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `consultas_data`
+--
+ALTER TABLE `consultas_data`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1388,6 +1439,12 @@ ALTER TABLE `quejas_data`
   ADD PRIMARY KEY (`id_quejas`);
 
 --
+-- Indices de la tabla `reclamacion_data`
+--
+ALTER TABLE `reclamacion_data`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `user`
 --
 ALTER TABLE `user`
@@ -1398,10 +1455,22 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `aclaracion_data`
+--
+ALTER TABLE `aclaracion_data`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `config_redeco`
 --
 ALTER TABLE `config_redeco`
   MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `consultas_data`
+--
+ALTER TABLE `consultas_data`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `log`
@@ -1414,6 +1483,12 @@ ALTER TABLE `log`
 --
 ALTER TABLE `quejas_data`
   MODIFY `id_quejas` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `reclamacion_data`
+--
+ALTER TABLE `reclamacion_data`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `user`
