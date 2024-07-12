@@ -89,9 +89,40 @@
                 } else {
                     http_response_code(500);
                     echo json_encode(['message' => 'Causas no encontradas']);
+                }                              
+            break;
+            case 'sepomex':
+                include 'views/upload_sepomex.php';
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    // Directorio donde se almacenarán los archivos subidos
+                    $uploadDir = __DIR__ . '/sepomex/';
+                    
+                    // Verifica si el directorio existe, si no, lo crea
+                    if (!is_dir($uploadDir)) {
+                        mkdir($uploadDir, 0777, true);
+                    }
+                    
+                    // Verifica si se ha subido un archivo
+                    if (isset($_FILES['file'])) {
+                        $file = $_FILES['file'];
+                        
+                        // Verifica si no hay errores en la carga del archivo
+                        if ($file['error'] === UPLOAD_ERR_OK) {
+                            $uploadFilePath = $uploadDir . basename($file['name']);
+                            
+                            // Mueve el archivo subido al directorio deseado
+                            if (move_uploaded_file($file['tmp_name'], $uploadFilePath)) {
+                                echo "El archivo " . htmlspecialchars(basename($file['name'])) . " ha sido subido exitosamente.";
+                            } else {
+                                echo "Error al mover el archivo subido.";
+                            }
+                        } else {
+                            echo "Error en la carga del archivo: " . $file['error'];
+                        }
+                    } else {
+                        echo "No se ha seleccionado ningún archivo.";
+                    }
                 }
-                
-                
             break;
             default:
              include 'views/error404.php';

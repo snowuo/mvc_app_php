@@ -312,11 +312,14 @@ function Estado_monetario() {
     }    
 }
 
-document.getElementById('AclaracionTipoPersona').addEventListener('change',function() {actualiza_tipo_persona()});
+document.getElementById('AclaracionTipoPersona').addEventListener('change',function() {
+     actualiza_tipo_persona()
+
+});
 function actualiza_tipo_persona() {
-    $tipopersona = document.getElementById('AclaracionTipoPersona');
+    $tipopersona = document.getElementById('AclaracionTipoPersona').value;
     $AclaracionEdad = document.getElementById('AclaracionEdad');
-    if ($tipopersona = '2') {
+    if ($tipopersona === '2') {
         $AclaracionEdad.readOnly = true;
         $AclaracionEdad.type = 'text';
         $AclaracionEdad.placeholder = 'No se utiliza.'
@@ -324,5 +327,6 @@ function actualiza_tipo_persona() {
     } else {
         $AclaracionEdad.readOnly = false;
         $AclaracionEdad.type = 'number';
+        $AclaracionEdad.placeholder = 'Introduce la edad'
     }
 }
