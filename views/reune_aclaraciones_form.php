@@ -18,11 +18,11 @@
                        <tr>
                            <td class="text-center w-50">
                            <label for="AclaracionDenominacion">Denominación:</label>
-                               <input type="text" name="AclaracionDenominacion" id="AclaracionDenominacion" value = "Sefi Estratégicos, S.A.P.I. de C.V., SOFOM, E.N.R." readonly>
+                           <input type="text" name="AclaracionDenominacion" id="AclaracionDenominacion" value = "<?php echo $denominacion?>" readonly>
                            </td>
                            <td class="text-center w-50">
                                <label for="AclaracionSector">Sector:</label>
-                               <input type="text" name="AclaracionSector" id="AclaracionSector" value = "Sociedades Financieras de Objeto Múltiple E.N.R." readonly>
+                               <input type="text" name="AclaracionSector" id="AclaracionSector" value = "<?php echo $sector?>" readonly>
                            </td>
                        </tr>
                        <tr>

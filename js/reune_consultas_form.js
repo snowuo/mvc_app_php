@@ -151,7 +151,7 @@ function actualzia_ConsultasCP() {
 
 function menu_causas() {
     $producto = document.getElementById('Producto').value;
-    $url = `http://localhost/app_php/index.php?action=causas&producto=${$producto}`;
+    $url = `http://localhost/mvc_app_php/index.php?action=causas&producto=${$producto}`;
     prueba = document.getElementById('prueba');
         
     fetch($url)

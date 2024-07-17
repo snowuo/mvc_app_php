@@ -17,12 +17,12 @@
                    <table class="table table-bordered">
                        <tr>
                            <td class="text-center w-50">
-                           <label for="QuejasDenominacion">Denominación:</label>
-                               <input type="text" name="QuejasDenominacion" id="QuejasDenominacion" value = "Sefi Estratégicos, S.A.P.I. de C.V., SOFOM, E.N.R." readonly>
-                           </td>
+                           <label for="InstitucionClave">Denominación:</label>                           
+                           <input type="text" name="InstitucionClave" id="InstitucionClave" value = "<?php echo $denominacion?>" readonly>
                            <td class="text-center w-50">
-                               <label for="QuejasSector">Sector:</label>
-                               <input type="text" name="QuejasSector" id="QuejasSector" value = "Sociedades Financieras de Objeto Múltiple E.N.R." readonly>
+                               <label for="Sector">Sector:</label>
+                               <input type="text" name="Sector" id="Sector" value = "<?php echo $sector?>" readonly>
+                               
                            </td>
                        </tr>
                        <tr>

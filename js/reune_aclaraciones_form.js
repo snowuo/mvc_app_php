@@ -1,3 +1,5 @@
+
+
 document.addEventListener('DOMContentLoaded', function() {
     menu_causas();
     Crear_Folio();
@@ -62,7 +64,7 @@ function actualiza_estado() {
 
 function menu_causas() {
     $producto = document.getElementById('AclaracionProductoServicio').value;
-    $url = `http://localhost/app_php/index.php?action=causas&producto=${$producto}`;        
+    $url = `http://localhost/mvc_app_php/index.php?action=causas&producto=${$producto}`;        
  
     fetch($url)
     .then(response=>{
@@ -81,7 +83,7 @@ function menu_causas() {
                 select.add(option);
             })
         }else{
-            console.error('Incorrecta la respuesta del servidor');
+            console.error(`Incorrecta la respuesta del servidor la consulta es:${$url}`);
         }
     })
     .catch(error => {

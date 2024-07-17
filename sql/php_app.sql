@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-07-2024 a las 01:58:25
+-- Tiempo de generación: 18-07-2024 a las 01:06:41
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -1291,6 +1291,26 @@ INSERT INTO `entidades_federativas` (`clave`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `info_sofom`
+--
+
+CREATE TABLE `info_sofom` (
+  `id` int(11) NOT NULL,
+  `denominacion` varchar(500) DEFAULT NULL,
+  `sector` varchar(500) DEFAULT NULL,
+  `f_actualizacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `info_sofom`
+--
+
+INSERT INTO `info_sofom` (`id`, `denominacion`, `sector`, `f_actualizacion`) VALUES
+(1, 'Sefi Estratégicos, S.A.P.I. de C.V., SOFOM, E.N.R.', 'Sociedades Financieras de Objeto Múltiple E.N.R.', '2024-07-17 20:23:51');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `log`
 --
 
@@ -1368,7 +1388,14 @@ INSERT INTO `quejas_data` (`id_quejas`, `data_queja`, `fcreacion_queja`, `enviad
 (7, '[\n  {\n    \"QuejasDenominacion\": \"Sefi Estratégicos, S.A.P.I. de C.V., SOFOM, E.N.R.\",\n    \"QuejasSector\": \"Sociedades Financieras de Objeto Múltiple E.N.R.\",\n    \"QuejasNoMes\": 3,\n    \"QuejasNum\": 1,\n    \"QuejasFolio\": \"Sefi/6-2024/63561f39\",\n    \"QuejasFecRecepcion\": \"01/03/2024\",\n    \"QuejasMedio\": 1,\n    \"QuejasNivelAT\": 1,\n    \"QuejasProducto\": \"026911801257\",\n    \"QuejasCausa\": \"0563\",\n    \"QuejasPORI\": \"SI\",\n    \"QuejasEstatus\": 1,\n    \"QuejasCP\": 76138,\n    \"QuejasColId\": 119,\n    \"QuejasLocId\": 9,\n    \"QuejasMunId\": 14,\n    \"QuejasEstados\": 22,\n    \"QuejasTipoPersona\": 1,\n    \"QuejasSexo\": \"H\",\n    \"QuejasEdad\": 31,\n    \"QuejasFecResolucion\": null,\n    \"QuejasFecNotificacion\": null,\n    \"QuejasRespuesta\": null,\n    \"QuejasNumPenal\": null,\n    \"QuejasPenalizacion\": 1\n  }\n]', '2024-07-05 20:39:54', 1),
 (8, '[\n  {\n    \"QuejasDenominacion\": \"Sefi Estratégicos, S.A.P.I. de C.V., SOFOM, E.N.R.\",\n    \"QuejasSector\": \"Sociedades Financieras de Objeto Múltiple E.N.R.\",\n    \"QuejasNoMes\": 3,\n    \"QuejasNum\": 1,\n    \"QuejasFolio\": \"Sefi/6-2024/f350927c\",\n    \"QuejasFecRecepcion\": \"01/03/2024\",\n    \"QuejasMedio\": 1,\n    \"QuejasNivelAT\": 1,\n    \"QuejasProducto\": \"026911801257\",\n    \"QuejasCausa\": \"0563\",\n    \"QuejasPORI\": \"SI\",\n    \"QuejasEstatus\": 1,\n    \"QuejasCP\": 76138,\n    \"QuejasColId\": 119,\n    \"QuejasLocId\": 9,\n    \"QuejasMunId\": 14,\n    \"QuejasEstados\": 22,\n    \"QuejasTipoPersona\": 2,\n    \"QuejasSexo\": null,\n    \"QuejasEdad\": null,\n    \"QuejasFecResolucion\": null,\n    \"QuejasFecNotificacion\": null,\n    \"QuejasRespuesta\": null,\n    \"QuejasNumPenal\": null,\n    \"QuejasPenalizacion\": 1\n  }\n]', '2024-07-05 20:41:16', 1),
 (9, '[\n  {\n    \"QuejasDenominacion\": \"Sefi Estratégicos, S.A.P.I. de C.V., SOFOM, E.N.R.\",\n    \"QuejasSector\": \"Sociedades Financieras de Objeto Múltiple E.N.R.\",\n    \"QuejasNoMes\": 3,\n    \"QuejasNum\": 1,\n    \"QuejasFolio\": \"Sefi/6-2024/04e35d4f\",\n    \"QuejasFecRecepcion\": \"01/03/2024\",\n    \"QuejasMedio\": 1,\n    \"QuejasNivelAT\": 1,\n    \"QuejasProducto\": \"026911801257\",\n    \"QuejasCausa\": \"0563\",\n    \"QuejasPORI\": \"SI\",\n    \"QuejasEstatus\": 1,\n    \"QuejasCP\": 76904,\n    \"QuejasColId\": 24,\n    \"QuejasLocId\": 21,\n    \"QuejasMunId\": 6,\n    \"QuejasEstados\": 22,\n    \"QuejasTipoPersona\": 2,\n    \"QuejasSexo\": null,\n    \"QuejasEdad\": null,\n    \"QuejasFecResolucion\": null,\n    \"QuejasFecNotificacion\": null,\n    \"QuejasRespuesta\": null,\n    \"QuejasNumPenal\": null,\n    \"QuejasPenalizacion\": 1\n  }\n]', '2024-07-05 22:06:45', 1),
-(10, '[\n  {\n    \"QuejasDenominacion\": \"Sefi Estratégicos, S.A.P.I. de C.V., SOFOM, E.N.R.\",\n    \"QuejasSector\": \"Sociedades Financieras de Objeto Múltiple E.N.R.\",\n    \"QuejasNoMes\": 3,\n    \"QuejasNum\": 1,\n    \"QuejasFolio\": \"Sefi/6-2024/d019f34a\",\n    \"QuejasFecRecepcion\": \"01/03/2024\",\n    \"QuejasMedio\": 1,\n    \"QuejasNivelAT\": 1,\n    \"QuejasProducto\": \"026911831261\",\n    \"QuejasCausa\": \"0563\",\n    \"QuejasPORI\": \"SI\",\n    \"QuejasEstatus\": 2,\n    \"QuejasCP\": 76904,\n    \"QuejasColId\": 24,\n    \"QuejasLocId\": 21,\n    \"QuejasMunId\": 6,\n    \"QuejasEstados\": 22,\n    \"QuejasTipoPersona\": 1,\n    \"QuejasSexo\": \"H\",\n    \"QuejasEdad\": 31,\n    \"QuejasFecResolucion\": \"15/07/2024\",\n    \"QuejasFecNotificacion\": \"17/07/2024\",\n    \"QuejasRespuesta\": 1,\n    \"QuejasNumPenal\": 1,\n    \"QuejasPenalizacion\": 1\n  }\n]', '2024-07-05 23:05:36', 1);
+(10, '[\n  {\n    \"QuejasDenominacion\": \"Sefi Estratégicos, S.A.P.I. de C.V., SOFOM, E.N.R.\",\n    \"QuejasSector\": \"Sociedades Financieras de Objeto Múltiple E.N.R.\",\n    \"QuejasNoMes\": 3,\n    \"QuejasNum\": 1,\n    \"QuejasFolio\": \"Sefi/6-2024/d019f34a\",\n    \"QuejasFecRecepcion\": \"01/03/2024\",\n    \"QuejasMedio\": 1,\n    \"QuejasNivelAT\": 1,\n    \"QuejasProducto\": \"026911831261\",\n    \"QuejasCausa\": \"0563\",\n    \"QuejasPORI\": \"SI\",\n    \"QuejasEstatus\": 2,\n    \"QuejasCP\": 76904,\n    \"QuejasColId\": 24,\n    \"QuejasLocId\": 21,\n    \"QuejasMunId\": 6,\n    \"QuejasEstados\": 22,\n    \"QuejasTipoPersona\": 1,\n    \"QuejasSexo\": \"H\",\n    \"QuejasEdad\": 31,\n    \"QuejasFecResolucion\": \"15/07/2024\",\n    \"QuejasFecNotificacion\": \"17/07/2024\",\n    \"QuejasRespuesta\": 1,\n    \"QuejasNumPenal\": 1,\n    \"QuejasPenalizacion\": 1\n  }\n]', '2024-07-05 23:05:36', 1),
+(11, '[\n  {\n    \"QuejasDenominacion\": \"Sefi Estratégicos, S.A.P.I. de C.V., SOFOM, E.N.R.\",\n    \"QuejasSector\": \"Sociedades Financieras de Objeto Múltiple E.N.R.\",\n    \"QuejasNoMes\": 3,\n    \"QuejasNum\": 1,\n    \"QuejasFolio\": \"Sefi/6-2024/d6bea261\",\n    \"QuejasFecRecepcion\": \"01/03/2024\",\n    \"QuejasMedio\": 1,\n    \"QuejasNivelAT\": 1,\n    \"QuejasProducto\": \"026911801257\",\n    \"QuejasCausa\": \"Solicitud de estados de cuenta no atendida\",\n    \"QuejasPORI\": \"SI\",\n    \"QuejasEstatus\": 1,\n    \"QuejasCP\": 76138,\n    \"QuejasColId\": 119,\n    \"QuejasLocId\": 9,\n    \"QuejasMunId\": 14,\n    \"QuejasEstados\": 22,\n    \"QuejasTipoPersona\": 2,\n    \"QuejasSexo\": null,\n    \"QuejasEdad\": null,\n    \"QuejasFecResolucion\": null,\n    \"QuejasFecNotificacion\": null,\n    \"QuejasRespuesta\": null,\n    \"QuejasNumPenal\": null,\n    \"QuejasPenalizacion\": 1\n  }\n]', '2024-07-17 20:28:13', 0),
+(12, '[\n  {\n    \"QuejasDenominacion\": \"Sefi Estratégicos, S.A.P.I. de C.V., SOFOM, E.N.R.\",\n    \"QuejasSector\": \"Sociedades Financieras de Objeto Múltiple E.N.R.\",\n    \"QuejasNoMes\": 3,\n    \"QuejasNum\": 1,\n    \"QuejasFolio\": \"Sefi/6-2024/8f38c84b\",\n    \"QuejasFecRecepcion\": \"01/03/2024\",\n    \"QuejasMedio\": 1,\n    \"QuejasNivelAT\": 1,\n    \"QuejasProducto\": \"026911801257\",\n    \"QuejasCausa\": \"Crédito aprobado sin la entrega de recursos\",\n    \"QuejasPORI\": \"SI\",\n    \"QuejasEstatus\": 1,\n    \"QuejasCP\": 76138,\n    \"QuejasColId\": 887,\n    \"QuejasLocId\": 21,\n    \"QuejasMunId\": 14,\n    \"QuejasEstados\": 22,\n    \"QuejasTipoPersona\": 2,\n    \"QuejasSexo\": null,\n    \"QuejasEdad\": null,\n    \"QuejasFecResolucion\": null,\n    \"QuejasFecNotificacion\": null,\n    \"QuejasRespuesta\": null,\n    \"QuejasNumPenal\": null,\n    \"QuejasPenalizacion\": 1\n  }\n]', '2024-07-17 20:29:04', 0),
+(13, '[\n  {\n    \"QuejasDenominacion\": \"Sefi Estratégicos, S.A.P.I. de C.V., SOFOM, E.N.R.\",\n    \"QuejasSector\": \"Sociedades Financieras de Objeto Múltiple E.N.R.\",\n    \"QuejasNoMes\": 3,\n    \"QuejasNum\": 1,\n    \"QuejasFolio\": \"Sefi/6-2024/c5989536\",\n    \"QuejasFecRecepcion\": \"01/03/2024\",\n    \"QuejasMedio\": 1,\n    \"QuejasNivelAT\": 1,\n    \"QuejasProducto\": \"026911801257\",\n    \"QuejasCausa\": \"0563\",\n    \"QuejasPORI\": \"SI\",\n    \"QuejasEstatus\": 1,\n    \"QuejasCP\": 76138,\n    \"QuejasColId\": 1,\n    \"QuejasLocId\": 1,\n    \"QuejasMunId\": 1,\n    \"QuejasEstados\": 1,\n    \"QuejasTipoPersona\": 2,\n    \"QuejasSexo\": null,\n    \"QuejasEdad\": null,\n    \"QuejasFecResolucion\": null,\n    \"QuejasFecNotificacion\": null,\n    \"QuejasRespuesta\": null,\n    \"QuejasNumPenal\": null,\n    \"QuejasPenalizacion\": 1\n  }\n]', '2024-07-17 20:41:53', 0),
+(14, '[\n  {\n    \"QuejasDenominacion\": \"Sefi Estratégicos, S.A.P.I. de C.V., SOFOM, E.N.R.\",\n    \"QuejasSector\": \"Sociedades Financieras de Objeto Múltiple E.N.R.\",\n    \"QuejasNoMes\": 1,\n    \"QuejasNum\": 1,\n    \"QuejasFolio\": \"Sefi/6-2024/99a6156d\",\n    \"QuejasFecRecepcion\": \"01/01/2024\",\n    \"QuejasMedio\": 1,\n    \"QuejasNivelAT\": 1,\n    \"QuejasProducto\": \"026911801257\",\n    \"QuejasCausa\": \"0563\",\n    \"QuejasPORI\": \"SI\",\n    \"QuejasEstatus\": 1,\n    \"QuejasCP\": 76138,\n    \"QuejasColId\": 122,\n    \"QuejasLocId\": 21,\n    \"QuejasMunId\": 14,\n    \"QuejasEstados\": 22,\n    \"QuejasTipoPersona\": 2,\n    \"QuejasSexo\": null,\n    \"QuejasEdad\": null,\n    \"QuejasFecResolucion\": null,\n    \"QuejasFecNotificacion\": null,\n    \"QuejasRespuesta\": null,\n    \"QuejasNumPenal\": null,\n    \"QuejasPenalizacion\": 1\n  }\n]', '2024-07-17 20:42:25', 0),
+(15, '[\n  {\n    \"QuejasDenominacion\": \"Sefi Estratégicos, S.A.P.I. de C.V., SOFOM, E.N.R.\",\n    \"QuejasSector\": \"Sociedades Financieras de Objeto Múltiple E.N.R.\",\n    \"QuejasNoMes\": 1,\n    \"QuejasNum\": 1,\n    \"QuejasFolio\": \"Sefi/6-2024/ef7e559e\",\n    \"QuejasFecRecepcion\": \"01/01/2024\",\n    \"QuejasMedio\": 1,\n    \"QuejasNivelAT\": 1,\n    \"QuejasProducto\": \"026911801257\",\n    \"QuejasCausa\": \"0563\",\n    \"QuejasPORI\": \"SI\",\n    \"QuejasEstatus\": 1,\n    \"QuejasCP\": 76138,\n    \"QuejasColId\": 119,\n    \"QuejasLocId\": 9,\n    \"QuejasMunId\": 14,\n    \"QuejasEstados\": 22,\n    \"QuejasTipoPersona\": 2,\n    \"QuejasSexo\": null,\n    \"QuejasEdad\": null,\n    \"QuejasFecResolucion\": null,\n    \"QuejasFecNotificacion\": null,\n    \"QuejasRespuesta\": null,\n    \"QuejasNumPenal\": null,\n    \"QuejasPenalizacion\": 1\n  }\n]', '2024-07-17 20:44:54', 0),
+(16, '[\n  {\n    \"QuejasDenominacion\": \"Sefi Estratégicos, S.A.P.I. de C.V., SOFOM, E.N.R.\",\n    \"QuejasSector\": \"Sociedades Financieras de Objeto Múltiple E.N.R.\",\n    \"QuejasNoMes\": 3,\n    \"QuejasNum\": 1,\n    \"QuejasFolio\": \"Sefi/6-2024/e7428b31\",\n    \"QuejasFecRecepcion\": \"01/03/2024\",\n    \"QuejasMedio\": 1,\n    \"QuejasNivelAT\": 1,\n    \"QuejasProducto\": \"026911801257\",\n    \"QuejasCausa\": \"0563\",\n    \"QuejasPORI\": \"SI\",\n    \"QuejasEstatus\": 1,\n    \"QuejasCP\": 76138,\n    \"QuejasColId\": 119,\n    \"QuejasLocId\": 9,\n    \"QuejasMunId\": 14,\n    \"QuejasEstados\": 22,\n    \"QuejasTipoPersona\": 2,\n    \"QuejasSexo\": null,\n    \"QuejasEdad\": null,\n    \"QuejasFecResolucion\": null,\n    \"QuejasFecNotificacion\": null,\n    \"QuejasRespuesta\": null,\n    \"QuejasNumPenal\": null,\n    \"QuejasPenalizacion\": 1\n  }\n]', '2024-07-17 20:45:34', 1),
+(17, '[\n  {\n    \"QuejasDenominacion\": \"Sefi Estratégicos, S.A.P.I. de C.V., SOFOM, E.N.R.\",\n    \"QuejasSector\": \"Sociedades Financieras de Objeto Múltiple E.N.R.\",\n    \"QuejasNoMes\": 3,\n    \"QuejasNum\": 1,\n    \"QuejasFolio\": \"Sefi/6-2024/7f31dec3\",\n    \"QuejasFecRecepcion\": \"01/03/2024\",\n    \"QuejasMedio\": 1,\n    \"QuejasNivelAT\": 1,\n    \"QuejasProducto\": \"026911801257\",\n    \"QuejasCausa\": \"0563\",\n    \"QuejasPORI\": \"SI\",\n    \"QuejasEstatus\": 1,\n    \"QuejasCP\": 76138,\n    \"QuejasColId\": 119,\n    \"QuejasLocId\": 9,\n    \"QuejasMunId\": 14,\n    \"QuejasEstados\": 22,\n    \"QuejasTipoPersona\": 2,\n    \"QuejasSexo\": null,\n    \"QuejasEdad\": null,\n    \"QuejasFecResolucion\": null,\n    \"QuejasFecNotificacion\": null,\n    \"QuejasRespuesta\": null,\n    \"QuejasNumPenal\": null,\n    \"QuejasPenalizacion\": 1\n  }\n]', '2024-07-17 20:47:15', 1);
 
 -- --------------------------------------------------------
 
@@ -1382,6 +1409,27 @@ CREATE TABLE `reclamacion_data` (
   `f_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
   `enviada` tinyint(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tokens_redeco_reune_superuser`
+--
+
+CREATE TABLE `tokens_redeco_reune_superuser` (
+  `id` int(11) NOT NULL,
+  `institucion` varchar(200) DEFAULT NULL,
+  `token` varchar(100) DEFAULT NULL,
+  `f_creacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tokens_redeco_reune_superuser`
+--
+
+INSERT INTO `tokens_redeco_reune_superuser` (`id`, `institucion`, `token`, `f_creacion`) VALUES
+(1, 'REDECO', '40380|69|694326|NO|NO', '2024-07-17 23:04:33'),
+(2, 'REUNE', ' 40380|69|694326|SI|NO', '2024-07-17 23:05:23');
 
 -- --------------------------------------------------------
 
@@ -1427,6 +1475,12 @@ ALTER TABLE `consultas_data`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `info_sofom`
+--
+ALTER TABLE `info_sofom`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `log`
 --
 ALTER TABLE `log`
@@ -1442,6 +1496,12 @@ ALTER TABLE `quejas_data`
 -- Indices de la tabla `reclamacion_data`
 --
 ALTER TABLE `reclamacion_data`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tokens_redeco_reune_superuser`
+--
+ALTER TABLE `tokens_redeco_reune_superuser`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1473,6 +1533,12 @@ ALTER TABLE `consultas_data`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `info_sofom`
+--
+ALTER TABLE `info_sofom`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `log`
 --
 ALTER TABLE `log`
@@ -1482,13 +1548,19 @@ ALTER TABLE `log`
 -- AUTO_INCREMENT de la tabla `quejas_data`
 --
 ALTER TABLE `quejas_data`
-  MODIFY `id_quejas` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_quejas` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `reclamacion_data`
 --
 ALTER TABLE `reclamacion_data`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tokens_redeco_reune_superuser`
+--
+ALTER TABLE `tokens_redeco_reune_superuser`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `user`

@@ -88,7 +88,9 @@ class controller{
         }
     }
 
-
+    public function get_info_sofom(){
+        return $this->model->get_info_sofom();
+    }
     public function set_queja_api_curl($id){
 
                 $url_queja = 'https://api.condusef.gob.mx/redeco/quejas';
@@ -136,6 +138,13 @@ class controller{
                 // Decodificar la respuesta JSON
                 //$responseData = json_decode($response, true);
                 
+    }
+
+    public function set_denominacion($valor){
+        return $this->model->set_denominacion($valor);
+    }
+    public function set_sector($valor){
+        return $this->model->set_sector($valor);
     }
 }
 ?>

@@ -322,7 +322,7 @@ document.getElementById('QuejasTipoPersona').addEventListener('change', function
     function Crear_Folio() {
         folio = document.getElementById('QuejasFolio');
         fecha = new Date();
-        folio.value = `Sefi/${fecha.getMonth()}-${fecha.getFullYear()}/${generateShortUUID()}`;        
+        folio.value = `Sefi/${fecha.getMonth()+1}-${fecha.getFullYear()}/${generateShortUUID()}`;        
     }
 
 document.getElementById('QuejasProducto').addEventListener('change',menu_causas)

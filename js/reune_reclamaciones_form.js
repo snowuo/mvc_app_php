@@ -8,7 +8,7 @@ document.getElementById('RecProductoServicio').addEventListener('change',functio
 console.log('Reclamaciones');
 function menu_causas() {
     $producto = document.getElementById('RecProductoServicio').value;
-    $url = `http://localhost/app_php/index.php?action=causas&producto=${$producto}`;        
+    $url = `http://localhost/mvc_app_php/index.php?action=causas&producto=${$producto}`;        
  
     fetch($url)
     .then(response=>{

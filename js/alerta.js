@@ -19,5 +19,5 @@ async function fetchData(url) {
   
   // Hacer las llamadas a la API
   fetchData(apiUrl1);
-  fetchData(apiUrl2);
+  //fetchData(apiUrl2);
   

@@ -131,6 +131,20 @@
                 die();
             }
         }
+        
+        public function get_info_sofom(){
+            try{
+                $stmt = $this->db->prepare('select denominacion, sector from info_sofom where id=1');
+                $stmt->execute();
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+            }catch(PDOException $e){
+                echo "La conexión falló: " . $e->getMessage();
+                die();
+            }
+
+        }
 
         public function update_enviada($id){
             try {    
@@ -143,6 +157,28 @@
             }
         }
 
+        public function set_denominacion($valor){   
+            try{
+                $stmt = $this->db->prepare('UPDATE info_sofom set denominacion = :valor where id = 1');
+                $stmt->execute([':valor' => $valor]);
+                return true;
+            }catch(PDOException $e) {
+                // En caso de error en la conexión o consulta, mostrar el mensaje de error
+                echo "La conexión falló: " . $e->getMessage();
+                die();
+            }
+        }
+        public function set_sector($valor){   
+            try{
+                $stmt = $this->db->prepare('UPDATE info_sofom set sector = :valor where id = 1');
+                $stmt->execute([':valor' => $valor]);
+                return true;
+            }catch(PDOException $e) {
+                // En caso de error en la conexión o consulta, mostrar el mensaje de error
+                echo "La conexión falló: " . $e->getMessage();
+                die();
+            }
+        }
 
     }
     

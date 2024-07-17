@@ -17,11 +17,11 @@
                        <tr>
                            <td class="text-center w-50">
                            <label for="RecDenominacion">Denominación:</label>
-                               <input type="text" name="RecDenominacion" id="RecDenominacion" value = "Sefi Estratégicos, S.A.P.I. de C.V., SOFOM, E.N.R." readonly>
+                           <input type="text" name="RecDenominacion" id="RecDenominacion" value = "<?php echo $denominacion?>" readonly>
                            </td>
                            <td class="text-center w-50">
                                <label for="RecSector">Sector:</label>
-                               <input type="text" name="RecSector" id="RecSector" value = "Sociedades Financieras de Objeto Múltiple E.N.R." readonly>
+                               <input type="text" name="RecSector" id="RecSector" value = "<?php echo $sector?>" readonly>
                            </td>
                        </tr>
                        <tr>

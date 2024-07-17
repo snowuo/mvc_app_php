@@ -7,6 +7,9 @@
     $productos = $controller->get_productos();
     $catalogo_reune_cmr=$controller->get_reune_cmr();
     $entidades_federativas=$controller->get_listado_entidades_federativas();
+    $info_sofom=$controller->get_info_sofom();
+    $denominacion = $info_sofom[0]['denominacion'];
+    $sector = $info_sofom[0]['sector'];
     //revisamos la sesión vigente
     if(!isset($_SESSION['username'])){
         if(isset($_POST['username']) && isset($_POST['password']) ){
@@ -35,8 +38,7 @@
                 $id=$_GET['id'];                
                 $controller->set_queja_api_curl($id);
             break;     
-            case 'redeco':
-              
+            case 'redeco':              
                 $quejas = $controller->get_listado_quejas();
                 include 'views/redeco.php';   
                 if (isset($_GET['mensaje'])) {
@@ -70,6 +72,11 @@
             case 'reune_aclaraciones_form':
                 $catalogo = $controller->get_reune_catalogo_producto_reclamacion();
                 include 'views/reune_aclaraciones_form.php';
+            break;
+            
+            case 'info_sofom':               
+                
+                include 'views/info_sofom.php';
             break;
             case 'causas':
                 if (isset($_GET['producto']) && !empty($_GET['producto'])) {
@@ -123,6 +130,46 @@
                         echo "No se ha seleccionado ningún archivo.";
                     }
                 }
+            break;
+            case 'actualiza_denominacion':
+                if (isset($_POST['nueva_denominacion'])) {
+                    $nueva_denominacion = trim($_POST['nueva_denominacion']);
+        
+                    // Validación simple, podrías añadir más reglas según tu caso
+                    if (!empty($nueva_denominacion)) {
+                        if ($controller->set_denominacion($nueva_denominacion)) {
+                            $response = array("status" => "success", "message" => "Denominación actualizada correctamente");
+                        } else {
+                            $response = array("status" => "error", "message" => "Error al actualizar la denominación");
+                        }
+                    } else {
+                        $response = array("status" => "error", "message" => "La nueva denominación no puede estar vacía");
+                    }
+                } else {
+                    $response = array("status" => "error", "message" => "No se ha recibido la nueva denominación");
+                }
+            
+                echo json_encode($response);                                    
+            break;
+            case 'actualiza_sector':
+                if (isset($_POST['nuevo_sector'])) {
+                    $nuevo_sector = trim($_POST['nuevo_sector']);
+        
+                    // Validación simple, podrías añadir más reglas según tu caso
+                    if (!empty($nuevo_sector)) {
+                        if ($controller->set_sector($nuevo_sector)) {
+                            $response = array("status" => "success", "message" => "Sectór actualizado correctamente");
+                        } else {
+                            $response = array("status" => "error", "message" => "Error al actualizar el sectór");
+                        }
+                    } else {
+                        $response = array("status" => "error", "message" => "El campo sectór no puede estar vacía");
+                    }
+                } else {
+                    $response = array("status" => "error", "message" => "No se ha recibido el nuevo sectór");
+                }
+            
+                echo json_encode($response);                                    
             break;
             default:
              include 'views/error404.php';

@@ -35,6 +35,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="#">Usuarios</a>
                     <a class="dropdown-item" href="index.php?action=sepomex">Catalogo SEPOMEX</a>
+                    <a class="dropdown-item" href="index.php?action=info_sofom">Informacion de la sofom</a>
                 </div>
             </li>
             <li class="nav-item">
