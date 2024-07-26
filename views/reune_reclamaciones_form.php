@@ -27,7 +27,7 @@
                        <tr>
                         <td class="text-center w-50">
                         <label for="RecTrimestre ">Trimestre a informar:</label>
-                               <select name="RecTrimestre " id="RecTrimestre ">
+                               <select name="RecTrimestre" id="RecTrimestre">
                                     <option value="1">Primer Trimestre</option>
                                     <option value="2">Segundo Trimestre</option>
                                     <option value="3">Tercer Trimestre</option>
@@ -103,9 +103,14 @@
                                 <input type="date" name="RecFechaNotifiUsuario" id="RecFechaNotifiUsuario" pattern="\d{1,2}/\d{1,2}/\d{4}" required>
                             </td>
                             <td class="text-center w-50">
-                                <label for="RecEntidadFederativa">Entidad Federativa</label>
-                                <input type="text"  id="dspRecEntidadFederativa" Value = "Selecciona el cdigo postal">
-                                <input type="number" name="RecEntidadFederativa" id="RecEntidadFederativa" style="display:none">                               
+                                <label for="RecEntidadFederativa">Entidad Federativa</label>                                             
+                                <select name="RecEntidadFederativa" id="RecEntidadFederativa">
+                                <?php foreach ($entidades_federativas as $cmr): ?>
+                                            <option value="<?= htmlspecialchars($cmr['clave']) ?>">
+                                            <?= htmlspecialchars($cmr['descripcion']) ?> 
+                                            </option>
+                                    <?php endforeach; ?>
+                                </select>
                             </td>
                        </tr>
                        <tr>

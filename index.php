@@ -14,7 +14,6 @@
     if(!isset($_SESSION['username'])){
         if(isset($_POST['username']) && isset($_POST['password']) ){
             $controller->login();
-            
         }else{
             require('views/login.php');
         }
@@ -74,16 +73,13 @@
                 include 'views/reune_aclaraciones_form.php';
             break;
             
-            case 'info_sofom':               
-                
+            case 'info_sofom':                     
                 include 'views/info_sofom.php';
             break;
             case 'causas':
                 if (isset($_GET['producto']) && !empty($_GET['producto'])) {
                     $causas = $controller->get_causas($_GET['producto']);
                     $obj = new stdClass();
-
-                    //print_r($causas);
                     if (empty($causas)) {
                         http_response_code(404);
                         echo json_encode(['message' => 'Causas no encontradas']);
@@ -168,13 +164,14 @@
                 } else {
                     $response = array("status" => "error", "message" => "No se ha recibido el nuevo sectór");
                 }
-            
                 echo json_encode($response);                                    
             break;
+            case 'consulta_quejas_redeco':
+                include 'views/consulta_quejas_redeco.php';
+                break;
             default:
              include 'views/error404.php';
             break;
         }
-
     }  
 ?>

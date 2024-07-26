@@ -104,9 +104,14 @@
                                 <input type="date" name="AclaracionFechaNotifiUsuario" id="AclaracionFechaNotifiUsuario" pattern="\d{1,2}/\d{1,2}/\d{4}" required>
                             </td>
                             <td class="text-center w-50">
-                                <label for="AclaracionEntidadFederativa">Entidad Federativa</label>
-                                <input type="text"  id="dspAclaracionEntidadFederativa" Value = "Selecciona el cdigo postal" readonly>                               
-                                <input type="number" name="AclaracionEntidadFederativa" id="AclaracionEntidadFederativa" style="display:none">
+                                <label for="AclaracionEntidadFederativa">Entidad Federativa</label>       
+                                <select name="AclaracionEntidadFederativa" id="AclaracionEntidadFederativa">
+                                <?php foreach ($entidades_federativas as $cmr): ?>
+                                            <option value="<?= htmlspecialchars($cmr['clave']) ?>">
+                                            <?= htmlspecialchars($cmr['descripcion']) ?> 
+                                            </option>
+                                    <?php endforeach; ?>
+                                </select>
                             </td>
                        </tr>
                        <tr>
@@ -172,7 +177,7 @@
                             </td>
                             <td class="text-center w-50">
                                 <label for="AclaracionEdad">Edad:</label>
-                                <input type="number" name="AclaracionEdad" id="AclaracionEdad" required>                                
+                                <input type="number" min="18" name="AclaracionEdad" id="AclaracionEdad" required>                                
                             </td>
                        </tr>
                        <tr>

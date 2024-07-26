@@ -359,13 +359,7 @@ function menu_causas() {
             }
         })
 }
-
-// script.js
-// script.js
-
-
-
-            document.getElementById('form_queja').addEventListener('submit', function(event) {
+document.getElementById('form_queja').addEventListener('submit', function(event) {
                 event.preventDefault(); // Evita el envío del formulario
             
                 let form = event.target;

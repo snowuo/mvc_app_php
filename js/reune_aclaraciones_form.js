@@ -17,6 +17,18 @@ document.getElementById('AclaracionTrimestre ').addEventListener('change',()=>{
     actualiza_fecha_atencion();
 
 })
+
+document.getElementById('AclaracionEdad').addEventListener('change',()=>{
+    $AclaracionEdad = document.getElementById('AclaracionEdad').value;
+    if ($AclaracionEdad < 18) {
+        $AclaracionEdad = 18;
+        alert('No puede ser menor de edad');
+        
+    } else {
+        
+    }
+})
+
 console.log('Aclaraciones');
 document.getElementById('AclaracionEstadoConPend').addEventListener('change',actualiza_estado)
 function actualiza_estado() {
@@ -279,7 +291,6 @@ document.getElementById('form_aclaraciones').addEventListener('submit',function(
     let formObjet = {};
     let numericFields = ['ConsultasTrim','NumConsultas','ConsultasEstatusCon','EstadosId','MediosId','ConsultasCP','ConsultasMpioId','ConsultasLocId','ConsultasColId','ConsultascatnivelatenId',]
     let dateFields = ['ConsultasFecAten','ConsultasFecRecepcion',]
-
 })
 
 document.getElementById('AclaracionFechaReclamacion').addEventListener('change',()=>{
@@ -291,11 +302,18 @@ function actualiza_fecha_atencion() {
     $fecha = document.getElementById('AclaracionFechaAtencion');
     $fecha_rec = document.getElementById('AclaracionFechaReclamacion');
     $estado = document.getElementById('AclaracionEstadoConPend').value;
+    $AclaracionFechaResolucion = document.getElementById('AclaracionFechaResolucion');
+    $AclaracionFechaNotifiUsuario = document.getElementById('AclaracionFechaNotifiUsuario');
     minDate = $fecha_rec.value;
     $fecha.min = minDate;
+    $AclaracionFechaResolucion.min = minDate;
+    $AclaracionFechaNotifiUsuario.min = minDate;
     if($estado === "2"){
         //console.log('se actualiza la fecha de atención')
-        $fecha.value = minDate;    }      
+        $fecha.value = minDate;  
+        $AclaracionFechaResolucion.value = minDate;
+        $AclaracionFechaNotifiUsuario.value = minDate;
+    }      
 }
 
 document.getElementById('AclaracionMonetario').addEventListener('change',Estado_monetario)
