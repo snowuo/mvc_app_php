@@ -168,7 +168,51 @@
             break;
             case 'consulta_quejas_redeco':
                 include 'views/consulta_quejas_redeco.php';
-                break;
+            break;
+            case 'config_redeco':
+                include 'views/config_redeco.php';
+            break;
+            
+            case 'superuser_redeco':
+               echo $controller->get_su_token_redeco();
+               if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                // La solicitud fue enviada mediante el método POST
+                if (!empty($_POST)) {
+                    // El arreglo $_POST no está vacío, lo que significa que se envió información
+                    echo "Se recibió información por el método POST.";
+                    // Puedes acceder a los datos enviados, por ejemplo:
+                    $nombre = $_POST['nombre'];
+                    $password = $_POST['password'];
+                    echo "Nombre: " . htmlspecialchars($nombre);
+                    echo "Password: " . htmlspecialchars($password);
+                    $controller->set_api_superuser($nombre,$password);                   
+
+                } else {
+                    echo "No se envió información.";
+                }
+            } else {
+                echo "La solicitud no fue enviada mediante el método POST.";
+            }
+
+            break;
+            case 'prueba_su':
+                $data = array(
+                            "userid"=>"userid",
+                            "username"=>"superusertest",
+                            "password"=>"asdf234aweqw2453",
+                            "institucionid"=>"asdfewrsb",
+                            "is_active"=>true,
+                            "profileid"=>"2",
+                            "token_access"=>"token_access"
+                );
+                $resp = array("message"=>"El usuario ha sido creado exitosamente!",
+                                "data"=>$data
+            );
+                
+                http_response_code(200);
+                echo json_encode($resp);
+               
+            break;
             default:
              include 'views/error404.php';
             break;

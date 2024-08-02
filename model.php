@@ -180,6 +180,40 @@
             }
         }
 
+        public function get_su_token_redeco(){
+            try{
+                $stmt = $this->db->prepare("SELECT token FROM tokens_redeco_reune_superuser WHERE institucion = 'REDECO'");
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                if ($result) {
+                    return $result['token'];
+                } else {
+                    return null; // o lanzar una excepción o un mensaje de error
+                }
+            }catch(PDOException $e) {
+                // En caso de error en la conexión o consulta, mostrar el mensaje de error
+                echo "La conexión falló: " . $e->getMessage();
+                die();
+            }
+        }
+        public function get_su_token_reune(){
+            try{
+                $stmt = $this->db->prepare("SELECT token FROM tokens_redeco_reune_superuser WHERE institucion = 'REUNE'");
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                if ($result) {
+                    return $result['token'];
+                } else {
+                    return null; // o lanzar una excepción o un mensaje de error
+                }
+            }catch(PDOException $e) {
+                // En caso de error en la conexión o consulta, mostrar el mensaje de error
+                echo "La conexión falló: " . $e->getMessage();
+                die();
+            }
+        }
+
+
     }
     
 ?>

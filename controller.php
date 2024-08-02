@@ -3,6 +3,7 @@ require_once ('model.php');
 
 class controller{
     private $model;
+    private $base_url = 'https://api.condusef.gob.mx/';
     
     public function __construct() {
         $this->model = new model();
@@ -92,8 +93,8 @@ class controller{
         return $this->model->get_info_sofom();
     }
     public function set_queja_api_curl($id){
-
-                $url_queja = 'https://api.condusef.gob.mx/redeco/quejas';
+                $endpoint = 'redeco/quejas';
+                $url_queja = $this->base_url.$endpoint;
                 $token = $_SESSION['token'];         
                 $json = $this->model->get_queja_data($id);
                 if(isset($json[0]['data_queja'])){
@@ -146,5 +147,63 @@ class controller{
     public function set_sector($valor){
         return $this->model->set_sector($valor);
     }
+
+    public function get_su_token_redeco(){
+        return $this->model->get_su_token_redeco();
+    }
+    public function set_api_superuser($nombre,$password){
+        $endpoint = 'auth/users/create-super-user/';
+        //$url = $this->base_url.$endpoint;
+        $url = 'http://localhost/mvc_app_php/index.php?action=prueba_su';
+        echo $url;
+        $token =  $this->get_su_token_redeco();
+        $data = array(
+                    "key"=>$token,
+                    "username"=>$nombre,
+                    "password"=>$password,
+                    "confirm_password"=>$password,
+                );
+        $json = json_encode($data);
+        echo "<br>".$json."<br>";
+        $curl = curl_init();
+        curl_setopt($curl,CURLOPT_URL,$url);
+        curl_setopt($curl,CURLOPT_SSL_VERIFYPEER,false);
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($curl,CURLOPT_POSTFIELDS,$json);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($json))
+        );
+        $response = curl_exec($curl);
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        if ($response === false) {
+            $error = curl_error($curl);
+            curl_close($curl);
+            // Registrar los datos enviados y el error
+            error_log("Error en la solicitud cURL: $error");
+            error_log("Datos enviados: $json");
+            die("Error en la solicitud cURL: $error");
+        }
+        curl_close($curl);
+        if ($httpCode >= 400) {
+            // Registrar la respuesta y los datos enviados en caso de error
+            echo "Error http: $httpCode \n";
+            echo "Causa del error:  $response \n";
+            header('location: index.php?action=redeco&mensaje='.$httpCode.'+'.$response);  
+            error_log("Super Usuario error al generar: Codigo de respuesta HTTP: $httpCode, Respuesta: $response");
+            
+        }else{
+            //$this->model->update_enviada($id);
+            echo "<br>todo salio bien<br><br><br><br>";
+
+            echo json_encode($response,true);
+            //header('location: index.php?action=redeco&mensaje=Super+usuario+se+registró+correctamente');  
+            
+            
+        }  
+
+
+    }
+
 }
 ?>

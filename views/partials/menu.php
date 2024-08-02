@@ -16,7 +16,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="index.php?action=redeco">Quejas</a>
                     <a class="dropdown-item" href="index.php?action=consulta_quejas_redeco">Consultar quejas api</a>
-                    <a class="dropdown-item" href="#">Configuración</a>
+                    <a class="dropdown-item" href="index.php?action=config_redeco">Configuración</a>
                 </div>
             </li>
              <li class="nav-item dropdown">

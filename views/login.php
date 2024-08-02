@@ -37,18 +37,7 @@
                 </form>
             </div>
         </div>
-    </div>
-
-<!--
-
-    <form action="index.php" method="post">
-        <input type="text" name="username" id="">
-        <input type="password" name="password" id="">
-        <input type="submit" value="Log in">
-
-    </form>
-    
-
+    </div>  
     <?php echo $scripts?>
 </body>
 </html>
