@@ -213,6 +213,20 @@
             }
         }
 
+        public function set_log($origen, $response) {
+            try {
+                $stmt = $this->db->prepare('insert into redeco_logs(origen,response)VALUES(:origen,:response)');
+                $stmt->execute([
+                    ':origen' => $origen,
+                    ':response' => $response
+                ]);
+            } catch (\Throwable $th) {
+                // Manejar el error de alguna manera, por ejemplo, registrar el error
+                error_log($th->getMessage());
+            }
+        }
+        
+
 
     }
     

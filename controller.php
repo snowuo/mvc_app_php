@@ -151,8 +151,12 @@ class controller{
     public function get_su_token_redeco(){
         return $this->model->get_su_token_redeco();
     }
+    public function set_log($origen, $response){
+        $this->model->set_log($origen, $response);
+    }
     public function set_api_superuser($nombre,$password){
         $endpoint = 'auth/users/create-super-user/';
+        $origen = 'redeco_set_api_superuser';
         //$url = $this->base_url.$endpoint;
         $url = 'http://localhost/mvc_app_php/index.php?action=prueba_su';
         echo $url;
@@ -175,6 +179,8 @@ class controller{
             'Content-Length: ' . strlen($json))
         );
         $response = curl_exec($curl);
+        $this->set_log($origen, $response);
+
         $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         if ($response === false) {
             $error = curl_error($curl);
@@ -196,7 +202,7 @@ class controller{
             //$this->model->update_enviada($id);
             echo "<br>todo salio bien<br><br><br><br>";
 
-            echo json_encode($response,true);
+            echo $response;
             //header('location: index.php?action=redeco&mensaje=Super+usuario+se+registró+correctamente');  
             
             
@@ -204,6 +210,34 @@ class controller{
 
 
     }
+
+    public function update_redeco_token($usuario, $password){
+        $endpoint = 'auth/users/token/';
+        $origen = 'redeco_set_api_superuser';
+        $url = $this->base_url.$endpoint;
+        $data = array(
+            "username"=>$usuario,
+            "password"=>$password
+        );
+        $json = json_encode($data);
+        
+        $curl = curl_init();
+        curl_setopt($curl,CURLOPT_URL,$url);
+        curl_setopt($curl,CURLOPT_SSL_VERIFYPEER,false);
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($curl,CURLOPT_POSTFIELDS,$json);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($json))
+        );
+        $response = curl_exec($curl);
+        $this->set_log($origen, $response);
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+
+    }
+
+
 
 }
 ?>

@@ -263,4 +263,11 @@ document.getElementById('form_consultas').addEventListener('submit',function(eve
     let numericFields = ['ConsultasTrim','NumConsultas','ConsultasEstatusCon','EstadosId','MediosId','ConsultasCP','ConsultasMpioId','ConsultasLocId','ConsultasColId','ConsultascatnivelatenId',]
     let dateFields = ['ConsultasFecAten','ConsultasFecRecepcion',]
 
+
+    formData.forEach((value, key) => {
+
+        
+    })
+
+
 })

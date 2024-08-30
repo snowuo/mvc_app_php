@@ -292,8 +292,45 @@ document.getElementById('form_rec').addEventListener('submit',function(event) {
     let formData = new FormData(form);
     console.log('formData: ',formData);
     let formObjet = {};
-    let numericFields = ['ConsultasTrim','NumConsultas','ConsultasEstatusCon','EstadosId','MediosId','ConsultasCP','ConsultasMpioId','ConsultasLocId','ConsultasColId','ConsultascatnivelatenId',]
-    let dateFields = ['ConsultasFecAten','ConsultasFecRecepcion',]
+    const alfanumerico = [
+        "RecDenominacion",
+        "RecSector",
+        "RecFolioAtencion",
+        "RecProductoServicio",
+        "RecCausaMotivo",
+        "RecMonetario",
+        "RecPori",
+        "RecSexo",
+        "RecFolioCondusef"
+    ];
+    
+    const numerico = [
+        "RecTrimestre",
+        "RecNumero",
+        "RecEstadoConPend",
+        "RecMedioRecepcionCanal",
+        "RecEntidadFederativa",
+        "RecCodigoPostal",
+        "RecMunicipioAlcaldia",
+        "RecLocalidad",
+        "RecColonia",
+        "RecMontoReclamado",
+        "RecImporteAbonado",
+        "RecTipoPersona",
+        "RecEdad",
+        "RecSentidoResolucion",
+        "RecNivelAtencion",
+        "RecReversa"
+    ];
+    
+    const fecha = [
+        "RecFechaReclamacion",
+        "RecFechaAtencion",
+        "RecFechaResolucion",
+        "RecFechaNotifiUsuario",
+        "RecFechaAbonoImporte"
+    ];
+    
 
 })
 

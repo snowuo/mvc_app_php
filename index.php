@@ -213,6 +213,15 @@
                 echo json_encode($resp);
                
             break;
+            case 'pruebalog':
+                try {
+                    $controller->set_log('origen','prueba');
+                    echo ']Concluido satisfactoriamente';
+                } catch (\Throwable $th) {
+                    //throw $th;
+                }
+                $controller->set_log('origen','prueba');
+            break;
             default:
              include 'views/error404.php';
             break;
