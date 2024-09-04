@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-08-2024 a las 01:23:47
+-- Tiempo de generación: 05-09-2024 a las 01:18:50
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -1311,19 +1311,6 @@ INSERT INTO `info_sofom` (`id`, `denominacion`, `sector`, `f_actualizacion`) VAL
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `log`
---
-
-CREATE TABLE `log` (
-  `id` int(11) NOT NULL,
-  `origen` varchar(50) NOT NULL,
-  `resultado` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`resultado`)),
-  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `productos`
 --
 
@@ -1415,6 +1402,131 @@ CREATE TABLE `reclamacion_data` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `redeco_logs`
+--
+
+CREATE TABLE `redeco_logs` (
+  `id` int(11) NOT NULL,
+  `origen` varchar(50) DEFAULT NULL,
+  `response` longtext DEFAULT NULL,
+  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `redeco_logs`
+--
+
+INSERT INTO `redeco_logs` (`id`, `origen`, `response`, `fecha_creacion`) VALUES
+(1, 'prueba', 'prueba', '2024-08-21 22:36:40'),
+(2, 'prueba2', 'prueba2', '2024-08-21 22:39:42'),
+(3, 'origen', 'prueba', '2024-08-21 22:41:09'),
+(4, 'origen', 'prueba', '2024-08-21 22:41:09'),
+(5, 'redeco_set_api_superuser', '<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>Document</title>\r\n    <link href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\" rel=\"stylesheet\">\r\n    <style>\r\n        .login-container {\r\n            height: 100vh;\r\n            display: flex;\r\n            justify-content: center;\r\n            align-items: center;\r\n        }\r\n    </style>\r\n</head>\r\n<body>\r\n        \r\n\r\n    <div class=\"login-container\">\r\n        <div class=\"card\" style=\"width: 18rem;\">\r\n            <div class=\"card-body\">\r\n                <h5 class=\"card-title text-center mb-4\">Iniciar sesión</h5>\r\n                <form action=\"index.php\" method=\"post\">\r\n                    <div class=\"mb-3\">\r\n                        <label for=\"email\" class=\"form-label\">Nombre de Usuario</label>\r\n                        <input type=\"text\" name=\"username\" class=\"form-control\" id=\"email\" placeholder=\"Nombre de Usuario\" required>\r\n                    </div>\r\n                    <div class=\"mb-3\">\r\n                        <label for=\"password\" class=\"form-label\">Contraseña</label>\r\n                        <input type=\"password\" name=\"password\" class=\"form-control\" id=\"password\" placeholder=\"********\" required>\r\n                    </div>\r\n                    <button type=\"submit\" class=\"btn btn-primary w-100\">Iniciar sesión</button>\r\n                                    </form>\r\n            </div>\r\n        </div>\r\n    </div>  \r\n        <script src=\"https://code.jquery.com/jquery-3.5.1.slim.min.js\"></script>\r\n<script src=\"https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js\"></script>\r\n<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js\"></script>\r\n<script src=\"js/alerta.js\"></script></body>\r\n</html>\r\n\r\n\r\n\r\n', '2024-08-21 22:42:24'),
+(6, 'redeco_set_api_superuser', '<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>Document</title>\r\n    <link href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\" rel=\"stylesheet\">\r\n    <style>\r\n        .login-container {\r\n            height: 100vh;\r\n            display: flex;\r\n            justify-content: center;\r\n            align-items: center;\r\n        }\r\n    </style>\r\n</head>\r\n<body>\r\n        \r\n\r\n    <div class=\"login-container\">\r\n        <div class=\"card\" style=\"width: 18rem;\">\r\n            <div class=\"card-body\">\r\n                <h5 class=\"card-title text-center mb-4\">Iniciar sesión</h5>\r\n                <form action=\"index.php\" method=\"post\">\r\n                    <div class=\"mb-3\">\r\n                        <label for=\"email\" class=\"form-label\">Nombre de Usuario</label>\r\n                        <input type=\"text\" name=\"username\" class=\"form-control\" id=\"email\" placeholder=\"Nombre de Usuario\" required>\r\n                    </div>\r\n                    <div class=\"mb-3\">\r\n                        <label for=\"password\" class=\"form-label\">Contraseña</label>\r\n                        <input type=\"password\" name=\"password\" class=\"form-control\" id=\"password\" placeholder=\"********\" required>\r\n                    </div>\r\n                    <button type=\"submit\" class=\"btn btn-primary w-100\">Iniciar sesión</button>\r\n                                    </form>\r\n            </div>\r\n        </div>\r\n    </div>  \r\n        <script src=\"https://code.jquery.com/jquery-3.5.1.slim.min.js\"></script>\r\n<script src=\"https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js\"></script>\r\n<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js\"></script>\r\n<script src=\"js/alerta.js\"></script></body>\r\n</html>\r\n\r\n\r\n\r\n', '2024-08-22 18:23:00'),
+(7, 'redeco_set_api_superuser', '<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>Document</title>\r\n    <link href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\" rel=\"stylesheet\">\r\n    <style>\r\n        .login-container {\r\n            height: 100vh;\r\n            display: flex;\r\n            justify-content: center;\r\n            align-items: center;\r\n        }\r\n    </style>\r\n</head>\r\n<body>\r\n        \r\n\r\n    <div class=\"login-container\">\r\n        <div class=\"card\" style=\"width: 18rem;\">\r\n            <div class=\"card-body\">\r\n                <h5 class=\"card-title text-center mb-4\">Iniciar sesión</h5>\r\n                <form action=\"index.php\" method=\"post\">\r\n                    <div class=\"mb-3\">\r\n                        <label for=\"email\" class=\"form-label\">Nombre de Usuario</label>\r\n                        <input type=\"text\" name=\"username\" class=\"form-control\" id=\"email\" placeholder=\"Nombre de Usuario\" required>\r\n                    </div>\r\n                    <div class=\"mb-3\">\r\n                        <label for=\"password\" class=\"form-label\">Contraseña</label>\r\n                        <input type=\"password\" name=\"password\" class=\"form-control\" id=\"password\" placeholder=\"********\" required>\r\n                    </div>\r\n                    <button type=\"submit\" class=\"btn btn-primary w-100\">Iniciar sesión</button>\r\n                                    </form>\r\n            </div>\r\n        </div>\r\n    </div>  \r\n        <script src=\"https://code.jquery.com/jquery-3.5.1.slim.min.js\"></script>\r\n<script src=\"https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js\"></script>\r\n<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js\"></script>\r\n<script src=\"js/alerta.js\"></script></body>\r\n</html>\r\n\r\n\r\n\r\n', '2024-09-02 20:44:24'),
+(8, 'redeco_set_api_superuser', '{\"message\":\"El usuario no existe para el sistema.\"}', '2024-09-03 20:17:25'),
+(9, 'redeco_set_api_superuser', '{\"message\":\"El usuario no existe para el sistema.\"}', '2024-09-03 20:45:42'),
+(10, 'redeco_set_api_superuser', '{\"message\":\"El usuario no existe para el sistema.\"}', '2024-09-03 20:46:15'),
+(11, 'redeco_set_api_superuser', '{\"message\":\"El usuario no existe para el sistema.\"}', '2024-09-03 20:47:14'),
+(12, 'redeco_set_api_superuser', '{\"message\":\"El usuario no existe para el sistema.\"}', '2024-09-03 20:47:23'),
+(13, 'redeco_set_api_superuser', '{\"message\":\"El usuario no existe para el sistema.\"}', '2024-09-03 21:38:39'),
+(14, 'redeco_set_api_superuser', '{\"message\":\"El usuario no existe para el sistema.\"}', '2024-09-03 21:38:46'),
+(15, 'redeco_set_api_superuser', '{\"message\":\"El usuario no existe para el sistema.\"}', '2024-09-03 21:46:37'),
+(16, 'redeco_set_api_superuser', '{\"message\":\"El usuario no existe para el sistema.\"}', '2024-09-03 21:46:41'),
+(17, 'redeco_set_api_superuser', '{\"message\":\"El usuario no existe para el sistema.\"}', '2024-09-03 23:07:32'),
+(18, 'redeco_set_api_superuser', '{\"message\":\"El usuario no existe para el sistema.\"}', '2024-09-03 23:11:47'),
+(19, 'redeco_set_api_superuser', '<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>Document</title>\r\n    <link href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\" rel=\"stylesheet\">\r\n    <style>\r\n        .login-container {\r\n            height: 100vh;\r\n            display: flex;\r\n            justify-content: center;\r\n            align-items: center;\r\n        }\r\n    </style>\r\n</head>\r\n<body>\r\n        \r\n\r\n    <div class=\"login-container\">\r\n        <div class=\"card\" style=\"width: 18rem;\">\r\n            <div class=\"card-body\">\r\n                <h5 class=\"card-title text-center mb-4\">Iniciar sesión</h5>\r\n                <form action=\"index.php\" method=\"post\">\r\n                    <div class=\"mb-3\">\r\n                        <label for=\"email\" class=\"form-label\">Nombre de Usuario</label>\r\n                        <input type=\"text\" name=\"username\" class=\"form-control\" id=\"email\" placeholder=\"Nombre de Usuario\" required>\r\n                    </div>\r\n                    <div class=\"mb-3\">\r\n                        <label for=\"password\" class=\"form-label\">Contraseña</label>\r\n                        <input type=\"password\" name=\"password\" class=\"form-control\" id=\"password\" placeholder=\"********\" required>\r\n                    </div>\r\n                    <button type=\"submit\" class=\"btn btn-primary w-100\">Iniciar sesión</button>\r\n                                    </form>\r\n            </div>\r\n        </div>\r\n    </div>  \r\n        <script src=\"https://code.jquery.com/jquery-3.5.1.slim.min.js\"></script>\r\n<script src=\"https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js\"></script>\r\n<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js\"></script>\r\n<script src=\"js/alerta.js\"></script></body>\r\n</html>\r\n\r\n\r\n\r\n', '2024-09-03 23:35:23'),
+(20, 'redeco_set_api_superuser', '{\"message\":\"El usuario ha sido creado exitosamente!\",\"data\":{\"userid\":\"49bf84ff-ab58-4b0d-b2d1-10f506d79100\",\"username\":\"Sefiredecosu\",\"password\":\"$2a$10$c1tG2z.X2MyYVdqRa4GcwehKEwbMFuUwx76W9MX0DvCyZ8EVTtj.2\",\"institucionid\":\"49A8C2DF-5942-4E14-9D36-ED3070D4\",\"is_active\":true,\"profileid\":\"2\",\"date\":\"2024-09-03T06:00:00.000Z\",\"system\":\"a7f7f93d-704e-4afe-a7aa-0b56490b479e\",\"token_access\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0OWJmODRmZi1hYjU4LTRiMGQtYjJkMS0xMGY1MDZkNzkxMDAiLCJ1c2VybmFtZSI6IlNlZmlyZWRlY29zdSIsImluc3RpdHVjaW9uaWQiOiI0OUE4QzJERi01OTQyLTRFMTQtOUQzNi1FRDMwNzBENCIsImluc3RpdHVjaW9uQ2xhdmUiOjEzNDYwLCJkZW5vbWluYWNpb25fc29jaWFsIjoiU2VmaSBFc3RyYXTDqWdpY29zLCBTLkEuUC5JLiBkZSBDLlYuLCBTT0ZPTSwgRS5OLlIuIiwic2VjdG9yaWQiOjY5LCJzZWN0b3IiOiJTT0NJRURBREVTIEZJTkFOQ0lFUkFTIERFIE9CSkVUTyBNVUxUSVBMRSBFTlIiLCJzeXN0ZW0iOiJSRURFQ08iLCJpYXQiOjE3MjU0MDY3NzEsImV4cCI6MTcyNzk5ODc3MX0.evaQp4nIWwDJHr5mPIIsigKyioifup1TEBvFQNucsP0\"}}', '2024-09-03 23:39:32'),
+(21, 'redeco_set_api_superuser', '<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>301 Moved Permanently</title>\n</head><body>\n<h1>Moved Permanently</h1>\n<p>The document has moved <a href=\"http://localhost/json/\">here</a>.</p>\n<hr>\n<address>Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.0.30 Server at localhost Port 80</address>\n</body></html>\n', '2024-09-04 17:32:50'),
+(22, 'redeco_set_api_superuser', '<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>301 Moved Permanently</title>\n</head><body>\n<h1>Moved Permanently</h1>\n<p>The document has moved <a href=\"http://localhost/json/\">here</a>.</p>\n<hr>\n<address>Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.0.30 Server at localhost Port 80</address>\n</body></html>\n', '2024-09-04 17:34:03'),
+(23, 'redeco_set_api_superuser', '{\"message\":\"El usuario ha sido creado exitosamente!\",\"data\":{\"userid\":\"49bf84ff-ab58-4b0d-b2d1-10f506d79100\",\"username\":\"Sefiredecosu\",\"password\":\"$2a$10$c1tG2z.X2MyYVdqRa4GcwehKEwbMFuUwx76W9MX0DvCyZ8EVTtj.2\",\"institucionid\":\"49A8C2DF-5942-4E14-9D36-ED3070D4\",\"is_active\":true,\"profileid\":\"2\",\"date\":\"2024-09-03T06:00:00.000Z\",\"system\":\"a7f7f93d-704e-4afe-a7aa-0b56490b479e\",\"token_access\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0OWJmODRmZi1hYjU4LTRiMGQtYjJkMS0xMGY1MDZkNzkxMDAiLCJ1c2VybmFtZSI6IlNlZmlyZWRlY29zdSIsImluc3RpdHVjaW9uaWQiOiI0OUE4QzJERi01OTQyLTRFMTQtOUQzNi1FRDMwNzBENCIsImluc3RpdHVjaW9uQ2xhdmUiOjEzNDYwLCJkZW5vbWluYWNpb25fc29jaWFsIjoiU2VmaSBFc3RyYXTDqWdpY29zLCBTLkEuUC5JLiBkZSBDLlYuLCBTT0ZPTSwgRS5OLlIuIiwic2VjdG9yaWQiOjY5LCJzZWN0b3IiOiJTT0NJRURBREVTIEZJTkFOQ0lFUkFTIERFIE9CSkVUTyBNVUxUSVBMRSBFTlIiLCJzeXN0ZW0iOiJSRURFQ08iLCJpYXQiOjE3MjU0MDY3NzEsImV4cCI6MTcyNzk5ODc3MX0.evaQp4nIWwDJHr5mPIIsigKyioifup1TEBvFQNucsP0\"}}', '2024-09-04 17:41:19'),
+(24, 'redeco_set_api_superuser', '{\"message\":\"El usuario ha sido creado exitosamente!\",\"data\":{\"userid\":\"49bf84ff-ab58-4b0d-b2d1-10f506d79100\",\"username\":\"Sefiredecosu\",\"password\":\"$2a$10$c1tG2z.X2MyYVdqRa4GcwehKEwbMFuUwx76W9MX0DvCyZ8EVTtj.2\",\"institucionid\":\"49A8C2DF-5942-4E14-9D36-ED3070D4\",\"is_active\":true,\"profileid\":\"2\",\"date\":\"2024-09-03T06:00:00.000Z\",\"system\":\"a7f7f93d-704e-4afe-a7aa-0b56490b479e\",\"token_access\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0OWJmODRmZi1hYjU4LTRiMGQtYjJkMS0xMGY1MDZkNzkxMDAiLCJ1c2VybmFtZSI6IlNlZmlyZWRlY29zdSIsImluc3RpdHVjaW9uaWQiOiI0OUE4QzJERi01OTQyLTRFMTQtOUQzNi1FRDMwNzBENCIsImluc3RpdHVjaW9uQ2xhdmUiOjEzNDYwLCJkZW5vbWluYWNpb25fc29jaWFsIjoiU2VmaSBFc3RyYXTDqWdpY29zLCBTLkEuUC5JLiBkZSBDLlYuLCBTT0ZPTSwgRS5OLlIuIiwic2VjdG9yaWQiOjY5LCJzZWN0b3IiOiJTT0NJRURBREVTIEZJTkFOQ0lFUkFTIERFIE9CSkVUTyBNVUxUSVBMRSBFTlIiLCJzeXN0ZW0iOiJSRURFQ08iLCJpYXQiOjE3MjU0MDY3NzEsImV4cCI6MTcyNzk5ODc3MX0.evaQp4nIWwDJHr5mPIIsigKyioifup1TEBvFQNucsP0\"}}', '2024-09-04 17:44:50'),
+(25, 'redeco_set_api_superuser', '{\"message\":\"El usuario ha sido creado exitosamente!\",\"data\":{\"userid\":\"49bf84ff-ab58-4b0d-b2d1-10f506d79100\",\"username\":\"Sefiredecosu\",\"password\":\"$2a$10$c1tG2z.X2MyYVdqRa4GcwehKEwbMFuUwx76W9MX0DvCyZ8EVTtj.2\",\"institucionid\":\"49A8C2DF-5942-4E14-9D36-ED3070D4\",\"is_active\":true,\"profileid\":\"2\",\"date\":\"2024-09-03T06:00:00.000Z\",\"system\":\"a7f7f93d-704e-4afe-a7aa-0b56490b479e\",\"token_access\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0OWJmODRmZi1hYjU4LTRiMGQtYjJkMS0xMGY1MDZkNzkxMDAiLCJ1c2VybmFtZSI6IlNlZmlyZWRlY29zdSIsImluc3RpdHVjaW9uaWQiOiI0OUE4QzJERi01OTQyLTRFMTQtOUQzNi1FRDMwNzBENCIsImluc3RpdHVjaW9uQ2xhdmUiOjEzNDYwLCJkZW5vbWluYWNpb25fc29jaWFsIjoiU2VmaSBFc3RyYXTDqWdpY29zLCBTLkEuUC5JLiBkZSBDLlYuLCBTT0ZPTSwgRS5OLlIuIiwic2VjdG9yaWQiOjY5LCJzZWN0b3IiOiJTT0NJRURBREVTIEZJTkFOQ0lFUkFTIERFIE9CSkVUTyBNVUxUSVBMRSBFTlIiLCJzeXN0ZW0iOiJSRURFQ08iLCJpYXQiOjE3MjU0MDY3NzEsImV4cCI6MTcyNzk5ODc3MX0.evaQp4nIWwDJHr5mPIIsigKyioifup1TEBvFQNucsP0\"}}', '2024-09-04 17:46:02'),
+(26, 'redeco_set_api_superuser', '{\"message\":\"El usuario ha sido creado exitosamente!\",\"data\":{\"userid\":\"49bf84ff-ab58-4b0d-b2d1-10f506d79100\",\"username\":\"Sefiredecosu\",\"password\":\"$2a$10$c1tG2z.X2MyYVdqRa4GcwehKEwbMFuUwx76W9MX0DvCyZ8EVTtj.2\",\"institucionid\":\"49A8C2DF-5942-4E14-9D36-ED3070D4\",\"is_active\":true,\"profileid\":\"2\",\"date\":\"2024-09-03T06:00:00.000Z\",\"system\":\"a7f7f93d-704e-4afe-a7aa-0b56490b479e\",\"token_access\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0OWJmODRmZi1hYjU4LTRiMGQtYjJkMS0xMGY1MDZkNzkxMDAiLCJ1c2VybmFtZSI6IlNlZmlyZWRlY29zdSIsImluc3RpdHVjaW9uaWQiOiI0OUE4QzJERi01OTQyLTRFMTQtOUQzNi1FRDMwNzBENCIsImluc3RpdHVjaW9uQ2xhdmUiOjEzNDYwLCJkZW5vbWluYWNpb25fc29jaWFsIjoiU2VmaSBFc3RyYXTDqWdpY29zLCBTLkEuUC5JLiBkZSBDLlYuLCBTT0ZPTSwgRS5OLlIuIiwic2VjdG9yaWQiOjY5LCJzZWN0b3IiOiJTT0NJRURBREVTIEZJTkFOQ0lFUkFTIERFIE9CSkVUTyBNVUxUSVBMRSBFTlIiLCJzeXN0ZW0iOiJSRURFQ08iLCJpYXQiOjE3MjU0MDY3NzEsImV4cCI6MTcyNzk5ODc3MX0.evaQp4nIWwDJHr5mPIIsigKyioifup1TEBvFQNucsP0\"}}', '2024-09-04 17:46:10'),
+(27, 'redeco_set_api_superuser', '{\"message\":\"El usuario ha sido creado exitosamente!\",\"data\":{\"userid\":\"49bf84ff-ab58-4b0d-b2d1-10f506d79100\",\"username\":\"Sefiredecosu\",\"password\":\"$2a$10$c1tG2z.X2MyYVdqRa4GcwehKEwbMFuUwx76W9MX0DvCyZ8EVTtj.2\",\"institucionid\":\"49A8C2DF-5942-4E14-9D36-ED3070D4\",\"is_active\":true,\"profileid\":\"2\",\"date\":\"2024-09-03T06:00:00.000Z\",\"system\":\"a7f7f93d-704e-4afe-a7aa-0b56490b479e\",\"token_access\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0OWJmODRmZi1hYjU4LTRiMGQtYjJkMS0xMGY1MDZkNzkxMDAiLCJ1c2VybmFtZSI6IlNlZmlyZWRlY29zdSIsImluc3RpdHVjaW9uaWQiOiI0OUE4QzJERi01OTQyLTRFMTQtOUQzNi1FRDMwNzBENCIsImluc3RpdHVjaW9uQ2xhdmUiOjEzNDYwLCJkZW5vbWluYWNpb25fc29jaWFsIjoiU2VmaSBFc3RyYXTDqWdpY29zLCBTLkEuUC5JLiBkZSBDLlYuLCBTT0ZPTSwgRS5OLlIuIiwic2VjdG9yaWQiOjY5LCJzZWN0b3IiOiJTT0NJRURBREVTIEZJTkFOQ0lFUkFTIERFIE9CSkVUTyBNVUxUSVBMRSBFTlIiLCJzeXN0ZW0iOiJSRURFQ08iLCJpYXQiOjE3MjU0MDY3NzEsImV4cCI6MTcyNzk5ODc3MX0.evaQp4nIWwDJHr5mPIIsigKyioifup1TEBvFQNucsP0\"}}', '2024-09-04 17:46:44'),
+(28, 'redeco_set_api_superuser', '{\"message\":\"El usuario ha sido creado exitosamente!\",\"data\":{\"userid\":\"49bf84ff-ab58-4b0d-b2d1-10f506d79100\",\"username\":\"Sefiredecosu\",\"password\":\"$2a$10$c1tG2z.X2MyYVdqRa4GcwehKEwbMFuUwx76W9MX0DvCyZ8EVTtj.2\",\"institucionid\":\"49A8C2DF-5942-4E14-9D36-ED3070D4\",\"is_active\":true,\"profileid\":\"2\",\"date\":\"2024-09-03T06:00:00.000Z\",\"system\":\"a7f7f93d-704e-4afe-a7aa-0b56490b479e\",\"token_access\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0OWJmODRmZi1hYjU4LTRiMGQtYjJkMS0xMGY1MDZkNzkxMDAiLCJ1c2VybmFtZSI6IlNlZmlyZWRlY29zdSIsImluc3RpdHVjaW9uaWQiOiI0OUE4QzJERi01OTQyLTRFMTQtOUQzNi1FRDMwNzBENCIsImluc3RpdHVjaW9uQ2xhdmUiOjEzNDYwLCJkZW5vbWluYWNpb25fc29jaWFsIjoiU2VmaSBFc3RyYXTDqWdpY29zLCBTLkEuUC5JLiBkZSBDLlYuLCBTT0ZPTSwgRS5OLlIuIiwic2VjdG9yaWQiOjY5LCJzZWN0b3IiOiJTT0NJRURBREVTIEZJTkFOQ0lFUkFTIERFIE9CSkVUTyBNVUxUSVBMRSBFTlIiLCJzeXN0ZW0iOiJSRURFQ08iLCJpYXQiOjE3MjU0MDY3NzEsImV4cCI6MTcyNzk5ODc3MX0.evaQp4nIWwDJHr5mPIIsigKyioifup1TEBvFQNucsP0\"}}', '2024-09-04 17:47:17'),
+(29, 'redeco_set_api_superuser', '{\"message\":\"El usuario ha sido creado exitosamente!\",\"data\":{\"userid\":\"49bf84ff-ab58-4b0d-b2d1-10f506d79100\",\"username\":\"Sefiredecosu\",\"password\":\"$2a$10$c1tG2z.X2MyYVdqRa4GcwehKEwbMFuUwx76W9MX0DvCyZ8EVTtj.2\",\"institucionid\":\"49A8C2DF-5942-4E14-9D36-ED3070D4\",\"is_active\":true,\"profileid\":\"2\",\"date\":\"2024-09-03T06:00:00.000Z\",\"system\":\"a7f7f93d-704e-4afe-a7aa-0b56490b479e\",\"token_access\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0OWJmODRmZi1hYjU4LTRiMGQtYjJkMS0xMGY1MDZkNzkxMDAiLCJ1c2VybmFtZSI6IlNlZmlyZWRlY29zdSIsImluc3RpdHVjaW9uaWQiOiI0OUE4QzJERi01OTQyLTRFMTQtOUQzNi1FRDMwNzBENCIsImluc3RpdHVjaW9uQ2xhdmUiOjEzNDYwLCJkZW5vbWluYWNpb25fc29jaWFsIjoiU2VmaSBFc3RyYXTDqWdpY29zLCBTLkEuUC5JLiBkZSBDLlYuLCBTT0ZPTSwgRS5OLlIuIiwic2VjdG9yaWQiOjY5LCJzZWN0b3IiOiJTT0NJRURBREVTIEZJTkFOQ0lFUkFTIERFIE9CSkVUTyBNVUxUSVBMRSBFTlIiLCJzeXN0ZW0iOiJSRURFQ08iLCJpYXQiOjE3MjU0MDY3NzEsImV4cCI6MTcyNzk5ODc3MX0.evaQp4nIWwDJHr5mPIIsigKyioifup1TEBvFQNucsP0\"}}', '2024-09-04 17:47:40'),
+(30, 'redeco_set_api_superuser', '{\"message\":\"El usuario ha sido creado exitosamente!\",\"data\":{\"userid\":\"49bf84ff-ab58-4b0d-b2d1-10f506d79100\",\"username\":\"Sefiredecosu\",\"password\":\"$2a$10$c1tG2z.X2MyYVdqRa4GcwehKEwbMFuUwx76W9MX0DvCyZ8EVTtj.2\",\"institucionid\":\"49A8C2DF-5942-4E14-9D36-ED3070D4\",\"is_active\":true,\"profileid\":\"2\",\"date\":\"2024-09-03T06:00:00.000Z\",\"system\":\"a7f7f93d-704e-4afe-a7aa-0b56490b479e\",\"token_access\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0OWJmODRmZi1hYjU4LTRiMGQtYjJkMS0xMGY1MDZkNzkxMDAiLCJ1c2VybmFtZSI6IlNlZmlyZWRlY29zdSIsImluc3RpdHVjaW9uaWQiOiI0OUE4QzJERi01OTQyLTRFMTQtOUQzNi1FRDMwNzBENCIsImluc3RpdHVjaW9uQ2xhdmUiOjEzNDYwLCJkZW5vbWluYWNpb25fc29jaWFsIjoiU2VmaSBFc3RyYXTDqWdpY29zLCBTLkEuUC5JLiBkZSBDLlYuLCBTT0ZPTSwgRS5OLlIuIiwic2VjdG9yaWQiOjY5LCJzZWN0b3IiOiJTT0NJRURBREVTIEZJTkFOQ0lFUkFTIERFIE9CSkVUTyBNVUxUSVBMRSBFTlIiLCJzeXN0ZW0iOiJSRURFQ08iLCJpYXQiOjE3MjU0MDY3NzEsImV4cCI6MTcyNzk5ODc3MX0.evaQp4nIWwDJHr5mPIIsigKyioifup1TEBvFQNucsP0\"}}', '2024-09-04 17:47:43'),
+(31, 'redeco_set_api_superuser', '{\"message\":\"El usuario ha sido creado exitosamente!\",\"data\":{\"userid\":\"49bf84ff-ab58-4b0d-b2d1-10f506d79100\",\"username\":\"Sefiredecosu\",\"password\":\"$2a$10$c1tG2z.X2MyYVdqRa4GcwehKEwbMFuUwx76W9MX0DvCyZ8EVTtj.2\",\"institucionid\":\"49A8C2DF-5942-4E14-9D36-ED3070D4\",\"is_active\":true,\"profileid\":\"2\",\"date\":\"2024-09-03T06:00:00.000Z\",\"system\":\"a7f7f93d-704e-4afe-a7aa-0b56490b479e\",\"token_access\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0OWJmODRmZi1hYjU4LTRiMGQtYjJkMS0xMGY1MDZkNzkxMDAiLCJ1c2VybmFtZSI6IlNlZmlyZWRlY29zdSIsImluc3RpdHVjaW9uaWQiOiI0OUE4QzJERi01OTQyLTRFMTQtOUQzNi1FRDMwNzBENCIsImluc3RpdHVjaW9uQ2xhdmUiOjEzNDYwLCJkZW5vbWluYWNpb25fc29jaWFsIjoiU2VmaSBFc3RyYXTDqWdpY29zLCBTLkEuUC5JLiBkZSBDLlYuLCBTT0ZPTSwgRS5OLlIuIiwic2VjdG9yaWQiOjY5LCJzZWN0b3IiOiJTT0NJRURBREVTIEZJTkFOQ0lFUkFTIERFIE9CSkVUTyBNVUxUSVBMRSBFTlIiLCJzeXN0ZW0iOiJSRURFQ08iLCJpYXQiOjE3MjU0MDY3NzEsImV4cCI6MTcyNzk5ODc3MX0.evaQp4nIWwDJHr5mPIIsigKyioifup1TEBvFQNucsP0\"}}', '2024-09-04 17:48:43'),
+(32, 'redeco_set_api_superuser', '{\"message\":\"El usuario ha sido creado exitosamente!\",\"data\":{\"userid\":\"49bf84ff-ab58-4b0d-b2d1-10f506d79100\",\"username\":\"Sefiredecosu\",\"password\":\"$2a$10$c1tG2z.X2MyYVdqRa4GcwehKEwbMFuUwx76W9MX0DvCyZ8EVTtj.2\",\"institucionid\":\"49A8C2DF-5942-4E14-9D36-ED3070D4\",\"is_active\":true,\"profileid\":\"2\",\"date\":\"2024-09-03T06:00:00.000Z\",\"system\":\"a7f7f93d-704e-4afe-a7aa-0b56490b479e\",\"token_access\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0OWJmODRmZi1hYjU4LTRiMGQtYjJkMS0xMGY1MDZkNzkxMDAiLCJ1c2VybmFtZSI6IlNlZmlyZWRlY29zdSIsImluc3RpdHVjaW9uaWQiOiI0OUE4QzJERi01OTQyLTRFMTQtOUQzNi1FRDMwNzBENCIsImluc3RpdHVjaW9uQ2xhdmUiOjEzNDYwLCJkZW5vbWluYWNpb25fc29jaWFsIjoiU2VmaSBFc3RyYXTDqWdpY29zLCBTLkEuUC5JLiBkZSBDLlYuLCBTT0ZPTSwgRS5OLlIuIiwic2VjdG9yaWQiOjY5LCJzZWN0b3IiOiJTT0NJRURBREVTIEZJTkFOQ0lFUkFTIERFIE9CSkVUTyBNVUxUSVBMRSBFTlIiLCJzeXN0ZW0iOiJSRURFQ08iLCJpYXQiOjE3MjU0MDY3NzEsImV4cCI6MTcyNzk5ODc3MX0.evaQp4nIWwDJHr5mPIIsigKyioifup1TEBvFQNucsP0\"}}', '2024-09-04 17:48:46'),
+(33, 'redeco_set_api_superuser', '{\"message\":\"El usuario ha sido creado exitosamente!\",\"data\":{\"userid\":\"49bf84ff-ab58-4b0d-b2d1-10f506d79100\",\"username\":\"Sefiredecosu\",\"password\":\"$2a$10$c1tG2z.X2MyYVdqRa4GcwehKEwbMFuUwx76W9MX0DvCyZ8EVTtj.2\",\"institucionid\":\"49A8C2DF-5942-4E14-9D36-ED3070D4\",\"is_active\":true,\"profileid\":\"2\",\"date\":\"2024-09-03T06:00:00.000Z\",\"system\":\"a7f7f93d-704e-4afe-a7aa-0b56490b479e\",\"token_access\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0OWJmODRmZi1hYjU4LTRiMGQtYjJkMS0xMGY1MDZkNzkxMDAiLCJ1c2VybmFtZSI6IlNlZmlyZWRlY29zdSIsImluc3RpdHVjaW9uaWQiOiI0OUE4QzJERi01OTQyLTRFMTQtOUQzNi1FRDMwNzBENCIsImluc3RpdHVjaW9uQ2xhdmUiOjEzNDYwLCJkZW5vbWluYWNpb25fc29jaWFsIjoiU2VmaSBFc3RyYXTDqWdpY29zLCBTLkEuUC5JLiBkZSBDLlYuLCBTT0ZPTSwgRS5OLlIuIiwic2VjdG9yaWQiOjY5LCJzZWN0b3IiOiJTT0NJRURBREVTIEZJTkFOQ0lFUkFTIERFIE9CSkVUTyBNVUxUSVBMRSBFTlIiLCJzeXN0ZW0iOiJSRURFQ08iLCJpYXQiOjE3MjU0MDY3NzEsImV4cCI6MTcyNzk5ODc3MX0.evaQp4nIWwDJHr5mPIIsigKyioifup1TEBvFQNucsP0\"}}', '2024-09-04 17:51:42'),
+(34, 'redeco_set_api_superuser', '{\"message\":\"El usuario ha sido creado exitosamente!\",\"data\":{\"userid\":\"49bf84ff-ab58-4b0d-b2d1-10f506d79100\",\"username\":\"Sefiredecosu\",\"password\":\"$2a$10$c1tG2z.X2MyYVdqRa4GcwehKEwbMFuUwx76W9MX0DvCyZ8EVTtj.2\",\"institucionid\":\"49A8C2DF-5942-4E14-9D36-ED3070D4\",\"is_active\":true,\"profileid\":\"2\",\"date\":\"2024-09-03T06:00:00.000Z\",\"system\":\"a7f7f93d-704e-4afe-a7aa-0b56490b479e\",\"token_access\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0OWJmODRmZi1hYjU4LTRiMGQtYjJkMS0xMGY1MDZkNzkxMDAiLCJ1c2VybmFtZSI6IlNlZmlyZWRlY29zdSIsImluc3RpdHVjaW9uaWQiOiI0OUE4QzJERi01OTQyLTRFMTQtOUQzNi1FRDMwNzBENCIsImluc3RpdHVjaW9uQ2xhdmUiOjEzNDYwLCJkZW5vbWluYWNpb25fc29jaWFsIjoiU2VmaSBFc3RyYXTDqWdpY29zLCBTLkEuUC5JLiBkZSBDLlYuLCBTT0ZPTSwgRS5OLlIuIiwic2VjdG9yaWQiOjY5LCJzZWN0b3IiOiJTT0NJRURBREVTIEZJTkFOQ0lFUkFTIERFIE9CSkVUTyBNVUxUSVBMRSBFTlIiLCJzeXN0ZW0iOiJSRURFQ08iLCJpYXQiOjE3MjU0MDY3NzEsImV4cCI6MTcyNzk5ODc3MX0.evaQp4nIWwDJHr5mPIIsigKyioifup1TEBvFQNucsP0\"}}', '2024-09-04 17:59:26'),
+(35, 'redeco_set_api_superuser', '{\"message\":\"El usuario ha sido creado exitosamente!\",\"data\":{\"userid\":\"49bf84ff-ab58-4b0d-b2d1-10f506d79100\",\"username\":\"Sefiredecosu\",\"password\":\"$2a$10$c1tG2z.X2MyYVdqRa4GcwehKEwbMFuUwx76W9MX0DvCyZ8EVTtj.2\",\"institucionid\":\"49A8C2DF-5942-4E14-9D36-ED3070D4\",\"is_active\":true,\"profileid\":\"2\",\"date\":\"2024-09-03T06:00:00.000Z\",\"system\":\"a7f7f93d-704e-4afe-a7aa-0b56490b479e\",\"token_access\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0OWJmODRmZi1hYjU4LTRiMGQtYjJkMS0xMGY1MDZkNzkxMDAiLCJ1c2VybmFtZSI6IlNlZmlyZWRlY29zdSIsImluc3RpdHVjaW9uaWQiOiI0OUE4QzJERi01OTQyLTRFMTQtOUQzNi1FRDMwNzBENCIsImluc3RpdHVjaW9uQ2xhdmUiOjEzNDYwLCJkZW5vbWluYWNpb25fc29jaWFsIjoiU2VmaSBFc3RyYXTDqWdpY29zLCBTLkEuUC5JLiBkZSBDLlYuLCBTT0ZPTSwgRS5OLlIuIiwic2VjdG9yaWQiOjY5LCJzZWN0b3IiOiJTT0NJRURBREVTIEZJTkFOQ0lFUkFTIERFIE9CSkVUTyBNVUxUSVBMRSBFTlIiLCJzeXN0ZW0iOiJSRURFQ08iLCJpYXQiOjE3MjU0MDY3NzEsImV4cCI6MTcyNzk5ODc3MX0.evaQp4nIWwDJHr5mPIIsigKyioifup1TEBvFQNucsP0\"}}', '2024-09-04 18:07:45'),
+(36, 'redeco_set_api_superuser', '{\"message\":\"El usuario no existe para el sistema.\"}', '2024-09-04 18:10:37'),
+(37, 'redeco_set_api_superuser', '{\"message\":\"El usuario no existe para el sistema.\"}', '2024-09-04 22:51:22'),
+(38, 'redeco_set_api_superuser', '{\"message\":\"El usuario no existe para el sistema.\"}', '2024-09-04 22:58:34'),
+(39, 'redeco_set_api_superuser', '{\"message\":\"El usuario no existe para el sistema.\"}', '2024-09-04 23:01:48'),
+(40, 'redeco_set_api_superuser', '{\"message\":\"El usuario no existe para el sistema.\"}', '2024-09-04 23:02:39'),
+(41, 'redeco_set_api_superuser', '{\"msg\":\"Login exitoso!!!\",\"user\":{\"token_access\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0OWJmODRmZi1hYjU4LTRiMGQtYjJkMS0xMGY1MDZkNzkxMDAiLCJ1c2VybmFtZSI6IlNlZmlyZWRlY29zdSIsImluc3RpdHVjaW9uaWQiOiI0OUE4QzJERi01OTQyLTRFMTQtOUQzNi1FRDMwNzBENCIsImluc3RpdHVjaW9uQ2xhdmUiOjEzNDYwLCJkZW5vbWluYWNpb25fc29jaWFsIjoiU2VmaSBFc3RyYXTDqWdpY29zLCBTLkEuUC5JLiBkZSBDLlYuLCBTT0ZPTSwgRS5OLlIuIiwic2VjdG9yaWQiOjY5LCJzZWN0b3IiOiJTT0NJRURBREVTIEZJTkFOQ0lFUkFTIERFIE9CSkVUTyBNVUxUSVBMRSBFTlIiLCJzeXN0ZW0iOiJSRURFQ08iLCJpYXQiOjE3MjU0OTEwMTgsImV4cCI6MTcyODA4MzAxOH0.aVXTcefj-YwMd9fWT13XJqX8NR6CpZnzYw2lsZ6kMMY\",\"username\":\"Sefiredecosu\"}}', '2024-09-04 23:03:38'),
+(42, 'prueba actualizar token', '<br> Token: <br> Username: Sefiredecosu<br> password: Se2024fi', '2024-09-04 23:03:38'),
+(43, 'redeco_set_api_superuser', '{\"msg\":\"Login exitoso!!!\",\"user\":{\"token_access\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0OWJmODRmZi1hYjU4LTRiMGQtYjJkMS0xMGY1MDZkNzkxMDAiLCJ1c2VybmFtZSI6IlNlZmlyZWRlY29zdSIsImluc3RpdHVjaW9uaWQiOiI0OUE4QzJERi01OTQyLTRFMTQtOUQzNi1FRDMwNzBENCIsImluc3RpdHVjaW9uQ2xhdmUiOjEzNDYwLCJkZW5vbWluYWNpb25fc29jaWFsIjoiU2VmaSBFc3RyYXTDqWdpY29zLCBTLkEuUC5JLiBkZSBDLlYuLCBTT0ZPTSwgRS5OLlIuIiwic2VjdG9yaWQiOjY5LCJzZWN0b3IiOiJTT0NJRURBREVTIEZJTkFOQ0lFUkFTIERFIE9CSkVUTyBNVUxUSVBMRSBFTlIiLCJzeXN0ZW0iOiJSRURFQ08iLCJpYXQiOjE3MjU0OTExNjQsImV4cCI6MTcyODA4MzE2NH0.Fyw9u8A9h6_wNih3VzvT55vCQ7xR_Zu434T8snjSAso\",\"username\":\"Sefiredecosu\"}}', '2024-09-04 23:06:04'),
+(44, 'prueba actualizar token', '<br> Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0OWJmODRmZi1hYjU4LTRiMGQtYjJkMS0xMGY1MDZkNzkxMDAiLCJ1c2VybmFtZSI6IlNlZmlyZWRlY29zdSIsImluc3RpdHVjaW9uaWQiOiI0OUE4QzJERi01OTQyLTRFMTQtOUQzNi1FRDMwNzBENCIsImluc3RpdHVjaW9uQ2xhdmUiOjEzNDYwLCJkZW5vbWluYWNpb25fc29jaWFsIjoiU2VmaSBFc3RyYXTDqWdpY29zLCBTLkEuUC5JLiBkZSBDLlYuLCBTT0ZPTSwgRS5OLlIuIiwic2VjdG9yaWQiOjY5LCJzZWN0b3IiOiJTT0NJRURBREVTIEZJTkFOQ0lFUkFTIERFIE9CSkVUTyBNVUxUSVBMRSBFTlIiLCJzeXN0ZW0iOiJSRURFQ08iLCJpYXQiOjE3MjU0OTExNjQsImV4cCI6MTcyODA4MzE2NH0.Fyw9u8A9h6_wNih3VzvT55vCQ7xR_Zu434T8snjSAso<br> Username: Sefiredecosu<br> password: Se2024fi', '2024-09-04 23:06:04'),
+(45, 'redeco_set_api_superuser', '{\"msg\":\"Login exitoso!!!\",\"user\":{\"token_access\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0OWJmODRmZi1hYjU4LTRiMGQtYjJkMS0xMGY1MDZkNzkxMDAiLCJ1c2VybmFtZSI6IlNlZmlyZWRlY29zdSIsImluc3RpdHVjaW9uaWQiOiI0OUE4QzJERi01OTQyLTRFMTQtOUQzNi1FRDMwNzBENCIsImluc3RpdHVjaW9uQ2xhdmUiOjEzNDYwLCJkZW5vbWluYWNpb25fc29jaWFsIjoiU2VmaSBFc3RyYXTDqWdpY29zLCBTLkEuUC5JLiBkZSBDLlYuLCBTT0ZPTSwgRS5OLlIuIiwic2VjdG9yaWQiOjY5LCJzZWN0b3IiOiJTT0NJRURBREVTIEZJTkFOQ0lFUkFTIERFIE9CSkVUTyBNVUxUSVBMRSBFTlIiLCJzeXN0ZW0iOiJSRURFQ08iLCJpYXQiOjE3MjU0OTE1NDYsImV4cCI6MTcyODA4MzU0Nn0.6QFZf-u0MG9ZPD2igfUepjEXuOpYzW9YOWuAGi6Mr8s\",\"username\":\"Sefiredecosu\"}}', '2024-09-04 23:12:26'),
+(46, 'prueba actualizar token', '<br> Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0OWJmODRmZi1hYjU4LTRiMGQtYjJkMS0xMGY1MDZkNzkxMDAiLCJ1c2VybmFtZSI6IlNlZmlyZWRlY29zdSIsImluc3RpdHVjaW9uaWQiOiI0OUE4QzJERi01OTQyLTRFMTQtOUQzNi1FRDMwNzBENCIsImluc3RpdHVjaW9uQ2xhdmUiOjEzNDYwLCJkZW5vbWluYWNpb25fc29jaWFsIjoiU2VmaSBFc3RyYXTDqWdpY29zLCBTLkEuUC5JLiBkZSBDLlYuLCBTT0ZPTSwgRS5OLlIuIiwic2VjdG9yaWQiOjY5LCJzZWN0b3IiOiJTT0NJRURBREVTIEZJTkFOQ0lFUkFTIERFIE9CSkVUTyBNVUxUSVBMRSBFTlIiLCJzeXN0ZW0iOiJSRURFQ08iLCJpYXQiOjE3MjU0OTE1NDYsImV4cCI6MTcyODA4MzU0Nn0.6QFZf-u0MG9ZPD2igfUepjEXuOpYzW9YOWuAGi6Mr8s<br> Username: Sefiredecosu<br> password: Se2024fi', '2024-09-04 23:12:26');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reune_logs`
+--
+
+CREATE TABLE `reune_logs` (
+  `id` int(11) NOT NULL,
+  `origen` varchar(50) DEFAULT NULL,
+  `response` longtext DEFAULT NULL,
+  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `reune_logs`
+--
+
+INSERT INTO `reune_logs` (`id`, `origen`, `response`, `fecha_creacion`) VALUES
+(1, 'carlos', '234513452', '2024-09-02 23:05:37'),
+(2, 'carlos', '1234', '2024-09-02 23:07:17'),
+(3, 'carlos', '123456', '2024-09-02 23:11:16'),
+(4, 'config_redeco', '{\"msg\":\"Ya existe un usuario con este username\"}', '2024-09-02 23:11:17'),
+(5, 'carlos_sefi', '123456', '2024-09-02 23:12:19'),
+(6, 'config_redeco', '{\"error\":\"La key proporcionada no es válida\"}', '2024-09-02 23:12:20'),
+(7, 'carlos_sefi', '123456', '2024-09-02 23:14:27'),
+(8, 'config_reune', '{\"error\":\"La key proporcionada no es válida\"}', '2024-09-02 23:14:27'),
+(9, 'carlos_sefi', '987654', '2024-09-02 23:44:25'),
+(10, 'config_reune', '{\"error\":\"La key proporcionada no es válida\"}', '2024-09-02 23:44:25'),
+(11, 'carlos_sefi', '124578', '2024-09-02 23:46:53'),
+(12, 'config_reune', '{\"error\":\"La key proporcionada no es válida\"}', '2024-09-02 23:46:54'),
+(13, 'carlos_sefi', '124578sdsdf', '2024-09-02 23:48:32'),
+(14, 'config_reune', '{\"error\":\"La key proporcionada no es válida\"}', '2024-09-02 23:48:33'),
+(15, 'carlos_sefi', '124578sdsdf', '2024-09-02 23:50:20'),
+(16, 'config_reune', '{\"error\":\"La key proporcionada no es válida\"}', '2024-09-02 23:50:21'),
+(17, 'carlos_sefi', '1234555', '2024-09-02 23:58:14'),
+(18, 'config_reune', '{\"error\":\"La key proporcionada no es válida\"}', '2024-09-02 23:58:14'),
+(19, 'carlos_sefi', '1234555234234', '2024-09-02 23:58:52'),
+(20, 'config_reune', '{\"error\":\"La key proporcionada no es válida\"}', '2024-09-02 23:58:52'),
+(21, 'ReuneAdminSefi', 'Se2024fi', '2024-09-03 00:00:16'),
+(22, 'config_reune', '{\"error\":\"La key proporcionada no es válida\"}', '2024-09-03 00:00:17');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_usuario`
+--
+
+CREATE TABLE `tipo_usuario` (
+  `id_tu` int(11) NOT NULL,
+  `tu_origen` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_usuario`
+--
+
+INSERT INTO `tipo_usuario` (`id_tu`, `tu_origen`) VALUES
+(1, 'REDECO'),
+(2, 'REUNE');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tokens_redeco_reune_superuser`
 --
 
@@ -1447,16 +1559,16 @@ CREATE TABLE `user` (
   `f_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
   `tipo_usuario` int(11) DEFAULT NULL,
   `json_usuario` longtext DEFAULT NULL,
-  `last_update` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `last_update` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `origen` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `token`, `f_creacion`, `tipo_usuario`, `json_usuario`, `last_update`) VALUES
-(1, 'admin', 'Sefi2015', 'Este usuario es solo para administración', '2024-07-19 23:33:09', NULL, NULL, '2024-08-02 22:38:43'),
-(2, 'AdminSefi', 'Se2024fi', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MjhlYzIzMS1mYmI4LTQxOGYtODZjYS1mMzk4Nzk1NThiZjkiLCJ1c2VybmFtZSI6IkFkbWluU2VmaSIsImluc3RpdHVjaW9uaWQiOiI0OUE4QzJERi01OTQyLTRFMTQtOUQzNi1FRDMwNzBENCIsImluc3RpdHVjaW9uQ2xhdmUiOjEzNDYwLCJkZW5vbWluYWNpb25fc29jaWFsIjoiU2VmaSBFc3RyYXTDqWdpY29zLCBTLkEuUC5JLiBkZSBDLlYuLCBTT0ZPTSwgRS5OLlIuIiwic2VjdG9yaWQiOjI0LCJzZWN0b3IiOiJTT0NJRURBREVTIEZJTkFOQ0lFUkFTIERFIE9CSkVUTyBNVUxUSVBMRSBFTlIiLCJzeXN0ZW0iOiJSRURFQ08iLCJpYXQiOjE3MTk0MzQwMzUsImV4cCI6MTcyMjAyNjAzNX0.NfgQJYSsc5ptxN5I0si_j191srsJeNEjTJCQOLL1HPI', '2024-07-19 23:33:09', NULL, NULL, '2024-08-02 22:38:43');
+INSERT INTO `user` (`id`, `username`, `password`, `token`, `f_creacion`, `tipo_usuario`, `json_usuario`, `last_update`, `origen`) VALUES
+(1, 'Sefiredecosu', 'Se2024fi', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0OWJmODRmZi1hYjU4LTRiMGQtYjJkMS0xMGY1MDZkNzkxMDAiLCJ1c2VybmFtZSI6IlNlZmlyZWRlY29zdSIsImluc3RpdHVjaW9uaWQiOiI0OUE4QzJERi01OTQyLTRFMTQtOUQzNi1FRDMwNzBENCIsImluc3RpdHVjaW9uQ2xhdmUiOjEzNDYwLCJkZW5vbWluYWNpb25fc29jaWFsIjoiU2VmaSBFc3RyYXTDqWdpY29zLCBTLkEuUC5JLiBkZSBDLlYuLCBTT0ZPTSwgRS5OLlIuIiwic2VjdG9yaWQiOjY5LCJzZWN0b3IiOiJTT0NJRURBREVTIEZJTkFOQ0lFUkFTIERFIE9CSkVUTyBNVUxUSVBMRSBFTlIiLCJzeXN0ZW0iOiJSRURFQ08iLCJpYXQiOjE3MjU0OTE1NDYsImV4cCI6MTcyODA4MzU0Nn0.6QFZf-u0MG9ZPD2igfUepjEXuOpYzW9YOWuAGi6Mr8s', '2024-09-04 18:07:45', 1, '{\"message\":\"El usuario ha sido creado exitosamente!\",\"data\":{\"userid\":\"49bf84ff-ab58-4b0d-b2d1-10f506d79100\",\"username\":\"Sefiredecosu\",\"password\":\"$2a$10$c1tG2z.X2MyYVdqRa4GcwehKEwbMFuUwx76W9MX0DvCyZ8EVTtj.2\",\"institucionid\":\"49A8C2DF-5942-4E14-9D36-ED3070D4\",\"is_active\":true,\"profileid\":\"2\",\"date\":\"2024-09-03T06:00:00.000Z\",\"system\":\"a7f7f93d-704e-4afe-a7aa-0b56490b479e\",\"token_access\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0OWJmODRmZi1hYjU4LTRiMGQtYjJkMS0xMGY1MDZkNzkxMDAiLCJ1c2VybmFtZSI6IlNlZmlyZWRlY29zdSIsImluc3RpdHVjaW9uaWQiOiI0OUE4QzJERi01OTQyLTRFMTQtOUQzNi1FRDMwNzBENCIsImluc3RpdHVjaW9uQ2xhdmUiOjEzNDYwLCJkZW5vbWluYWNpb25fc29jaWFsIjoiU2VmaSBFc3RyYXTDqWdpY29zLCBTLkEuUC5JLiBkZSBDLlYuLCBTT0ZPTSwgRS5OLlIuIiwic2VjdG9yaWQiOjY5LCJzZWN0b3IiOiJTT0NJRURBREVTIEZJTkFOQ0lFUkFTIERFIE9CSkVUTyBNVUxUSVBMRSBFTlIiLCJzeXN0ZW0iOiJSRURFQ08iLCJpYXQiOjE3MjU0MDY3NzEsImV4cCI6MTcyNzk5ODc3MX0.evaQp4nIWwDJHr5mPIIsigKyioifup1TEBvFQNucsP0\"}}', '2024-09-04 23:12:26', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -1487,12 +1599,6 @@ ALTER TABLE `info_sofom`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `log`
---
-ALTER TABLE `log`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indices de la tabla `quejas_data`
 --
 ALTER TABLE `quejas_data`
@@ -1503,6 +1609,24 @@ ALTER TABLE `quejas_data`
 --
 ALTER TABLE `reclamacion_data`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `redeco_logs`
+--
+ALTER TABLE `redeco_logs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `reune_logs`
+--
+ALTER TABLE `reune_logs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tipo_usuario`
+--
+ALTER TABLE `tipo_usuario`
+  ADD PRIMARY KEY (`id_tu`);
 
 --
 -- Indices de la tabla `tokens_redeco_reune_superuser`
@@ -1545,12 +1669,6 @@ ALTER TABLE `info_sofom`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de la tabla `log`
---
-ALTER TABLE `log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de la tabla `quejas_data`
 --
 ALTER TABLE `quejas_data`
@@ -1563,6 +1681,24 @@ ALTER TABLE `reclamacion_data`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `redeco_logs`
+--
+ALTER TABLE `redeco_logs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+
+--
+-- AUTO_INCREMENT de la tabla `reune_logs`
+--
+ALTER TABLE `reune_logs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_usuario`
+--
+ALTER TABLE `tipo_usuario`
+  MODIFY `id_tu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `tokens_redeco_reune_superuser`
 --
 ALTER TABLE `tokens_redeco_reune_superuser`
@@ -1572,7 +1708,7 @@ ALTER TABLE `tokens_redeco_reune_superuser`
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
