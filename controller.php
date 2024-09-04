@@ -4,6 +4,7 @@ require_once ('model.php');
 class controller{
     private $model;
     private $base_url = 'https://api.condusef.gob.mx/';
+    private $reune_base_url = 'https://api-reune-pruebas.condusef.gob.mx/';
     
     public function __construct() {
         $this->model = new model();
@@ -151,14 +152,75 @@ class controller{
     public function get_su_token_redeco(){
         return $this->model->get_su_token_redeco();
     }
+
+    public function get_su_token_reune(){
+        return $this->model->get_su_token_reune();
+    }
     public function set_log($origen, $response){
         $this->model->set_log($origen, $response);
     }
+
+    public function set_api_reune_superuser($nombre,$password){
+       
+        $tipo_usuario = '2';
+        $endpoint = 'auth/users/create-super-user/';
+        $url = $this->reune_base_url.$endpoint;
+        $token = $this->get_su_token_reune();
+        $origen = 'config_reune';
+        echo '</br> impreso desde controlles '.$url. '</br>El token es: '.$token;
+        $this->model->reune_set_log($nombre,$password);
+        $data = array(
+            "key"=>$token,
+            "username"=>$nombre,
+            "password"=>$password,
+            "confirm_password"=>$password,
+        );
+        $json = json_encode($data);
+        $curl = curl_init();
+        curl_setopt($curl,CURLOPT_URL,$url);
+        curl_setopt($curl,CURLOPT_SSL_VERIFYPEER,false);
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($curl,CURLOPT_POSTFIELDS,$json);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($json))
+        );
+        $response = curl_exec($curl);
+        $this->model->reune_set_log($origen, $response);
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        if ($response === false) {
+            $error = curl_error($curl);
+            curl_close($curl);
+            // Registrar los datos enviados y el error
+            error_log("Error en la solicitud cURL: $error");
+            error_log("Datos enviados: $json");
+            die("Error en la solicitud cURL: $error");
+        }
+        curl_close($curl);
+
+        if ($httpCode >= 400) {
+            // Registrar la respuesta y los datos enviados en caso de error
+            echo "Error http: $httpCode \n";
+            echo "Causa del error:  $response \n";
+            header('location: index.php?mensaje='.$httpCode.'+'.$response);  
+            error_log("Super Usuario error al generar: Codigo de respuesta HTTP: $httpCode, Respuesta: $response");
+            
+        }else{
+            //$this->model->update_enviada($id);
+            $json_usuario = json_decode($response,true);
+            $token_access = $json_usuario['data']['token_access'];
+            $this->model->add_user($nombre,$password,$token,$tipo_usuario,$response);
+            header('location: index.php?mensaje=Super+usuario+se+registró+correctamente');  
+
+    }
+    }
+
+
     public function set_api_superuser($nombre,$password){
         $endpoint = 'auth/users/create-super-user/';
         $origen = 'redeco_set_api_superuser';
-        //$url = $this->base_url.$endpoint;
-        $url = 'http://localhost/mvc_app_php/index.php?action=prueba_su';
+        $url = $this->base_url.$endpoint;
+        //$url = 'http://localhost/mvc_app_php/index.php?action=prueba_su';
         echo $url;
         $token =  $this->get_su_token_redeco();
         $data = array(
@@ -211,7 +273,7 @@ class controller{
 
     }
 
-    public function update_redeco_token($usuario, $password){
+    public function update_redeco_token($usuario, $password,$id){
         $endpoint = 'auth/users/token/';
         $origen = 'redeco_set_api_superuser';
         $url = $this->base_url.$endpoint;
@@ -233,11 +295,91 @@ class controller{
         $response = curl_exec($curl);
         $this->set_log($origen, $response);
         $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        if ($httpCode >= 400) {
+            error_log("Ocurrió un error(Actualiza token redeco): ".$response);
+        }else{
+            $info_user = json_decode($response,true); 
+            print_r($info_user);
+            $token = $info_user['user']['token_access'];
+            $param = "<br> Token: ".$token."<br> Username: ".$usuario."<br> password: ".$password;
+           $this->model->set_log('Actualizar token (update_redeco_token)',$param);
+           $this->model->update_redeco_token_su($token,$id);
+        }
+        return $nuevo_token = 0;
+    }
+
+    public function update_reune_token($usuario, $password){
+        $endpoint = 'auth/users/token/';
+        $origen = 'reune_set_api_superuser';
+        $url = $this->base_url.$endpoint;
+        $data = array(
+            "username"=>$usuario,
+            "password"=>$password
+        );
+        $json = json_encode($data);
+        
+        $curl = curl_init();
+        curl_setopt($curl,CURLOPT_URL,$url);
+        curl_setopt($curl,CURLOPT_SSL_VERIFYPEER,false);
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($curl,CURLOPT_POSTFIELDS,$json);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($json))
+        );
+        $response = curl_exec($curl);
+        $this->set_log($origen, $response);
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        $respuesta_json = json_decode($response,true);
+        if ($httpCode >= 400) {
+            error_log("Ocurrió un error(Reune): ".$response);
+        }else{
+
+        }
 
 
     }
 
+    public function get_user_list(){
+        return $this->model->get_user_list();
+    }
 
+    //Pruebas ..... borrar a partir de aquí !!!!!
 
+    public function prueba_redeco_token($usuario, $password){
+        $endpoint = 'auth/users/token/';
+        $origen = 'redeco_set_api_superuser';
+        $url = 'http://localhost/json/'; //$this->base_url.$endpoint;
+        $data = array(
+            "username"=>$usuario,
+            "password"=>$password
+        );
+        $json = json_encode($data);
+        
+        $curl = curl_init();
+        curl_setopt($curl,CURLOPT_URL,$url);
+        curl_setopt($curl,CURLOPT_SSL_VERIFYPEER,false);
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($curl,CURLOPT_POSTFIELDS,$json);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($json))
+        );
+        $response = curl_exec($curl);
+        $this->set_log($origen, $response);
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        if ($httpCode >= 400) {
+            error_log("Ocurrió un error(redeco): ".$response);
+        }else{
+            $info_user = json_decode($response,true);
+            $username = $info_user['data']['username'];
+            $token = $info_user['data']['token_access'];
+            $tipo_usuario = 1;
+            $json_usuario = $response;
+            $origen = 'superuser';
+            $this->model->add_user($username,$password,$token,$tipo_usuario,$json_usuario,$origen);
+        }
+        return $nuevo_token = 0;
+    }
 }
 ?>

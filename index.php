@@ -23,6 +23,10 @@
         switch ($action) {
             case 'index':
                 include 'views/main.php'; 
+                if (isset($_GET['mensaje'])) {
+                    $mensaje = $_GET['mensaje'];
+                    echo "<script type='text/javascript'>alert('$mensaje');</script>";
+                } 
                 break;
             
             case 'alta_queja':
@@ -172,9 +176,11 @@
             case 'config_redeco':
                 include 'views/config_redeco.php';
             break;
+            case 'config_reune':
+                include 'views/config_reune.php';
+            break;
             
             case 'superuser_redeco':
-               echo $controller->get_su_token_redeco();
                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // La solicitud fue enviada mediante el método POST
                 if (!empty($_POST)) {
@@ -195,23 +201,22 @@
             }
 
             break;
-            case 'prueba_su':
-                $data = array(
-                            "userid"=>"userid",
-                            "username"=>"superusertest",
-                            "password"=>"asdf234aweqw2453",
-                            "institucionid"=>"asdfewrsb",
-                            "is_active"=>true,
-                            "profileid"=>"2",
-                            "token_access"=>"token_access"
-                );
-                $resp = array("message"=>"El usuario ha sido creado exitosamente!",
-                                "data"=>$data
-            );
-                
-                http_response_code(200);
-                echo json_encode($resp);
-               
+
+            case 'superuser_reune':
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    // La solicitud fue enviada mediante el método POST
+                    if (!empty($_POST)) {
+                        $nombre = $_POST['nombre'];
+                        $password = $_POST['password'];
+                        $controller->set_api_reune_superuser($nombre,$password);                   
+    
+                    } else {
+                        echo "No se envió información.";
+                    }
+                } else {
+                    echo "La solicitud no fue enviada mediante el método POST.";
+                }
+
             break;
             case 'pruebalog':
                 try {
@@ -222,6 +227,41 @@
                 }
                 $controller->set_log('origen','prueba');
             break;
+            case 'update_redeco_token':
+               
+                $controller->update_redeco_token($_POST['username'],$_POST['password'],$_POST['id']);
+                
+                //header('location: index.php?action=usuarios&mensaje=redeco+ok');
+
+            break;
+            case 'update_reune_token':
+                //$controller->update_reune_token($_GET['usuario'],$_GET['password']);
+                echo "Estas en update_reune_token";
+                //header('location: index.php?action=usuarios&mensaje=reune+ok');
+
+            break;
+
+            
+            case 'usuarios':
+                include 'views/usuarios.php';
+                if (isset($_GET['mensaje'])) {
+                    $mensaje = $_GET['mensaje'];
+                    echo "<script type='text/javascript'>alert('$mensaje');</script>";
+                } 
+            break;
+//Pruebas a partir de aqui --------------- borrar hasta el default
+
+                case 'prueba_redeco':
+                    try {
+                        $controller->prueba_redeco_token('carlos','zepeda');
+                        echo 'La prueba se completó correctamente';
+                    } catch (\Throwable $th) {
+                        error_log('Error en la prueba: '.$th);
+                    }
+                   
+                break;
+
+//Borrar hasta aquí ----------------------------------------------
             default:
              include 'views/error404.php';
             break;

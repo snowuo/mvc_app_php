@@ -225,6 +225,61 @@
                 error_log($th->getMessage());
             }
         }
+
+        public function reune_set_log($origen, $response){
+            try {
+                $stmt = $this->db->prepare('insert into reune_logs(origen,response)VALUES(:origen,:response)');
+                $stmt->execute([
+                    ':origen' => $origen,
+                    ':response' => $response
+                ]);
+            } catch (\Throwable $th) {
+                // Manejar el error de alguna manera, por ejemplo, registrar el error
+                error_log($th->getMessage());
+            }
+        }
+
+        public function add_user($username,$password,$token,$tipo_usuario,$json_usuario,$origen){
+            try {
+                $stmt = $this->db->prepare('insert into user (username,password,token,tipo_usuario,json_usuario,origen) values (:username,:password,:token,:tipo_usuario,:json_usuario,:origen)');
+                $stmt->execute([
+                    ':username' => $username,
+                    ':password' => $password,
+                    ':token' => $token,
+                    ':tipo_usuario' => $tipo_usuario,
+                    ':json_usuario' => $json_usuario,
+                    ':origen'=> $origen
+
+                ]);
+            } catch (\Throwable $th) {
+                // Manejar el error de alguna manera, por ejemplo, registrar el error
+                error_log($th->getMessage());
+            }
+
+        }
+
+        public function get_user_list(){
+            try {
+                $stmt = $this->db->prepare("SELECT id,tipo_usuario,username,password, last_update FROM `user` WHERE last_update <= DATE_SUB(NOW(), INTERVAL 30 DAY) 
+AND tipo_usuario IN (1, 2);");
+                $stmt->execute();
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch (\Throwable $th) {
+                error_log($th->getMessage());
+            }
+        }
+
+        public function update_redeco_token_su($token, $id){//actualizael token mensual para redeco
+            try {
+                $stmt = $this->db->prepare('UPDATE user SET token = :token where id = :id');
+                $stmt->execute([
+                    ':token' => $token,
+                    ':id' => $id
+                ]);
+            } catch (\Throwable $th) {
+                error_log($th->getMessage());
+            }
+        }
         
 
 

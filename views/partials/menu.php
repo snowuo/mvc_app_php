@@ -16,7 +16,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="index.php?action=redeco">Quejas</a>
                     <a class="dropdown-item" href="index.php?action=consulta_quejas_redeco">Consultar quejas api</a>
-                    <a class="dropdown-item" href="index.php?action=config_redeco">Configuración</a>
+                    <a class="dropdown-item" href="index.php?action=config_redeco">Crear super usuario</a>
                 </div>
             </li>
              <li class="nav-item dropdown">
@@ -27,6 +27,8 @@
                     <a class="dropdown-item" href="index.php?action=reune_consultas">Consultas</a>
                     <a class="dropdown-item" href="index.php?action=reune_reclamaciones">Reclamaciones</a>
                     <a class="dropdown-item" href="index.php?action=reune_aclaraciones">Aclaraciones</a>
+                    <a class="dropdown-item" href="index.php?action=config_reune">Crear super usuario</a>
+                    
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -34,7 +36,7 @@
                     Configuración
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Usuarios</a>
+                    <a class="dropdown-item" href="index.php?action=usuarios">Actualizar Token </a>
                     <a class="dropdown-item" href="index.php?action=sepomex">Catalogo SEPOMEX</a>
                     <a class="dropdown-item" href="index.php?action=info_sofom">Informacion de la sofom</a>
                 </div>
