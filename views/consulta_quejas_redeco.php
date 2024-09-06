@@ -15,7 +15,7 @@
     <div class="container d-flex justify-content-center align-items-center" >
          <div class="card" style="width: 90%;">
            <div class="card-body">
-            <form id="consultar_quejas" action="index.php?action=procesa_consulta_reune">
+            <form id="consultar_quejas" action="index.php?action=procesa_quejas_redeco" method = "post">
                 <input type="number" name="queja_año" placeholder="Año de consulta" id="queja_año" require>
                 <input type="number" name="queja_mes" id="queja_mes" placeholder="Mes de consulta" require>
                 <button id="envia_consulta" class="btn btn-primary"   type="submit">Buscar</button>
@@ -29,7 +29,7 @@
         
     </script>
     <?php echo $scripts?>
-    <script src="js/consulta_quejas_reune.js"></script>
+    <!--<script src="js/consulta_quejas_reune.js"></script>-->
     
     
 </body>

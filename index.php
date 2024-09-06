@@ -189,8 +189,6 @@
                     // Puedes acceder a los datos enviados, por ejemplo:
                     $nombre = $_POST['nombre'];
                     $password = $_POST['password'];
-                    echo "Nombre: " . htmlspecialchars($nombre);
-                    echo "Password: " . htmlspecialchars($password);
                     $controller->set_api_superuser($nombre,$password);                   
 
                 } else {

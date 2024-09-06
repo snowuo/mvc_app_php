@@ -219,9 +219,7 @@ class controller{
     public function set_api_superuser($nombre,$password){
         $endpoint = 'auth/users/create-super-user/';
         $origen = 'redeco_set_api_superuser';
-        $url = $this->base_url.$endpoint;
-        //$url = 'http://localhost/mvc_app_php/index.php?action=prueba_su';
-        echo $url;
+        $url = $this->base_url.$endpoint;                
         $token =  $this->get_su_token_redeco();
         $data = array(
                     "key"=>$token,
@@ -230,7 +228,6 @@ class controller{
                     "confirm_password"=>$password,
                 );
         $json = json_encode($data);
-        echo "<br>".$json."<br>";
         $curl = curl_init();
         curl_setopt($curl,CURLOPT_URL,$url);
         curl_setopt($curl,CURLOPT_SSL_VERIFYPEER,false);
@@ -257,20 +254,18 @@ class controller{
             // Registrar la respuesta y los datos enviados en caso de error
             echo "Error http: $httpCode \n";
             echo "Causa del error:  $response \n";
-            header('location: index.php?action=redeco&mensaje='.$httpCode.'+'.$response);  
             error_log("Super Usuario error al generar: Codigo de respuesta HTTP: $httpCode, Respuesta: $response");
-            
+            header('location: index.php?action=redeco&mensaje='.$httpCode.'+'.$response);  
         }else{
-            //$this->model->update_enviada($id);
-            echo "<br>todo salio bien<br><br><br><br>";
-
-            echo $response;
-            //header('location: index.php?action=redeco&mensaje=Super+usuario+se+registró+correctamente');  
-            
-            
+            $info_user = json_decode($response,true);
+            $username = $info_user['data']['username'];
+            $token = $info_user['data']['token_access'];
+            $tipo_usuario = 1;
+            $json_usuario = $response;
+            $origen = 'superuser';
+            $this->model->add_user($username,$password,$token,$tipo_usuario,$json_usuario,$origen);
+            header('location: index.php?action=redeco&mensaje=Super+usuario+se+registró+correctamente');                         
         }  
-
-
     }
 
     public function update_redeco_token($usuario, $password,$id){
@@ -299,7 +294,6 @@ class controller{
             error_log("Ocurrió un error(Actualiza token redeco): ".$response);
         }else{
             $info_user = json_decode($response,true); 
-            print_r($info_user);
             $token = $info_user['user']['token_access'];
             $param = "<br> Token: ".$token."<br> Username: ".$usuario."<br> password: ".$password;
            $this->model->set_log('Actualizar token (update_redeco_token)',$param);
@@ -310,7 +304,7 @@ class controller{
 
     public function update_reune_token($usuario, $password){
         $endpoint = 'auth/users/token/';
-        $origen = 'reune_set_api_superuser';
+        $origen = 'reune_set_api_superuser_token';
         $url = $this->base_url.$endpoint;
         $data = array(
             "username"=>$usuario,
