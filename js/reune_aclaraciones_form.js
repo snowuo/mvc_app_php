@@ -284,11 +284,13 @@ document.getElementById('AclaracionLocalidad').addEventListener('change', functi
 
 document.getElementById('form_aclaraciones').addEventListener('submit',function(event) {
     event.preventDefault();
+
     let form = event.target;
     console.log('form: ',form)
     let formData = new FormData(form);
     console.log('formData: ',formData);
     let formObjet = {};
+    
     let numericFields = ['ConsultasTrim','NumConsultas','ConsultasEstatusCon','EstadosId','MediosId','ConsultasCP','ConsultasMpioId','ConsultasLocId','ConsultasColId','ConsultascatnivelatenId',]
     let dateFields = ['ConsultasFecAten','ConsultasFecRecepcion',]
 })
