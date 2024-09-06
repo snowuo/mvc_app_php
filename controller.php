@@ -13,6 +13,8 @@ class controller{
     public function login(){
         if(isset($_POST['username']) && isset($_POST['password']) ){
             if($this->model->log_in($_POST['username'],$_POST['password'])){
+                $_SESSION['token'] = $this->get_token('1');//este token es para redeco
+                $_SESSION['token_reune'] = $this->get_token('2');//este token es para reune
                 header('location: index.php');
             }else{
                 $message = 'Usuario o contraseña incorrectos';
@@ -125,6 +127,7 @@ class controller{
                 curl_close($curl);
                 if ($httpCode >= 400) {
                     // Registrar la respuesta y los datos enviados en caso de error
+                    $this->model->update_redeco_queja_respuestadelaapi($id,$response);
                     echo "Error http: $httpCode \n";
                     echo "Causa del error:  $response \n";
                     header('location: index.php?action=redeco&mensaje='.$httpCode.'+'.$response);  
@@ -135,11 +138,7 @@ class controller{
                     header('location: index.php?action=redeco&mensaje=Se+registró+correctamente');  
                     
                     
-                }       
-                      
-                // Decodificar la respuesta JSON
-                //$responseData = json_decode($response, true);
-                
+                }                       
     }
 
     public function set_denominacion($valor){
@@ -160,7 +159,7 @@ class controller{
         $this->model->set_log($origen, $response);
     }
 
-    public function set_api_reune_superuser($nombre,$password){
+    public function set_api_reune_superuser($nombre,$password){ //Crea el super usuario para REUNE
        
         $tipo_usuario = '2';
         $endpoint = 'auth/users/create-super-user/';
@@ -203,20 +202,25 @@ class controller{
             echo "Error http: $httpCode \n";
             echo "Causa del error:  $response \n";
             header('location: index.php?mensaje='.$httpCode.'+'.$response);  
-            error_log("Super Usuario error al generar: Codigo de respuesta HTTP: $httpCode, Respuesta: $response");
+            error_log("Super Usuario error al generar (REUNE): Codigo de respuesta HTTP: $httpCode, Respuesta: $response");
             
         }else{
             //$this->model->update_enviada($id);
-            $json_usuario = json_decode($response,true);
-            $token_access = $json_usuario['data']['token_access'];
-            $this->model->add_user($nombre,$password,$token,$tipo_usuario,$response);
-            header('location: index.php?mensaje=Super+usuario+se+registró+correctamente');  
+
+            $info_user = json_decode($response,true);
+            $username = $info_user['data']['username'];
+            $token = $info_user['data']['token_access'];
+            $tipo_usuario = 1;
+            $json_usuario = $response;
+            $origen = 'superuser';
+            $this->model->add_user($username,$password,$token,$tipo_usuario,$json_usuario,$origen);
+            header('location: index.php?mensaje=Super+usuario+se+registró+correctamente'); 
 
     }
     }
 
 
-    public function set_api_superuser($nombre,$password){
+    public function set_api_superuser($nombre,$password){ //Crea el super usuario para REDECO
         $endpoint = 'auth/users/create-super-user/';
         $origen = 'redeco_set_api_superuser';
         $url = $this->base_url.$endpoint;                
@@ -270,7 +274,7 @@ class controller{
 
     public function update_redeco_token($usuario, $password,$id){
         $endpoint = 'auth/users/token/';
-        $origen = 'redeco_set_api_superuser';
+        $origen = 'update_redeco_token';
         $url = $this->base_url.$endpoint;
         $data = array(
             "username"=>$usuario,
@@ -297,14 +301,15 @@ class controller{
             $token = $info_user['user']['token_access'];
             $param = "<br> Token: ".$token."<br> Username: ".$usuario."<br> password: ".$password;
            $this->model->set_log('Actualizar token (update_redeco_token)',$param);
+           $_SESSION['token']=$token;
            $this->model->update_redeco_token_su($token,$id);
         }
         return $nuevo_token = 0;
     }
 
-    public function update_reune_token($usuario, $password){
+    public function update_reune_token($usuario, $password,$id){
         $endpoint = 'auth/users/token/';
-        $origen = 'reune_set_api_superuser_token';
+        $origen = 'update_reune_token';
         $url = $this->base_url.$endpoint;
         $data = array(
             "username"=>$usuario,
@@ -326,23 +331,74 @@ class controller{
         $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         $respuesta_json = json_decode($response,true);
         if ($httpCode >= 400) {
-            error_log("Ocurrió un error(Reune): ".$response);
+            error_log("Ocurrió un error(Reune): $response");
         }else{
-
+            $info_user = json_decode($response,true); 
+            $token = $info_user['user']['token_access'];
+            $param = "<br> Token: ".$token."<br> Username: ".$usuario."<br> password: ".$password;
+           $this->model->set_log('Actualizar token (update_reune_token)',$param);
+           $_SESSION['token_reune']=$token;
+           $this->model->update_redeco_token_su($token,$id);
         }
-
-
     }
 
     public function get_user_list(){
         return $this->model->get_user_list();
     }
 
+    public function get_token($tipo_usuario){
+        return $this->model->get_token($tipo_usuario);
+    }
+    public function consulta_quejas_redeco($año,$mes){        
+        $endpoint = "redeco/quejas/?year=$año&month=$mes";
+        $origen = 'consulta_quejas_redeco';
+        $url = $this->base_url.$endpoint;
+        $token = $_SESSION['token'];//es de redeco;
+        $curl = curl_init($url);
+        curl_setopt($curl,CURLOPT_URL,$url);
+        curl_setopt($curl,CURLOPT_SSL_VERIFYPEER,false);
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+            "Authorization: $token",
+            'Content-Type: application/json')
+        );
+        $response = curl_exec($curl);
+        $this->set_log($origen, $response);
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        if ($httpCode >= 400) {
+            error_log("Ocurrió un error(redeco): ".$response);
+            return 'Ocurrió un error';
+        }else{
+            return $response;            
+        }
+    }
+
+    public function delete_redeco_queja($folio_queja){
+        $endpoint = "redeco/quejas/?quejaFolio=$folio_queja";
+        $origen = "delete_redeco_queja $folio_queja";
+        $url = $this->base_url.$endpoint;
+        $curl = curl_init();
+        $token = $_SESSION['token'];
+        curl_setopt($curl,CURLOPT_URL,$url);
+        curl_setopt($curl,CURLOPT_SSL_VERIFYPEER,false);
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "DELETE");
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            "Authorization: $token"
+            )
+        );
+        $response = curl_exec($curl);
+        $this->set_log($origen, $response);
+        curl_close($curl);
+        return $response;
+    }
+
     //Pruebas ..... borrar a partir de aquí !!!!!
 
     public function prueba_redeco_token($usuario, $password){
         $endpoint = 'auth/users/token/';
-        $origen = 'redeco_set_api_superuser';
+        $origen = 'prueba_redeco_token';
         $url = 'http://localhost/json/'; //$this->base_url.$endpoint;
         $data = array(
             "username"=>$usuario,
@@ -361,6 +417,7 @@ class controller{
         );
         $response = curl_exec($curl);
         $this->set_log($origen, $response);
+        
         $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         if ($httpCode >= 400) {
             error_log("Ocurrió un error(redeco): ".$response);
@@ -374,6 +431,8 @@ class controller{
             $this->model->add_user($username,$password,$token,$tipo_usuario,$json_usuario,$origen);
         }
         return $nuevo_token = 0;
+        curl_close($curl);
     }
+
 }
 ?>

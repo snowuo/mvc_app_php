@@ -8,7 +8,7 @@
 
         public function log_in($username,$password){
             try {
-                $stmt = $this->db->prepare('SELECT id, username, password, token from user WHERE username = :username');
+                $stmt = $this->db->prepare('SELECT id, username, password from user WHERE username = :username');
                 $stmt->execute(['username' => $username]);
                 $user = $stmt->fetch(PDO::FETCH_ASSOC);
                 
@@ -16,7 +16,6 @@
                 if ($user && $user['password'] == $password) {
                     $_SESSION['id'] = $user['id'];
                     $_SESSION['username'] = $user['username'];
-                    $_SESSION['token'] = $user['token'];
                     return true;
                 } else {
                     return false;
@@ -49,6 +48,37 @@
                 die();
             }
         }
+        public function set_aclaracion($aclaracion){
+            try{
+                $stmt = $this->db->prepare("INSERT INTO aclaracion_data (data_json) VALUES (:aclaracion)");        
+                $stmt->execute([':aclaracion' => $aclaracion]);
+            }catch(PDOException $e) {
+                // En caso de error en la conexión o consulta, mostrar el mensaje de error
+                echo "La conexión falló: " . $e->getMessage();
+                die();
+            }
+        }
+        public function set_consultas($consultas){
+            try{
+                $stmt = $this->db->prepare("INSERT INTO consultas_data (data_json) VALUES (:consultas)");        
+                $stmt->execute([':consultas' => $consultas]);
+            }catch(PDOException $e) {
+                // En caso de error en la conexión o consulta, mostrar el mensaje de error
+                echo "La conexión falló: " . $e->getMessage();
+                die();
+            }
+        }
+
+        public function set_reclamacion($reclamacion){
+            try{
+                $stmt = $this->db->prepare("INSERT INTO reclamacion_data (data_json) VALUES (:reclamacion)");        
+                $stmt->execute([':reclamacion' => $reclamacion]);
+            }catch(PDOException $e) {
+                // En caso de error en la conexión o consulta, mostrar el mensaje de error
+                echo "La conexión falló: " . $e->getMessage();
+                die();
+            }
+        }
 
         public function get_listado_quejas(){
             try {    
@@ -60,6 +90,39 @@
                 die();
             }
         }
+
+        public function get_listado_aclaracion(){
+            try {    
+                $stmt = $this->db->query('SELECT * FROM aclaracion_data');
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch(PDOException $e) {
+                // En caso de error en la conexión o consulta, mostrar el mensaje de error
+                echo "La conexión falló: " . $e->getMessage();
+                die();
+            }
+        }
+
+        public function get_listado_consultas(){
+            try {    
+                $stmt = $this->db->query('SELECT * FROM consultas_data');
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch(PDOException $e) {
+                // En caso de error en la conexión o consulta, mostrar el mensaje de error
+                echo "La conexión falló: " . $e->getMessage();
+                die();
+            }
+        }
+        public function get_listado_reclamacion(){
+            try {    
+                $stmt = $this->db->query('SELECT * FROM reclamacion_data');
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch(PDOException $e) {
+                // En caso de error en la conexión o consulta, mostrar el mensaje de error
+                echo "La conexión falló: " . $e->getMessage();
+                die();
+            }
+        }
+
 
         public function get_listado_entidades_federativas(){
             try {    
@@ -75,6 +138,42 @@
         public function get_queja_data($id){
             try {    
                 $stmt = $this->db->prepare('SELECT data_queja FROM quejas_data WHERE id_quejas = :id');
+                $stmt->execute([':id' => $id]);
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch(PDOException $e) {
+                // En caso de error en la conexión o consulta, mostrar el mensaje de error
+                echo "La conexión falló: " . $e->getMessage();
+                die();
+            }
+        }
+
+        public function get_aclaracion_data($id){
+            try {    
+                $stmt = $this->db->prepare('SELECT data_json FROM aclaracion_data WHERE id = :id');
+                $stmt->execute([':id' => $id]);
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch(PDOException $e) {
+                // En caso de error en la conexión o consulta, mostrar el mensaje de error
+                echo "La conexión falló: " . $e->getMessage();
+                die();
+            }
+        }
+
+        public function get_consultas_data($id){
+            try {    
+                $stmt = $this->db->prepare('SELECT data_json FROM consultas_data WHERE id = :id');
+                $stmt->execute([':id' => $id]);
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch(PDOException $e) {
+                // En caso de error en la conexión o consulta, mostrar el mensaje de error
+                echo "La conexión falló: " . $e->getMessage();
+                die();
+            }
+        }
+
+        public function get_reclamacion_data($id){
+            try {    
+                $stmt = $this->db->prepare('SELECT data_json FROM reclamacion_data WHERE id = :id');
                 $stmt->execute([':id' => $id]);
                 return $stmt->fetchAll(PDO::FETCH_ASSOC);
             } catch(PDOException $e) {
@@ -149,6 +248,36 @@
         public function update_enviada($id){
             try {    
                 $stmt = $this->db->prepare('UPDATE quejas_data SET enviada = true WHERE id_quejas = :id');
+                $stmt->execute([':id' => $id]);
+            } catch(PDOException $e) {
+                // En caso de error en la conexión o consulta, mostrar el mensaje de error
+                echo "La conexión falló: " . $e->getMessage();
+                die();
+            }
+        }
+        public function update_enviada_aclaracion($id){
+            try {    
+                $stmt = $this->db->prepare('UPDATE aclaracion_data SET enviada = true WHERE id = :id');
+                $stmt->execute([':id' => $id]);
+            } catch(PDOException $e) {
+                // En caso de error en la conexión o consulta, mostrar el mensaje de error
+                echo "La conexión falló: " . $e->getMessage();
+                die();
+            }
+        }
+        public function update_enviada_consultas($id){
+            try {    
+                $stmt = $this->db->prepare('UPDATE consultas_data SET enviada = true WHERE id = :id');
+                $stmt->execute([':id' => $id]);
+            } catch(PDOException $e) {
+                // En caso de error en la conexión o consulta, mostrar el mensaje de error
+                echo "La conexión falló: " . $e->getMessage();
+                die();
+            }
+        }
+        public function update_enviada_reclamacion($id){
+            try {    
+                $stmt = $this->db->prepare('UPDATE reclamacion_data SET enviada = true WHERE id = :id');
                 $stmt->execute([':id' => $id]);
             } catch(PDOException $e) {
                 // En caso de error en la conexión o consulta, mostrar el mensaje de error
@@ -280,9 +409,66 @@ AND tipo_usuario IN (1, 2);");
                 error_log($th->getMessage());
             }
         }
+
+        public function get_token($tipo_usuario){
+            try{
+                $stmt = $this->db->prepare("SELECT token FROM user WHERE tipo_usuario = :tipo_usuario");
+                $stmt->execute([':tipo_usuario'=> $tipo_usuario]);
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                if ($result) {
+                    return $result['token'];
+                } else {
+                    return null; // o lanzar una excepción o un mensaje de error
+                }
+            } catch (\Throwable $th) {
+                error_log($th->getMessage());                
+            }
+        }
+
+        public function update_redeco_queja_respuestadelaapi($id_quejas,$response){
+            try {
+                $stmt = $this->db->prepare("update quejas_data set respuesta_api = :response where id_quejas = :id_quejas");
+                $stmt->execute([':response'=> $response,
+                                ':id_quejas'=>$id_quejas]);
+            } catch (\Throwable $th) {
+                error_log($th->getMessage());
+            }
+        }
+
         
+        public function update_reune_aclaracion_respuestadelaapi($id,$response){
+            try {
+                $stmt = $this->db->prepare("update aclaracion_data set respuesta_api = :response where id = :id");
+                $stmt->execute([':response'=> $response,
+                                ':id'=>$id]);
+            } catch (\Throwable $th) {
+                error_log($th->getMessage());
+            }
+        }
 
+        
+        public function update_reune_consultas_respuestadelaapi($id,$response){
+            try {
+                $stmt = $this->db->prepare("update consultas_data set respuesta_api = :response where id = :id");
+                $stmt->execute([':response'=> $response,
+                                ':id'=>$id]);
+            } catch (\Throwable $th) {
+                error_log($th->getMessage());
+            }
+        }
 
+        
+        public function update_reune_reclamacion_respuestadelaapi($id,$response){
+            try {
+                $stmt = $this->db->prepare("update reclamacion_data set respuesta_api = :response where id = :id");
+                $stmt->execute([':response'=> $response,
+                                ':id'=>$id]);
+            } catch (\Throwable $th) {
+                error_log($th->getMessage());
+            }
+        }
+
+        
     }
     
 ?>

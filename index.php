@@ -173,6 +173,16 @@
             case 'consulta_quejas_redeco':
                 include 'views/consulta_quejas_redeco.php';
             break;
+            //procesa_quejas_redeco
+            case 'procesa_quejas_redeco':
+                if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+                    $content = $controller->consulta_quejas_redeco($_POST['queja_año'],$_POST['queja_mes']);
+                }else{
+                    echo 'Los datos no se enviaron por el metodo post';
+                }
+                include 'views/procesa_quejas_redeco.php';
+                
+            break;
             case 'config_redeco':
                 include 'views/config_redeco.php';
             break;
@@ -227,9 +237,8 @@
             break;
             case 'update_redeco_token':
                
-                $controller->update_redeco_token($_POST['username'],$_POST['password'],$_POST['id']);
-                
-                //header('location: index.php?action=usuarios&mensaje=redeco+ok');
+                $controller->update_redeco_token($_POST['username'],$_POST['password'],$_POST['id']);                
+                header('location: index.php?action=usuarios&mensaje=Actualizado+Correctamente');
 
             break;
             case 'update_reune_token':
@@ -246,6 +255,17 @@
                     $mensaje = $_GET['mensaje'];
                     echo "<script type='text/javascript'>alert('$mensaje');</script>";
                 } 
+            break;
+
+            case 'delete_queja':
+                if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+                    $controller->delete_redeco_queja($_POST['folio_queja']);
+                    header('location: index.php?mensaje=La+queja+se+ah+borrado+con+exito');
+                }else{
+                    error_log("el intento realizado en delete_queja debe realizarse por el metodo POST");
+                    header('location: index.php?mensaje=Error+al+borrar+la+queja');
+                }
+                
             break;
 //Pruebas a partir de aqui --------------- borrar hasta el default
 

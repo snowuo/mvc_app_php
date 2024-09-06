@@ -16,6 +16,7 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Queja</th>
+                    <th scope="col">Errores</th>
                     <th scope="col">Fecha de creación</th>
                     <th scope="col">Acciones</th>
 
@@ -26,6 +27,7 @@
                 <tr>                
                     <td id="<?php echo htmlspecialchars($queja['id_quejas'])?>"><?php echo htmlspecialchars($queja['id_quejas'])?></td>
                     <td id="<?php echo htmlspecialchars($queja['id_quejas'])?>"><?php echo htmlspecialchars($queja['data_queja'])?></td>
+                    <td id="<?php echo htmlspecialchars($queja['id_quejas'])?>"><?php echo htmlspecialchars($queja['respuesta_api'])?></td>
                     <td id="<?php echo htmlspecialchars($queja['id_quejas'])?>"><?php echo htmlspecialchars($queja['fcreacion_queja'])?></td>
                     <td id="<?php echo htmlspecialchars($queja['id_quejas'])?>"><?php if (!$queja['enviada']) { ?>
                                                                                             <a href="index.php?action=curl&id=<?php echo $queja['id_quejas']; ?>" class="btn btn-primary">Enviar</a>
