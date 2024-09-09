@@ -210,7 +210,7 @@ class controller{
             $info_user = json_decode($response,true);
             $username = $info_user['data']['username'];
             $token = $info_user['data']['token_access'];
-            $tipo_usuario = 1;
+            $tipo_usuario = 2;
             $json_usuario = $response;
             $origen = 'superuser';
             $this->model->add_user($username,$password,$token,$tipo_usuario,$json_usuario,$origen);
