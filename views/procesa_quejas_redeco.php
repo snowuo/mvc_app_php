@@ -40,15 +40,46 @@
                                             <input type="hidden" name="folio_queja" value="'.htmlspecialchars($queja['folio']).'">
                                             <button class="btn btn-white text-danger border-danger">X</button>
                                         </form></div>';
-                echo '<div class="col-1"> <form class="form-inline">
-                                            <button class="btn btn-primary">🔎</button>
-                                        </form></div>';
+                echo /*'<div class="col-1"> <form class="form-inline" action = "index.php?action=modifica_queja_redeco" method="POST">
+                                            <input type="hidden" name="queja" id="queja" value="'. htmlspecialchars($queja['folio']) .'">
+                                            <button type="submit" class="btn btn-primary">🔎</button>
+                                        </form></div>'*/
+                                        '<button type="button" class="btn btn-primary open-modal-btn" /*data-toggle="modal" data-target="#Modal_info_quejas"*/ data-id="'.htmlspecialchars($queja['folio'], ENT_QUOTES, 'UTF-8').'">
+  🔎
+</button>';
                 
             echo '</div>';   
         }
        ?>    
     </div>
     </div>
+
+         <!-- Button trigger modal -->
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle">Título del Modal</h5>
+        <!--<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+      </div>
+      <div class="modal-body" id="modalBody">
+        Cuerpo del Modal
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+        var base_url = "<?php echo htmlspecialchars($controller->get_base_url(), ENT_QUOTES, 'UTF-8'); ?>";
+        console.log(base_url)
+    </script>
     <?php echo $scripts?>
+    <script src="js/procesa_quejas_redeco.js"></script>
 </body>
 </html>

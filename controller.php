@@ -53,6 +53,9 @@ class controller{
         return $this->model->get_listado_quejas();
     }
 
+    public function get_queja_data($id){
+        return $this->model->get_queja_data($id);
+    }
     public function update_enviada($id){
         $this->model->update_enviada($id);
     }
@@ -310,7 +313,7 @@ class controller{
     public function update_reune_token($usuario, $password,$id){
         $endpoint = 'auth/users/token/';
         $origen = 'update_reune_token';
-        $url = $this->base_url.$endpoint;
+        $url = $this->reune_base_url.$endpoint;
         $data = array(
             "username"=>$usuario,
             "password"=>$password
@@ -327,7 +330,7 @@ class controller{
             'Content-Length: ' . strlen($json))
         );
         $response = curl_exec($curl);
-        $this->set_log($origen, $response);
+        $this->model->reune_set_log($origen, $response);
         $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         $respuesta_json = json_decode($response,true);
         if ($httpCode >= 400) {
@@ -336,7 +339,7 @@ class controller{
             $info_user = json_decode($response,true); 
             $token = $info_user['user']['token_access'];
             $param = "<br> Token: ".$token."<br> Username: ".$usuario."<br> password: ".$password;
-           $this->model->set_log('Actualizar token (update_reune_token)',$param);
+           $this->model->reune_set_log('Actualizar token (update_reune_token)',$param);
            $_SESSION['token_reune']=$token;
            $this->model->update_redeco_token_su($token,$id);
         }
@@ -432,6 +435,18 @@ class controller{
         }
         return $nuevo_token = 0;
         curl_close($curl);
+    }
+
+    public function get_id_redeco_queja_consulta($folio){
+        return $this->model->get_id_redeco_queja_consulta($folio);
+    }
+
+    public function get_base_url(){
+        return $this->base_url;
+    }
+    
+    public function get_reune_base_url(){
+        return $this->reune_base_url;
     }
 
 }

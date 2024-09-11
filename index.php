@@ -242,9 +242,8 @@
 
             break;
             case 'update_reune_token':
-                //$controller->update_reune_token($_GET['usuario'],$_GET['password']);
-                echo "Estas en update_reune_token";
-                //header('location: index.php?action=usuarios&mensaje=reune+ok');
+                $controller->update_reune_token($_POST['username'],$_POST['password'],$_POST['id']);                
+                header('location: index.php?action=usuarios&mensaje=Actualizado+Correctamente');
 
             break;
 
@@ -267,17 +266,77 @@
                 }
                 
             break;
+
+            case 'modifica_queja_redeco':
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    echo "se envió correctamente por post";
+                    echo $_POST['queja'];
+                }
+                include 'views/modifica_queja_redeco.php';
+            break;
+
+            case 'consulta_queja':
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+                echo '{"hola": '.$_POST['folio'].' }';
+            }
+               /* if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    
+                    // Verifica que el folio esté presente en los datos enviados
+                    if (isset($_POST['folio'])) {
+                        $folio = json_decode($_POST['folio'], true);
+                        
+                        // Si hay un error en el JSON enviado
+                        if (json_last_error() !== JSON_ERROR_NONE) {
+                            echo json_encode(array(
+                                'error' => 'Formato JSON no válido'
+                            ));
+                            http_response_code(400); // Bad Request
+                            exit;
+                        }
+                        
+                        $id = $controller->get_id_redeco_queja_consulta($folio['folio']);
+                        $respuesta = array('id' => $id);
+                        echo json_encode($respuesta);
+                    } else {
+                        // Si falta el parámetro 'folio'
+                        echo json_encode(array(
+                            'error' => 'Falta el parámetro folio'
+                        ));
+                        
+                        http_response_code(400); // Bad Request
+                    }
+                } else {
+                    // Respuesta si el método no es POST
+                    echo json_encode(array(
+                        'error' => 'Método no permitido, usa POST'
+                    ));
+                    http_response_code(405); // Method Not Allowed
+                }*/
+                break;
+                       
 //Pruebas a partir de aqui --------------- borrar hasta el default
 
                 case 'prueba_redeco':
                     try {
-                        $controller->prueba_redeco_token('carlos','zepeda');
-                        echo 'La prueba se completó correctamente';
+                        $datos = $controller->get_queja_data(1);
+                        foreach ($datos as $dato) {
+                           echo "<div class='row'>
+                                    <div class='col'>".htmlspecialchars($dato['key'])."</div>
+                                    <div class='col'>".htmlspecialchars($dato['value'])."</div>
+                                 </div>";
+                            
+                        }
                     } catch (\Throwable $th) {
                         error_log('Error en la prueba: '.$th);
                     }
                    
                 break;
+
+                case 'prueba_modal':
+                        include 'views/pm.php';
+                    break;
+
 
 //Borrar hasta aquí ----------------------------------------------
             default:

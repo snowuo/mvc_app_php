@@ -468,6 +468,22 @@ AND tipo_usuario IN (1, 2);");
             }
         }
 
+        public function get_id_redeco_queja_consulta($folio){
+            try {
+                $stmt= $this->db->prepare("SELECT id_quejas FROM quejas_data WHERE JSON_UNQUOTE(JSON_EXTRACT(data_queja, '$[0].QuejasFolio')) = :folio");
+                $stmt->execute([':folio'=> $folio]);
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);        
+               // return $result;/*        
+                if($result){
+                    return $result['id_quejas'];
+                }else{
+                    return 0;
+                }
+            } catch (\Throwable $th) {
+                error_log($th->getMessage());
+            }
+        }
+
         
     }
     
