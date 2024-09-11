@@ -276,43 +276,26 @@
             break;
 
             case 'consulta_queja':
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-                echo '{"hola": '.$_POST['folio'].' }';
-            }
-               /* if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    
-                    // Verifica que el folio esté presente en los datos enviados
-                    if (isset($_POST['folio'])) {
-                        $folio = json_decode($_POST['folio'], true);
-                        
-                        // Si hay un error en el JSON enviado
-                        if (json_last_error() !== JSON_ERROR_NONE) {
-                            echo json_encode(array(
-                                'error' => 'Formato JSON no válido'
-                            ));
-                            http_response_code(400); // Bad Request
-                            exit;
-                        }
-                        
-                        $id = $controller->get_id_redeco_queja_consulta($folio['folio']);
-                        $respuesta = array('id' => $id);
-                        echo json_encode($respuesta);
+                if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                    $folio =$_GET['folio'];
+                    error_log("este es el folio recibido por get: ". $folio);
+                    $id = $controller->get_id_redeco_queja_consulta($folio);
+                    if ($id >0) {
+                        $info = $controller->get_queja_data($id);
+                        $respuesta = $info[0]['data_queja'];
+                        echo $respuesta;
                     } else {
-                        // Si falta el parámetro 'folio'
-                        echo json_encode(array(
-                            'error' => 'Falta el parámetro folio'
-                        ));
-                        
-                        http_response_code(400); // Bad Request
-                    }
+                        $mensaje = array( 'mensaje' => 'El folio buscado no se encuentra en la base de datos');
+                        echo (json_encode($mensaje,true));
+                    }                    
                 } else {
-                    // Respuesta si el método no es POST
-                    echo json_encode(array(
-                        'error' => 'Método no permitido, usa POST'
-                    ));
-                    http_response_code(405); // Method Not Allowed
-                }*/
+                    $mensaje = array( 'mensaje' => 'El endpoint solo admite el metodo GET');
+                        echo (json_encode($mensaje,true));
+                }
+                
+
+
+
                 break;
                        
 //Pruebas a partir de aqui --------------- borrar hasta el default
