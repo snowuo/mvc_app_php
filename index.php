@@ -39,7 +39,19 @@
                 break;       
             case 'curl':
                 $id=$_GET['id'];                
-                $controller->set_queja_api_curl($id);
+                 $controller->set_queja_api_curl($id);
+            break;
+            case 'curl_consultas':
+                $id=$_GET['id'];                
+                 $controller->set_queja_api_curl_consultas($id);
+            break; 
+            case 'curl_reclamaciones':
+                $id=$_GET['id'];                
+                 $controller->set_queja_api_curl_reclamaciones($id);
+            break; 
+            case 'curl_aclaraciones':
+                $id=$_GET['id'];                
+                 $controller->set_queja_api_curl_aclaraciones($id);
             break;     
             case 'redeco':              
                 $quejas = $controller->get_listado_quejas();
@@ -49,27 +61,42 @@
                     echo "<script type='text/javascript'>alert('$mensaje');</script>";
                 } 
             break;
-            case 'salir':
-                $controller->logout();
+            case 'reune':
+                include 'views/reune.php';
+                if (isset($_GET['mensaje'])) {
+                    $mensaje = $_GET['mensaje'];
+                    echo "<script type='text/javascript'>alert('$mensaje');</script>";
+                } 
             break;
+
             case 'reune_consultas':
-                include 'views/reune_consultas.php';
+                $consultas = $controller->get_listado_consultas();
+                include 'views/reune_consultas.php';  
+                if (isset($_GET['mensaje'])) {
+                    $mensaje = $_GET['mensaje'];
+                    echo "<script type='text/javascript'>alert('$mensaje');</script>";
+                } 
+                
             break;
             case 'reune_consultas_form':
                 $catalogo = $controller->get_reune_catalogo_producto_consulta();
                 include 'views/reune_consultas_form.php';
             break;
             case 'reune_reclamaciones':
+                $reclamaciones = $controller->get_listado_reclamaciones();
                 include 'views/reune_reclamaciones.php';
+                if (isset($_GET['mensaje'])) {
+                    $mensaje = $_GET['mensaje'];
+                    echo "<script type='text/javascript'>alert('$mensaje');</script>";
+                }
             break;
             case 'reune_reclamaciones_form':
                 $catalogo = $controller->get_reune_catalogo_producto_aclaracion();
                 include 'views/reune_reclamaciones_form.php';
             break;
-            case 'reune':
-                include 'views/reune.php';
-            break;
+
             case 'reune_aclaraciones':
+                $aclaraciones = $controller->get_listado_aclaraciones();
                 include 'views/reune_aclaraciones.php';
             break;
             case 'reune_aclaraciones_form':
@@ -292,10 +319,9 @@
                     $mensaje = array( 'mensaje' => 'El endpoint solo admite el metodo GET');
                         echo (json_encode($mensaje,true));
                 }
-                
-
-
-
+                break;
+                case 'salir':
+                    $controller->logout();
                 break;
                        
 //Pruebas a partir de aqui --------------- borrar hasta el default
@@ -321,6 +347,7 @@
                     break;
 
 
+
 //Borrar hasta aquí ----------------------------------------------
             default:
              include 'views/error404.php';
@@ -328,3 +355,4 @@
         }
     }  
 ?>
+

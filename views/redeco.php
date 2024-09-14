@@ -26,21 +26,18 @@
             <?php foreach($quejas as $queja): ?>
                 <tr>                
                     <td id="<?php echo htmlspecialchars($queja['id_quejas'])?>"><?php echo htmlspecialchars($queja['id_quejas'])?></td>
-                    <td id="<?php echo htmlspecialchars($queja['id_quejas'])?>"><?php echo htmlspecialchars($queja['data_queja'])?></td>
-                    <td id="<?php echo htmlspecialchars($queja['id_quejas'])?>"><?php echo htmlspecialchars($queja['respuesta_api'])?></td>
+                    <td id="<?php echo htmlspecialchars($queja['id_quejas'])?>"><?php echo $queja['data_queja']?></td>
+                    <td id="<?php echo htmlspecialchars($queja['id_quejas'])?>"><?php echo $queja['respuesta_api']?></td>
                     <td id="<?php echo htmlspecialchars($queja['id_quejas'])?>"><?php echo htmlspecialchars($queja['fcreacion_queja'])?></td>
                     <td id="<?php echo htmlspecialchars($queja['id_quejas'])?>"><?php if (!$queja['enviada']) { ?>
                                                                                             <a href="index.php?action=curl&id=<?php echo $queja['id_quejas']; ?>" class="btn btn-primary">Enviar</a>
                                                                                 <?php }else{echo "Ya fue enviada";} ?>
-
-                </tr>
+                                                                                            </tr>
             <?php endforeach;  ?>
             </tbody>
-        </table>
-
-                    
-
+        </table>                  
         </div>
+
         <div class="card-body">
             <a href="index.php?action=alta_queja" class="btn btn-primary">Registrar Queja</a>
         </div>

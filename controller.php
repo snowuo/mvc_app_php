@@ -53,6 +53,18 @@ class controller{
         return $this->model->get_listado_quejas();
     }
 
+    public function get_listado_consultas(){
+        return $this->model->get_listado_consultas();
+    }
+
+    public function get_listado_aclaraciones(){
+        return $this->model->get_listado_aclaraciones();
+    }
+
+    public function get_listado_reclamaciones(){
+        return $this->model->get_listado_reclamaciones();
+    }
+
     public function get_queja_data($id){
         return $this->model->get_queja_data($id);
     }
@@ -138,10 +150,142 @@ class controller{
                     
                 }else{
                     $this->model->update_enviada($id);
-                    header('location: index.php?action=redeco&mensaje=Se+registró+correctamente');  
-                    
-                    
+                    header('location: index.php?action=redeco&mensaje=Se+registró+correctamente'); 
                 }                       
+    }
+
+    public function set_api_curl_consultas($id){
+        $endpoint = 'reune/consultas/general';
+        $url_consulta = $this->reune_base_url.$endpoint;
+        $token = $_SESSION['token_reune'];         
+        $json = $this->model->get_consultas_data($id);
+        if(isset($json[0]['data_json'])){
+            $data_json=$json[0]['data_json'];
+        }
+        $curl = curl_init();
+        curl_setopt($curl,CURLOPT_URL,$url_consulta);
+        curl_setopt($curl,CURLOPT_SSL_VERIFYPEER,false);
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($curl,CURLOPT_HTTPHEADER,[
+            "Authorization: $token",
+            "Content-Type: application/json"
+        ]);
+        curl_setopt($curl,CURLOPT_POST,true);
+        curl_setopt($curl,CURLOPT_POSTFIELDS,$data_json);
+        $response=curl_exec($curl);
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        if ($response === false) {
+            $error = curl_error($curl);
+            curl_close($curl);
+            // Registrar los datos enviados y el error
+            error_log("Error en la solicitud cURL (consultas) : $error");
+            error_log("Datos enviados: $data_json");
+            die("Error en la solicitud cURL: $error");
+        }
+        
+        curl_close($curl);
+        if ($httpCode >= 400) {
+            // Registrar la respuesta y los datos enviados en caso de error
+            $this->model->update_reune_consultas_respuestadelaapi($id,$response);
+            echo "Error http: $httpCode \n";
+            echo "Causa del error:  $response \n";
+            header('location: index.php?action=reune&mensaje='.$httpCode.'+'.$response);  
+            error_log("consultas Codigo de respuesta HTTP: $httpCode, Respuesta: $response");
+            
+        }else{
+            $this->model->update_enviada_consultas($id);
+            header('location: index.php?action=reune&mensaje=Se+registró+correctamente'); 
+        }
+
+    }
+             
+    public function set_api_curl_reclamaciones($id){
+        $endpoint = 'reune/reclamaciones/general';
+        $url_consulta = $this->reune_base_url.$endpoint;
+        $token = $_SESSION['token_reune'];         
+        $json = $this->model->get_reclamacion_data($id);
+        if(isset($json[0]['data_json'])){
+            $data_json=$json[0]['data_json'];
+        }
+        $curl = curl_init();
+        curl_setopt($curl,CURLOPT_URL,$url_consulta);
+        curl_setopt($curl,CURLOPT_SSL_VERIFYPEER,false);
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($curl,CURLOPT_HTTPHEADER,[
+            "Authorization: $token",
+            "Content-Type: application/json"
+        ]);
+        curl_setopt($curl,CURLOPT_POST,true);
+        curl_setopt($curl,CURLOPT_POSTFIELDS,$data_json);
+        $response=curl_exec($curl);
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        if ($response === false) {
+            $error = curl_error($curl);
+            curl_close($curl);
+            // Registrar los datos enviados y el error
+            error_log("Error en la solicitud cURL (reclamaciones) : $error");
+            error_log("Datos enviados: $data_json");
+            die("Error en la solicitud cURL: $error");
+        }
+        
+        curl_close($curl);
+        if ($httpCode >= 400) {
+            // Registrar la respuesta y los datos enviados en caso de error
+            $this->model->update_reune_reclamacion_respuestadelaapi($id,$response);
+            echo "Error http: $httpCode \n";
+            echo "Causa del error:  $response \n";
+            header('location: index.php?action=reune&mensaje='.$httpCode.'+'.$response);  
+            error_log("reclamaciones Codigo de respuesta HTTP: $httpCode, Respuesta: $response");
+            
+        }else{
+            $this->model->update_enviada_reclamacion($id);
+            header('location: index.php?action=reune&mensaje=Se+registró+correctamente'); 
+        }
+    }
+         
+    public function set_api_curl_aclaraciones($id){
+        $endpoint = 'reune/aclaraciones/general';
+        $url_consulta = $this->reune_base_url.$endpoint;
+        $token = $_SESSION['token_reune'];         
+        $json = $this->model->get_aclaracion_data($id);
+        if(isset($json[0]['data_json'])){
+            $data_json=$json[0]['data_json'];
+        }
+        $curl = curl_init();
+        curl_setopt($curl,CURLOPT_URL,$url_consulta);
+        curl_setopt($curl,CURLOPT_SSL_VERIFYPEER,false);
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($curl,CURLOPT_HTTPHEADER,[
+            "Authorization: $token",
+            "Content-Type: application/json"
+        ]);
+        curl_setopt($curl,CURLOPT_POST,true);
+        curl_setopt($curl,CURLOPT_POSTFIELDS,$data_json);
+        $response=curl_exec($curl);
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        if ($response === false) {
+            $error = curl_error($curl);
+            curl_close($curl);
+            // Registrar los datos enviados y el error
+            error_log("Error en la solicitud cURL (reclamaciones) : $error");
+            error_log("Datos enviados: $data_json");
+            die("Error en la solicitud cURL: $error");
+        }
+        
+        curl_close($curl);
+        if ($httpCode >= 400) {
+            // Registrar la respuesta y los datos enviados en caso de error
+            $this->model->update_reune_aclaracion_respuestadelaapi($id,$response);
+            echo "Error http: $httpCode \n";
+            echo "Causa del error:  $response \n";
+            header('location: index.php?action=reune&mensaje='.$httpCode.'+'.$response);  
+            error_log("Aclaraciones Codigo de respuesta HTTP: $httpCode, Respuesta: $response");
+            
+        }else{
+            $this->model->update_enviada_aclaracion($id);
+            header('location: index.php?action=reune&mensaje=Se+registró+correctamente'); 
+        }
+
     }
 
     public function set_denominacion($valor){

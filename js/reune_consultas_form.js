@@ -265,8 +265,17 @@ document.getElementById('form_consultas').addEventListener('submit',function(eve
 
 
     formData.forEach((value, key) => {
-
-        
+        if (dateFields.includes(key)) {
+            if (value === "") {
+                formObjet[key] = null
+            } else {
+                formObject[key] = convertDateFormat(value)
+            }
+            
+        } else {
+            
+        }
+       console.log(formObject) 
     })
 
 

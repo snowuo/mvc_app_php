@@ -91,7 +91,7 @@
             }
         }
 
-        public function get_listado_aclaracion(){
+        public function get_listado_aclaraciones(){
             try {    
                 $stmt = $this->db->query('SELECT * FROM aclaracion_data');
                 return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -112,7 +112,7 @@
                 die();
             }
         }
-        public function get_listado_reclamacion(){
+        public function get_listado_reclamaciones(){
             try {    
                 $stmt = $this->db->query('SELECT * FROM reclamacion_data');
                 return $stmt->fetchAll(PDO::FETCH_ASSOC);
