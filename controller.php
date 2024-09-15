@@ -49,6 +49,18 @@ class controller{
         $this->model->set_queja($queja);
     }
 
+    public function set_consultas($consulta){
+        $this->model->set_consultas($consulta);
+    }
+
+    public function set_aclaracion($aclaracion){
+        $this->model->set_aclaracion($aclaracion);
+    }
+
+    public function set_reclamacion($reclamacion){
+        $this->model->set_reclamacion($reclamacion);
+    }
+
     public function get_listado_quejas(){
         return $this->model->get_listado_quejas();
     }

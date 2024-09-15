@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,8 +27,8 @@
                        </tr>
                        <tr>
                            <td class="text-center w-50">
-                           <label for="ConsultasTrim ">Trimestre a informar:</label>
-                               <select name="ConsultasTrim " id="ConsultasTrim ">
+                           <label for="ConsultasTrim">Trimestre a informar:</label>
+                               <select name="ConsultasTrim" id="ConsultasTrim">
                                     <option value="1">Primer Trimestre</option>
                                     <option value="2">Segundo Trimestre</option>
                                     <option value="3">Tercer Trimestre</option>
@@ -36,8 +36,8 @@
                                </select>
                            </td>
                            <td class="text-center w-50">
-                               <label for="NumConsultas ">Numero de Consultas :</label>
-                               <input type="number" name="NumConsultas " id="NumConsultas " value = 1 readonly>
+                               <label for="NumConsultas">Numero de Consultas :</label>
+                               <input type="number" name="NumConsultas" id="NumConsultas" value = 1 readonly>
                            </td>
                        </tr>
                        <tr>
@@ -79,7 +79,7 @@
                                <select name="MediosId" id="MediosId" required>
                                <?php foreach ($catalogo_reune_cmr as $cmr): ?>
                                     <option value="<?= htmlspecialchars($cmr['clave']) ?>">
-                                    <?= htmlspecialchars($cmr['Descripcion']) ?> 
+                                    <?= htmlspecialchars($cmr['Descripcion'],ENT_QUOTES, 'UTF-8') ?> 
                                </option>
                                <?php endforeach; ?>
                                </select>
@@ -90,7 +90,7 @@
                            <label for="Producto">Producto y/o servicio :</label>
                               <select name="Producto" id="Producto" required>
                                 <?php foreach ($catalogo as $cmr): ?>
-                                    <option value="<?= htmlspecialchars($cmr['codigo_producto']) ?>">
+                                    <option value="<?= $cmr['codigo_producto'] ?>">
                                     <?= htmlspecialchars($cmr['tipo_credito']) ?>  
                                </option>
                                <?php endforeach; ?>
@@ -124,7 +124,7 @@
                            <td class="text-center w-50">
                                <label for="ConsultasColId">Colonia:</label>
                                 <select name="ConsultasColId" id="ConsultasColId">
-                                    <option value="">introduce el codigo postal</option>
+                                    <option value = "">introduce el codigo postal</option>
                                 </select>
                            </td>
                        </tr>

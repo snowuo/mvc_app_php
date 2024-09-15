@@ -69,7 +69,7 @@
                                <select name="AclaracionMedioRecepcionCanal" id="AclaracionMedioRecepcionCanal" required>
                                <?php foreach ($catalogo_reune_cmr as $cmr): ?>
                             <option value="<?= htmlspecialchars($cmr['clave']) ?>">
-                                <?= htmlspecialchars($cmr['Descripcion']) ?>
+                                <?= $cmr['Descripcion'] ?>
                             </option>
                         <?php endforeach; ?>
                                </select>

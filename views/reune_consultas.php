@@ -32,7 +32,7 @@
                     <td id="<?php echo htmlspecialchars($queja['id'])?>"><?php echo $queja['respuesta_api']?></td>
                     <td id="<?php echo htmlspecialchars($queja['id'])?>"><?php echo htmlspecialchars($queja['f_creacion'])?></td>
                     <td id="<?php echo htmlspecialchars($queja['id'])?>"><?php if (!$queja['enviada']) { ?>
-                                                                                            <a href="index.php?action=curl&id=<?php echo $queja['id']; ?>" class="btn btn-primary">Enviar</a>
+                                                                                            <a href="index.php?action=curl_consultas&id=<?php echo $queja['id']; ?>" class="btn btn-primary">Enviar</a>
                                                                                 <?php }else{echo "Ya fue enviada";} ?>
                                                                                             </tr>
             <?php endforeach;  ?>

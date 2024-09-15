@@ -20,7 +20,7 @@ document.getElementById('Producto').addEventListener('change',function(){
 })
 document.getElementById('ConsultasEstatusCon').addEventListener('change',actualiza_estado)
 document.getElementById('MediosId').addEventListener('change',actualzia_ConsultasCP);
-document.getElementById('ConsultasTrim ').addEventListener('change',()=>{
+document.getElementById('ConsultasTrim').addEventListener('change',()=>{
     actualiza_fechaRecepcion()
     actualiza_fecha_atencion()
 
@@ -31,7 +31,7 @@ document.getElementById('ConsultasFecRecepcion').addEventListener('change',()=>{
     ;})
 
 function actualiza_fechaRecepcion() {
-    $trimestre = document.getElementById('ConsultasTrim ').value;
+    $trimestre = document.getElementById('ConsultasTrim').value;
     inputDate = document.getElementById('ConsultasFecRecepcion')
     const currentYear = new Date().getFullYear();
 
@@ -90,17 +90,43 @@ function actualiza_estado() {
         //console.log('Estado Concluido');
         $fecha_atencion.type = 'date';
         $fecha_atencion.readOnly = false;
-        $ConsultascatnivelatenId.disabled = false;
-        $ConsultascatnivelatenId.disabled = false;
         actualiza_fecha_atencion();
+        $ConsultascatnivelatenId.innerHTML = '' ;
+        // Nuevas opciones a agregar
+        var newOptions = [
+            { value: '1', text: 'UNE' },
+            { value: '2', text: 'Sucursal' },
+            { value: '3', text: 'Centro de atención telefónica' },
+            { value: '4', text: 'Oficinas de atención' }
+        ];
+
+        // Crear y agregar nuevas opciones
+        newOptions.forEach(function(option) {
+            var opt = document.createElement('option');
+            opt.value = option.value;
+            opt.textContent = option.text;
+            $ConsultascatnivelatenId.appendChild(opt);
+        });
     } else {
         //console.log('Estado pendiente');
         $fecha_atencion.type = 'text';
         $fecha_atencion.placeholder = 'No se utiliza.';
         $fecha_atencion.value = "";
         $fecha_atencion.readOnly = true;
-        $ConsultascatnivelatenId.disabled = true;
-        $ConsultascatnivelatenId.disabled = true;
+        $ConsultascatnivelatenId.innerHTML = '' ;
+
+        var newOptions = [
+            { value: '', text: 'No se utiliza' },
+
+        ];
+
+        // Crear y agregar nuevas opciones
+        newOptions.forEach(function(option) {
+            var opt = document.createElement('option');
+            opt.value = option.value;
+            opt.textContent = option.text;
+            $ConsultascatnivelatenId.appendChild(opt);
+        });
     }    
 }
 function actualiza_fecha_atencion() {
@@ -142,8 +168,8 @@ function actualzia_ConsultasCP() {
         $ConsultasCP.value = '';
         $ConsultasLocId.readOnly=true;
         $ConsultasLocId.value = '';
-        $ConsultasColId.disabled=true;
-        $ConsultasColId.value = '';
+        //$ConsultasColId.disabled=true;
+        $ConsultasColId.value = "";
         $dspConsultasLocId.value = "";
         $dspConsultasMpioId.value = "";
     }    
@@ -209,7 +235,7 @@ document.getElementById('ConsultasCP').addEventListener('change', function() {
             })
             .then(data => {
                 const select = document.getElementById('ConsultasColId');
-                select.length = 0;  // Limpiar opciones existentes excepto la primera
+                select.length = 0;  // Limpiar opciones existentes 
 
                 if (data.colonias && data.colonias.length > 0) {
                     data.colonias.forEach(colonia => {
@@ -259,24 +285,77 @@ document.getElementById('form_consultas').addEventListener('submit',function(eve
     //console.log('form: ',form)
     let formData = new FormData(form);
     //console.log('formData: ',formData);
-    let formObjet = {};
-    let numericFields = ['ConsultasTrim','NumConsultas','ConsultasEstatusCon','EstadosId','MediosId','ConsultasCP','ConsultasMpioId','ConsultasLocId','ConsultasColId','ConsultascatnivelatenId',]
-    let dateFields = ['ConsultasFecAten','ConsultasFecRecepcion',]
-
+    let formObject = {};
+    let numericFields = ['ConsultasTrim','ConsultasColId','NumConsultas','ConsultasEstatusCon','EstadosId','MediosId','ConsultasCP','ConsultasMpioId','ConsultasLocId','ConsultascatnivelatenId']
+    let dateFields = ['ConsultasFecAten','ConsultasFecRecepcion']
+    //let qr = ['ConsultasColId']
 
     formData.forEach((value, key) => {
+        console.log(value,key)
         if (dateFields.includes(key)) {
             if (value === "") {
-                formObjet[key] = null
+                formObject[key] = null
             } else {
                 formObject[key] = convertDateFormat(value)
             }
             
+        } else if (numericFields.includes(key)) {
+            if (value === "") {
+                formObject[key] = null                                                    
+            }else{
+                formObject[key] = Number(value);
+            }
         } else {
-            
-        }
-       console.log(formObject) 
+
+            formObject[key] = value;
+        }       
     })
 
+    paso2 = []
+    paso2.push(formObject)
+    jsonString = JSON.stringify(paso2,null,2)
+    //fetch para la api
+
+    fetch('index.php?action=save_form_consulta',{
+        method: 'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body:jsonString
+       })
+       .then(response => response.text())
+       .then(data => {alert(data);window.location.href = 'index.php?action=reune_consultas';})
+       .catch(error => {console.error('Error',error);
+
+       });
+    
+    //termina fetch para la api
+    
+    
+    //downloadJSON(jsonString, 'formulario.json');
 
 })
+function convertDateFormat(dateString) {
+    // Convertir fecha de yyyy-mm-dd a dd/mm/yyyy
+    let regex = /^(\d{4})-(\d{2})-(\d{2})$/;
+    let matches = dateString.match(regex);
+
+    if (matches) {
+        let year = matches[1];
+        let month = matches[2];
+        let day = matches[3];
+        return `${day}/${month}/${year}`;
+    }
+    return dateString; // Si no coincide con el formato esperado, retornar la cadena original
+}
+
+function downloadJSON(jsonString, filename) {
+    let blob = new Blob([jsonString], { type: 'application/json' });
+    let link = document.createElement('a');
+
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+
+    URL.revokeObjectURL(link.href);
+}

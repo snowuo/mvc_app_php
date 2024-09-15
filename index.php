@@ -36,22 +36,37 @@
                 echo 'La queja se guardó correctamente';
                 $json = file_get_contents('php://input');                
                 $controller->set_queja($json);
-                break;       
+            break;      
+            case 'save_form_consulta':
+                    echo 'La consulta se guardó correctamente';
+                    $json = file_get_contents('php://input');                
+                    $controller->set_consultas($json);
+            break; 
+            case 'save_form_aclaracion':
+                        echo 'La aclaracion se guardó correctamente';
+                        $json = file_get_contents('php://input');                
+                        $controller->set_aclaracion($json);
+            break; 
+            case 'save_form_reclamacion':
+                            echo 'La reclamacion se guardó correctamente';
+                            $json = file_get_contents('php://input');                
+                            $controller->set_reclamacion($json);
+            break;  
             case 'curl':
                 $id=$_GET['id'];                
                  $controller->set_queja_api_curl($id);
             break;
             case 'curl_consultas':
                 $id=$_GET['id'];                
-                 $controller->set_queja_api_curl_consultas($id);
+                 $controller->set_api_curl_consultas($id);
             break; 
             case 'curl_reclamaciones':
                 $id=$_GET['id'];                
-                 $controller->set_queja_api_curl_reclamaciones($id);
+                 $controller->set_api_curl_reclamaciones($id);
             break; 
             case 'curl_aclaraciones':
                 $id=$_GET['id'];                
-                 $controller->set_queja_api_curl_aclaraciones($id);
+                 $controller->set_api_curl_aclaraciones($id);
             break;     
             case 'redeco':              
                 $quejas = $controller->get_listado_quejas();

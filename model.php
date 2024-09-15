@@ -1,9 +1,19 @@
 <?php
     class model {
         private $db;
+
         public function __construct() {
-            $this->db = new PDO('mysql:host=localhost;dbname=php_app','php_app','php_app');
+            // Agregar charset=utf8mb4 al DSN
+            $dsn = 'mysql:host=localhost;dbname=php_app;charset=utf8mb4';
+            
+            // Crear la conexión con la base de datos utilizando utf8mb4
+            $this->db = new PDO($dsn, 'php_app', 'php_app');
+            
+            // Configurar PDO para lanzar excepciones en caso de error
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            
+            // Asegurarse de que las consultas usen el conjunto de caracteres correcto
+            $this->db->exec("SET NAMES utf8mb4");
         }
 
         public function log_in($username,$password){
