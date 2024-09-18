@@ -311,9 +311,9 @@ document.getElementById('form_consultas').addEventListener('submit',function(eve
         }       
     })
 
-    paso2 = []
-    paso2.push(formObject)
-    jsonString = JSON.stringify(paso2,null,2)
+    ingresar_a_arreglo = []
+    ingresar_a_arreglo.push(formObject)
+    jsonString = JSON.stringify(ingresar_a_arreglo,null,2)
     //fetch para la api
 
     fetch('index.php?action=save_form_consulta',{
@@ -327,13 +327,7 @@ document.getElementById('form_consultas').addEventListener('submit',function(eve
        .then(data => {alert(data);window.location.href = 'index.php?action=reune_consultas';})
        .catch(error => {console.error('Error',error);
 
-       });
-    
-    //termina fetch para la api
-    
-    
-    //downloadJSON(jsonString, 'formulario.json');
-
+       });    
 })
 function convertDateFormat(dateString) {
     // Convertir fecha de yyyy-mm-dd a dd/mm/yyyy

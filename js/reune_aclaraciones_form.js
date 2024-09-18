@@ -12,7 +12,7 @@ document.getElementById('AclaracionProductoServicio').addEventListener('change',
     menu_causas();
 })
 
-document.getElementById('AclaracionTrimestre ').addEventListener('change',()=>{
+document.getElementById('AclaracionTrimestre').addEventListener('change',()=>{
     actualiza_fechaRecepcion();
     actualiza_fecha_atencion();
 
@@ -32,7 +32,6 @@ document.getElementById('AclaracionEdad').addEventListener('change',()=>{
 console.log('Aclaraciones');
 document.getElementById('AclaracionEstadoConPend').addEventListener('change',actualiza_estado)
 function actualiza_estado() {
-    $ConsultascatnivelatenId = document.getElementById('AclaracionNivelAtencion');
     $estado = document.getElementById('AclaracionEstadoConPend').value;
     $fecha_atencion = document.getElementById('AclaracionFechaAtencion');
     $AclaracionFechaResolucion = document.getElementById('AclaracionFechaResolucion');
@@ -49,8 +48,30 @@ function actualiza_estado() {
         $AclaracionFechaNotifiUsuario.readOnly = false;
         $AclaracionFechaNotifiUsuario.type = 'date';
         
-        $ConsultascatnivelatenId.disabled = false;
+
         $AclaracionNivelAtencion.disabled = false;
+
+        
+        $AclaracionNivelAtencion.innerHTML = ''
+        // Nuevas opciones a agregar
+            var newOptions = [
+            { value: '1', text: 'UNE' },
+            { value: '2', text: 'Sucursal' },
+            { value: '3', text: 'Centro de atención telefónica' },
+            { value: '4', text: ' Oficinas de atención' }
+            ];
+
+            // Crear y agregar nuevas opciones
+            newOptions.forEach(function(option) {
+            var opt = document.createElement('option');
+            opt.value = option.value;
+            opt.textContent = option.text;
+            $AclaracionNivelAtencion.appendChild(opt);
+            });
+
+
+
+
         actualiza_fecha_atencion();
     } else {
         //console.log('Estado pendiente');
@@ -69,8 +90,20 @@ function actualiza_estado() {
         $AclaracionFechaNotifiUsuario.value = "";
         $AclaracionFechaNotifiUsuario.readOnly = true;
 
-        $ConsultascatnivelatenId.disabled = true;
-        $AclaracionNivelAtencion.disabled = true;
+
+        $AclaracionNivelAtencion.innerHTML = ''
+        // Nuevas opciones a agregar
+            var newOptions = [
+            { value: '', text: 'No se utiliza' },           
+            ];
+
+            // Crear y agregar nuevas opciones
+            newOptions.forEach(function(option) {
+            var opt = document.createElement('option');
+            opt.value = option.value;
+            opt.textContent = option.text;
+            $AclaracionNivelAtencion.appendChild(opt);
+            });
     }    
 }
 
@@ -118,7 +151,7 @@ function Crear_Folio() {
 }
 
 function actualiza_fechaRecepcion() {
-    $trimestre = document.getElementById('AclaracionTrimestre ').value;
+    $trimestre = document.getElementById('AclaracionTrimestre').value;
     inputDate = document.getElementById('AclaracionFechaReclamacion')
     const currentYear = new Date().getFullYear();
 
@@ -198,10 +231,30 @@ function actualzia_ConsultasCP() {
         $dspConsultasMpioId.placeholder = 'No se utiliza.';
         $dspConsultasLocId.placeholder = 'No se utiliza.';
         $ConsultasCP.value = '';
-        $ConsultasLocId.readOnly=true;
-        $ConsultasLocId.value = '';
-        $ConsultasColId.disabled=true;
+
         $ConsultasColId.value = '';
+
+
+        $ConsultasColId.innerHTML = ''
+        // Nuevas opciones a agregar
+            var newOptions = [
+            { value: '', text: 'No se utiliza' },
+            ];
+
+            // Crear y agregar nuevas opciones
+            newOptions.forEach(function(option) {
+            var opt = document.createElement('option');
+            opt.value = option.value;
+            opt.textContent = option.text;
+            $ConsultasColId.appendChild(opt);
+            });
+
+
+
+
+
+
+
         $dspConsultasLocId.value = "";
         $dspConsultasMpioId.value = "";
     }    
@@ -209,16 +262,57 @@ function actualzia_ConsultasCP() {
         $AclaracionFolioCondusef.readonly = false;
         $AclaracionFolioCondusef.placeholder = 'Introduce folio Condusef'
         if($valores != '7'){
-            debugger
-            $AclaracionReversa.disabled = false;
+           
+
+            $AclaracionReversa.innerHTML = ''
+                    // Nuevas opciones a agregar
+        var newOptions = [
+            { value: '0', text: 'NO es reversa SIGE (Gestión electrónica)' },
+            { value: '1', text: 'Si es reversa SIGE (Gestión electrónica)' }
+        ];
+
+        // Crear y agregar nuevas opciones
+        newOptions.forEach(function(option) {
+            var opt = document.createElement('option');
+            opt.value = option.value;
+            opt.textContent = option.text;
+            $AclaracionReversa.appendChild(opt);
+        });
+
         }else{
-            $AclaracionReversa.disabled = true;
+
+            $AclaracionReversa.innerHTML = ''
+            // Nuevas opciones a agregar
+            var newOptions = [
+                { value: '', text: 'No se utiliza' },
+            ];
+
+            // Crear y agregar nuevas opciones
+            newOptions.forEach(function(option) {
+                var opt = document.createElement('option');
+                opt.value = option.value;
+                opt.textContent = option.text;
+                $AclaracionReversa.appendChild(opt);
+            });
         }
     } else {
         $AclaracionFolioCondusef.readonly = true;
         $AclaracionFolioCondusef.placeholder = 'No se utiliza.'
         $AclaracionFolioCondusef.value = ''
-        $AclaracionReversa.disabled = true;
+        
+        $AclaracionReversa.innerHTML = ''
+        // Nuevas opciones a agregar
+        var newOptions = [
+            { value: '', text: 'No se utiliza' },
+        ];
+
+        // Crear y agregar nuevas opciones
+        newOptions.forEach(function(option) {
+            var opt = document.createElement('option');
+            opt.value = option.value;
+            opt.textContent = option.text;
+            $AclaracionReversa.appendChild(opt);
+        });
     }
 }
 
@@ -286,19 +380,96 @@ document.getElementById('form_aclaraciones').addEventListener('submit',function(
     event.preventDefault();
 
     let form = event.target;
-    console.log('form: ',form)
+    //console.log('form: ',form)
     let formData = new FormData(form);
-    console.log('formData: ',formData);
-    let formObjet = {};
+    //console.log('formData: ',formData);
+    let formObject = {};
     
-    let numericFields = ['ConsultasTrim','NumConsultas','ConsultasEstatusCon','EstadosId','MediosId','ConsultasCP','ConsultasMpioId','ConsultasLocId','ConsultasColId','ConsultascatnivelatenId',]
-    let dateFields = ['ConsultasFecAten','ConsultasFecRecepcion',]
+    let numericFields = ['AclaracionTrimestre','AclaracionNumero','AclaracionEstadoConPend','AclaracionMedioRecepcionCanal','AclaracionEntidadFederativa',
+                        'AclaracionCodigoPostal','AclaracionMunicipioAlcaldia','AclaracionLocalidad','AclaracionColonia','AclaracionMontoReclamado','AclaracionTipoPersona',
+                        'AclaracionEdad','AclaracionNivelAtencion','AclaracionReversa']
+    let dateFields = ['AclaracionFechaReclamacion','AclaracionFechaAtencion','AclaracionFechaResolucion','AclaracionFechaNotifiUsuario']
+    let qr =['AclaracionFolioCondusef']
+
+    formData.forEach((value, key) => {
+        //console.log(value,key)
+        if (dateFields.includes(key)) {
+            if (value === "") {
+                formObject[key] = null
+            } else {
+                formObject[key] = convertDateFormat(value)
+            }
+            
+        } else if (numericFields.includes(key)) {
+            if (value === "") {
+                formObject[key] = null                                                    
+            }else{
+                formObject[key] = Number(value);
+            }
+        } else if(qr.includes(key)){
+            if (value === "") {
+                formObject[key] = null
+            } else {
+                formObject[key] = value
+             }
+        } else{
+
+            formObject[key] = value;
+        }
+    })
+
+        ingresar_a_arreglo = []
+        ingresar_a_arreglo.push(formObject)
+        jsonString = JSON.stringify(ingresar_a_arreglo,null,2)
+        console.log(jsonString)
+        //fetch para la api
+    /*
+        fetch('index.php?action=save_form_aclaracion',{
+            method: 'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:jsonString
+           })
+           .then(response => response.text())
+           .then(data => {alert(data);window.location.href = 'index.php?action=reune_consultas';})
+           .catch(error => {console.error('Error',error);
+    
+           }); */   
 })
+
+
 
 document.getElementById('AclaracionFechaReclamacion').addEventListener('change',()=>{
     //console.log('se actualiza la fecha de atencion')
     actualiza_fecha_atencion()
     ;})
+
+    function convertDateFormat(dateString) {
+        // Convertir fecha de yyyy-mm-dd a dd/mm/yyyy
+        let regex = /^(\d{4})-(\d{2})-(\d{2})$/;
+        let matches = dateString.match(regex);
+    
+        if (matches) {
+            let year = matches[1];
+            let month = matches[2];
+            let day = matches[3];
+            return `${day}/${month}/${year}`;
+        }
+        return dateString; // Si no coincide con el formato esperado, retornar la cadena original
+    }
+    
+    function downloadJSON(jsonString, filename) {
+        let blob = new Blob([jsonString], { type: 'application/json' });
+        let link = document.createElement('a');
+    
+        link.href = URL.createObjectURL(blob);
+        link.download = filename;
+        link.click();
+    
+        URL.revokeObjectURL(link.href);
+    
+    }
 
 function actualiza_fecha_atencion() {
     $fecha = document.getElementById('AclaracionFechaAtencion');

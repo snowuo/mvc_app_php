@@ -63,12 +63,41 @@ function actualiza_tipo_persona() {
        $AclaracionEdad.placeholder = 'No se utiliza.'
        $AclaracionEdad.value = '';
        
-       $RecSexo.disabled = true;
+       $RecSexo.innerHTML = ''
+       // Nuevas opciones a agregar
+            var newOptions = [
+            { value: '', text: 'No aplica' },            
+            ];
+
+            // Crear y agregar nuevas opciones
+            newOptions.forEach(function(option) {
+            var opt = document.createElement('option');
+            opt.value = option.value;
+            opt.textContent = option.text;
+            $RecSexo.appendChild(opt);
+            });
    } else {
        $AclaracionEdad.readOnly = false;
        $AclaracionEdad.type = 'number';
        $AclaracionEdad.placeholder = 'Introduce la edad'
-       $RecSexo.disabled = false;
+       $RecSexo.readOnly = false;
+       
+
+       $RecSexo.innerHTML = ''
+       // Nuevas opciones a agregar
+            var newOptions = [
+            { value: 'H', text: 'Hombre' },
+            { value: 'M', text: 'Mujer' }
+            ];
+
+            // Crear y agregar nuevas opciones
+            newOptions.forEach(function(option) {
+            var opt = document.createElement('option');
+            opt.value = option.value;
+            opt.textContent = option.text;
+            $RecSexo.appendChild(opt);
+            });
+
    }
 }
 
@@ -149,11 +178,46 @@ function actualiza_estado() {
         $AclaracionFechaNotifiUsuario.readOnly = false;
         $AclaracionFechaNotifiUsuario.type = 'date';
         
-        $AclaracionNivelAtencion.disabled = false;
+       
 
-        $RecMonetario.disabled = false;
-        $RecSentidoResolucion.disabled = false;
-        RecNivelAtencion.disabled = false;
+        $RecMonetario.readOnly = false;
+
+        $RecSentidoResolucion.innerHTML = ''
+        // Nuevas opciones a agregar
+            var newOptions = [
+            { value: '1', text: 'Totalmente favorable al Usuario' },
+            { value: '2', text: 'Desfavorable al Usuario' },
+            { value: '3', text: 'Parcialmente favorable al Usuario' },
+            ];
+
+            // Crear y agregar nuevas opciones
+            newOptions.forEach(function(option) {
+            var opt = document.createElement('option');
+            opt.value = option.value;
+            opt.textContent = option.text;
+            $RecSentidoResolucion.appendChild(opt);
+            });
+
+
+    
+
+        
+        RecNivelAtencion.innerHTML = ''
+        // Nuevas opciones a agregar
+            var newOptions = [
+            { value: '1', text: 'UNE' },
+            { value: '2', text: 'Sucursal' },
+            { value: '3', text: 'Centro de atención telefónica' },
+            { value: '4', text: 'Oficinas de atención' }
+            ];
+
+            // Crear y agregar nuevas opciones
+            newOptions.forEach(function(option) {
+            var opt = document.createElement('option');
+            opt.value = option.value;
+            opt.textContent = option.text;
+            RecNivelAtencion.appendChild(opt);
+            });
 
         actualiza_fecha_atencion();
     } else {
@@ -173,11 +237,42 @@ function actualiza_estado() {
         $AclaracionFechaNotifiUsuario.value = "";
         $AclaracionFechaNotifiUsuario.readOnly = true;
 
-        $AclaracionNivelAtencion.disabled = true;
+        
 
-        $RecMonetario.disabled = true
-        $RecSentidoResolucion.disabled = true;
-        RecNivelAtencion.disabled = true;
+        $RecMonetario.readOnly = true
+
+        
+        $RecSentidoResolucion.innerHTML = ''
+        // Nuevas opciones a agregar
+            var newOptions = [
+            { value: '', text: 'No se utiliza' }
+            ];
+
+            // Crear y agregar nuevas opciones
+            newOptions.forEach(function(option) {
+            var opt = document.createElement('option');
+            opt.value = option.value;
+            opt.textContent = option.text;
+            $RecSentidoResolucion.appendChild(opt);
+            });
+
+
+
+            RecNivelAtencion.innerHTML = ''
+            // Nuevas opciones a agregar
+                var newOptions = [
+                { value: '', text: 'No se utiliza' },
+               
+                ];
+    
+                // Crear y agregar nuevas opciones
+                newOptions.forEach(function(option) {
+                var opt = document.createElement('option');
+                opt.value = option.value;
+                opt.textContent = option.text;
+                RecNivelAtencion.appendChild(opt);
+                });
+    
     }    
 }
 console.log('Reclamaciones');
@@ -287,11 +382,9 @@ document.getElementById('RecLocalidad').addEventListener('change', function() {
 
 document.getElementById('form_rec').addEventListener('submit',function(event) {
     event.preventDefault();
-    let form = event.target;
-    console.log('form: ',form)
-    let formData = new FormData(form);
-    console.log('formData: ',formData);
-    let formObjet = {};
+    let form = event.target;    
+    let formData = new FormData(form);   
+    let formObject = {};
     const alfanumerico = [
         "RecDenominacion",
         "RecSector",
@@ -304,7 +397,7 @@ document.getElementById('form_rec').addEventListener('submit',function(event) {
         "RecFolioCondusef"
     ];
     
-    const numerico = [
+    const numericFields = [
         "RecTrimestre",
         "RecNumero",
         "RecEstadoConPend",
@@ -323,16 +416,64 @@ document.getElementById('form_rec').addEventListener('submit',function(event) {
         "RecReversa"
     ];
     
-    const fecha = [
+    const dateFields = [
         "RecFechaReclamacion",
         "RecFechaAtencion",
         "RecFechaResolucion",
         "RecFechaNotifiUsuario",
         "RecFechaAbonoImporte"
     ];
-    
 
+    const qr=['RecSexo'];
+    
+    formData.forEach((value, key) => {
+        console.log(value,key)
+
+        if (qr.includes(key)) {
+            if (value === "") {
+                formObject[key] = null
+            } else {
+                formObject[key] = value
+            }
+        } else if (dateFields.includes(key)) {
+            if (value === "") {
+                formObject[key] = null
+            } else {
+                formObject[key] = convertDateFormat(value)
+            }
+            
+        } else if (numericFields.includes(key)) {
+            if (value === "") {
+                formObject[key] = null                                                    
+            }else{
+                formObject[key] = Number(value);
+            }
+        } else {
+
+            formObject[key] = value;
+        }       
+    })
+
+    ingresar_a_arreglo = []
+    ingresar_a_arreglo.push(formObject)
+    jsonString = JSON.stringify(ingresar_a_arreglo,null,2)
+
+    console.log(jsonString)
 })
+
+function convertDateFormat(dateString) {
+    // Convertir fecha de yyyy-mm-dd a dd/mm/yyyy
+    let regex = /^(\d{4})-(\d{2})-(\d{2})$/;
+    let matches = dateString.match(regex);
+
+    if (matches) {
+        let year = matches[1];
+        let month = matches[2];
+        let day = matches[3];
+        return `${day}/${month}/${year}`;
+    }
+    return dateString; // Si no coincide con el formato esperado, retornar la cadena original
+}
 
 function actualiza_fechaRecepcion() {
     $trimestre = document.getElementById('RecTrimestre').value;
@@ -405,8 +546,21 @@ function actualzia_ConsultasCP() {
         $ConsultasCP.placeholder = 'Introduce el CP.';
         $dspConsultasMpioId.placeholder = 'Introduce el CP.';
         $dspConsultasLocId.placeholder = 'Introduce el CP.';
-        $ConsultasLocId.readOnly=false;     
-        $ConsultasColId.disabled=false;   
+        $ConsultasLocId.readOnly=false;          
+        $ConsultasColId.readOnly=false; 
+        $ConsultasColId.innerHTML = ''
+        // Nuevas opciones a agregar
+            var newOptions = [
+            { value: '', text: 'Introduce el CP' },
+            ];
+
+            // Crear y agregar nuevas opciones
+            newOptions.forEach(function(option) {
+            var opt = document.createElement('option');
+            opt.value = option.value;
+            opt.textContent = option.text;
+           $ConsultasColId.appendChild(opt);
+            });  
     } else {
         //console.log('no requiere CP');
         $ConsultasCP.readOnly=true;
@@ -416,8 +570,21 @@ function actualzia_ConsultasCP() {
         $ConsultasCP.value = '';
         $ConsultasLocId.readOnly=true;
         $ConsultasLocId.value = '';
-        $ConsultasColId.disabled=true;
-        $ConsultasColId.value = '';
+        $ConsultasColId.readOnly=true;
+        
+       $ConsultasColId.innerHTML = ''
+        // Nuevas opciones a agregar
+            var newOptions = [
+            { value: '', text: 'No se utiliza' },
+            ];
+
+            // Crear y agregar nuevas opciones
+            newOptions.forEach(function(option) {
+            var opt = document.createElement('option');
+            opt.value = option.value;
+            opt.textContent = option.text;
+           $ConsultasColId.appendChild(opt);
+            });
         $dspConsultasLocId.value = "";
         $dspConsultasMpioId.value = "";
     }    
@@ -425,15 +592,56 @@ function actualzia_ConsultasCP() {
         $AclaracionFolioCondusef.readOnly = false;
         $AclaracionFolioCondusef.placeholder = 'Introduce folio Condusef'
         if($valores != '7'){
-            debugger
-            $AclaracionReversa.disabled = false;
+            
+            $AclaracionReversa.innerHTML = ''
+                    // Nuevas opciones a agregar
+                var newOptions = [
+                    { value: '0', text: 'NO es reversa SIGE (Gestión electrónica)' },
+                    { value: '1', text: 'Si es reversa SIGE (Gestión electrónica)' }
+                ];
+
+                // Crear y agregar nuevas opciones
+                newOptions.forEach(function(option) {
+                    var opt = document.createElement('option');
+                    opt.value = option.value;
+                    opt.textContent = option.text;
+                    $AclaracionReversa.appendChild(opt);
+                });
+
+
+
         }else{
-            $AclaracionReversa.disabled = true;
+            
+            $AclaracionReversa.innerHTML = ''
+                    // Nuevas opciones a agregar
+        var newOptions = [
+            { value: '', text: 'No se utiliza' },
+        ];
+
+        // Crear y agregar nuevas opciones
+        newOptions.forEach(function(option) {
+            var opt = document.createElement('option');
+            opt.value = option.value;
+            opt.textContent = option.text;
+            $AclaracionReversa.appendChild(opt);
+        });
         }
     } else {
         $AclaracionFolioCondusef.readOnly = true
         $AclaracionFolioCondusef.placeholder = 'No se utiliza.'
         $AclaracionFolioCondusef.value = ''
-        $AclaracionReversa.disabled = true;
+        $AclaracionReversa.innerHTML = ''
+        // Nuevas opciones a agregar
+            var newOptions = [
+            { value: '', text: 'No se utiliza' },
+            ];
+
+            // Crear y agregar nuevas opciones
+            newOptions.forEach(function(option) {
+            var opt = document.createElement('option');
+            opt.value = option.value;
+            opt.textContent = option.text;
+            $AclaracionReversa.appendChild(opt);
+            });
     }
 }

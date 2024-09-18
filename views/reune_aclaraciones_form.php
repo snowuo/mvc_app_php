@@ -27,8 +27,8 @@
                        </tr>
                        <tr>
                            <td class="text-center w-50">
-                           <label for="AclaracionTrimestre ">Trimestre a informar:</label>
-                               <select name="AclaracionTrimestre " id="AclaracionTrimestre ">
+                           <label for="AclaracionTrimestre">Trimestre a informar:</label>
+                               <select name="AclaracionTrimestre" id="AclaracionTrimestre">
                                     <option value="1">Primer Trimestre</option>
                                     <option value="2">Segundo Trimestre</option>
                                     <option value="3">Tercer Trimestre</option>
@@ -192,7 +192,7 @@
                             </td>
                             <td class="text-center w-50">
                                 <label for="AclaracionFolioCondusef">Folio asignado por CONDUSEF</label>
-                                <input type="text" name="AclaracionFolioCondusef" id="AclaracionFolioCondusef" required>
+                                <input type="text" name="AclaracionFolioCondusef" id="AclaracionFolioCondusef" >
                             </td>
                        </tr>
                        <tr>

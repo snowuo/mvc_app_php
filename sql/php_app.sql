@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-09-2024 a las 09:43:32
--- Versión del servidor: 10.4.21-MariaDB
--- Versión de PHP: 8.0.12
+-- Tiempo de generación: 18-09-2024 a las 02:00:44
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,7 +34,7 @@ CREATE TABLE `aclaracion_data` (
   `enviada` tinyint(4) DEFAULT NULL,
   `respuesta_api` longtext DEFAULT NULL,
   `last_update` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `aclaracion_data`
@@ -78,7 +78,7 @@ INSERT INTO `aclaracion_data` (`id`, `data_json`, `f_creacion`, `enviada`, `resp
 CREATE TABLE `catalogo_medios_rec` (
   `clave` int(11) DEFAULT NULL,
   `Descripcion` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `catalogo_medios_rec`
@@ -117,7 +117,7 @@ CREATE TABLE `catalogo_productos_causas` (
   `aplica_consulta` varchar(100) DEFAULT NULL,
   `aplica_reclamacion` varchar(100) DEFAULT NULL,
   `aplica_aclaracion` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `catalogo_productos_causas`
@@ -1252,7 +1252,7 @@ CREATE TABLE `config_redeco` (
   `id` int(50) NOT NULL,
   `QuejasDenominacion` varchar(100) NOT NULL,
   `QuejasSector` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `config_redeco`
@@ -1274,14 +1274,18 @@ CREATE TABLE `consultas_data` (
   `enviada` tinyint(4) DEFAULT NULL,
   `respuesta_api` longtext DEFAULT NULL,
   `last_update` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `consultas_data`
 --
 
 INSERT INTO `consultas_data` (`id`, `data_json`, `f_creacion`, `enviada`, `respuesta_api`, `last_update`) VALUES
-(1, '[\n  {\n    \"InstitucionClave\": \"Sefi Estratégicos, S.A.P.I. de C.V., SOFOM, E.N.R.\",\n    \"Sector\": \"Sociedades Financieras de Objeto Múltiple E.N.R.\",\n    \"ConsultasTrim\": 1,\n    \"NumConsultas\": 1,\n    \"ConsultasFolio\": \"Sefi_consulta/8-2024/060c618b\",\n    \"ConsultasEstatusCon\": 1,\n    \"ConsultasFecAten\": null,\n    \"EstadosId\": 1,\n    \"ConsultasFecRecepcion\": \"01/01/2024\",\n    \"MediosId\": 1,\n    \"Producto\": \"026911791256\",\n    \"CausaId\": \"0162\",\n    \"ConsultasCP\": null,\n    \"ConsultasMpioId\": null,\n    \"ConsultasLocId\": null,\n    \"ConsultasColId\": null,\n    \"ConsultascatnivelatenId\": null,\n    \"ConsultasPori\": \"NO\"\n  }\n]', '2024-09-15 07:36:55', NULL, '{\"message\":\"Error interno del servidor\"}', '2024-09-15 07:41:31');
+(1, '[\n  {\n    \"InstitucionClave\": \"Sefi Estratégicos, S.A.P.I. de C.V., SOFOM, E.N.R.\",\n    \"Sector\": \"Sociedades Financieras de Objeto Múltiple E.N.R.\",\n    \"ConsultasTrim\": 1,\n    \"NumConsultas\": 1,\n    \"ConsultasFolio\": \"Sefi_consulta/8-2024/060c618b\",\n    \"ConsultasEstatusCon\": 1,\n    \"ConsultasFecAten\": null,\n    \"EstadosId\": 1,\n    \"ConsultasFecRecepcion\": \"01/01/2024\",\n    \"MediosId\": 1,\n    \"Producto\": \"026911791256\",\n    \"CausaId\": \"0162\",\n    \"ConsultasCP\": null,\n    \"ConsultasMpioId\": null,\n    \"ConsultasLocId\": null,\n    \"ConsultasColId\": null,\n    \"ConsultascatnivelatenId\": null,\n    \"ConsultasPori\": \"NO\"\n  }\n]', '2024-09-15 07:36:55', NULL, '{\"message\":\"Ninguno de los registros enviados fue adicionado hasta que se haga la corrección total de los folios.\",\"errors\":{\"Sefi_consulta/8-2024/060c618b\":[\"El campo Municipio o Alcaldía es obligatorio. En el folio Sefi_consulta/8-2024/060c618b.\",\"El Producto y la Causa no tienen relación o no está vigente. En el folio Sefi_consulta/8-2024/060c618b\"]}}', '2024-09-17 19:40:53'),
+(2, '[\n  {\n    \"InstitucionClave\": \"Sefi Estratégicos, S.A.P.I. de C.V., SOFOM, E.N.R.\",\n    \"Sector\": \"Sociedades Financieras de Objeto Múltiple E.N.R.\",\n    \"ConsultasTrim\": 1,\n    \"NumConsultas\": 1,\n    \"ConsultasFolio\": \"Sefi_consulta/8-2024/3fa50343\",\n    \"ConsultasEstatusCon\": 1,\n    \"ConsultasFecAten\": null,\n    \"EstadosId\": 1,\n    \"ConsultasFecRecepcion\": \"01/01/2024\",\n    \"MediosId\": 1,\n    \"Producto\": \"026911791256\",\n    \"CausaId\": \"0162\",\n    \"ConsultasCP\": null,\n    \"ConsultasMpioId\": null,\n    \"ConsultasLocId\": null,\n    \"ConsultasColId\": null,\n    \"ConsultascatnivelatenId\": null,\n    \"ConsultasPori\": \"NO\"\n  }\n]', '2024-09-17 19:41:27', NULL, '{\"message\":\"Ninguno de los registros enviados fue adicionado hasta que se haga la corrección total de los folios.\",\"errors\":{\"Sefi_consulta/8-2024/3fa50343\":[\"El campo Municipio o Alcaldía es obligatorio. En el folio Sefi_consulta/8-2024/3fa50343.\",\"El Producto y la Causa no tienen relación o no está vigente. En el folio Sefi_consulta/8-2024/3fa50343\"]}}', '2024-09-17 19:41:30'),
+(3, '[\n  {\n    \"InstitucionClave\": \"Sefi Estratégicos, S.A.P.I. de C.V., SOFOM, E.N.R.\",\n    \"Sector\": \"Sociedades Financieras de Objeto Múltiple E.N.R.\",\n    \"ConsultasTrim\": 3,\n    \"NumConsultas\": 1,\n    \"ConsultasFolio\": \"Sefi_consulta/8-2024/56afa9ed\",\n    \"ConsultasEstatusCon\": 1,\n    \"ConsultasFecAten\": null,\n    \"EstadosId\": 22,\n    \"ConsultasFecRecepcion\": \"01/07/2024\",\n    \"MediosId\": 3,\n    \"Producto\": \"026911801257\",\n    \"CausaId\": \"0188\",\n    \"ConsultasCP\": 76904,\n    \"ConsultasMpioId\": 6,\n    \"ConsultasLocId\": 21,\n    \"ConsultasColId\": 24,\n    \"ConsultascatnivelatenId\": null,\n    \"ConsultasPori\": \"NO\"\n  }\n]', '2024-09-17 19:42:44', NULL, '{\"message\":\"Ninguno de los registros enviados fue adicionado hasta que se haga la corrección total de los folios.\",\"errors\":{\"Sefi_consulta/8-2024/56afa9ed\":[\"El trimestre no corresponde al periodo actual o no ha sido aperturado. En el folio Sefi_consulta/8-2024/56afa9ed\",\"La Fecha de Recepción de la consulta no corresponde con el trimestre o el trimestre no está aperturado. En el folio Sefi_consulta/8-2024/56afa9ed\",\"El Producto y la Causa no tienen relación o no está vigente. En el folio Sefi_consulta/8-2024/56afa9ed\"]}}', '2024-09-17 19:42:50'),
+(4, '[\n  {\n    \"InstitucionClave\": \"Sefi Estratégicos, S.A.P.I. de C.V., SOFOM, E.N.R.\",\n    \"Sector\": \"Sociedades Financieras de Objeto Múltiple E.N.R.\",\n    \"ConsultasTrim\": 3,\n    \"NumConsultas\": 1,\n    \"ConsultasFolio\": \"Sefi_consulta/8-2024/8eb6d184\",\n    \"ConsultasEstatusCon\": 1,\n    \"ConsultasFecAten\": null,\n    \"EstadosId\": 1,\n    \"ConsultasFecRecepcion\": \"09/09/2024\",\n    \"MediosId\": 1,\n    \"Producto\": \"026911821260\",\n    \"CausaId\": \"0577\",\n    \"ConsultasCP\": null,\n    \"ConsultasMpioId\": null,\n    \"ConsultasLocId\": null,\n    \"ConsultasColId\": null,\n    \"ConsultascatnivelatenId\": null,\n    \"ConsultasPori\": \"NO\"\n  }\n]', '2024-09-17 19:43:54', NULL, '{\"message\":\"Ninguno de los registros enviados fue adicionado hasta que se haga la corrección total de los folios.\",\"errors\":{\"Sefi_consulta/8-2024/8eb6d184\":[\"El trimestre no corresponde al periodo actual o no ha sido aperturado. En el folio Sefi_consulta/8-2024/8eb6d184\",\"La Fecha de Recepción de la consulta no corresponde con el trimestre o el trimestre no está aperturado. En el folio Sefi_consulta/8-2024/8eb6d184\",\"El campo Municipio o Alcaldía es obligatorio. En el folio Sefi_consulta/8-2024/8eb6d184.\",\"El Producto y la Causa no tienen relación o no está vigente. En el folio Sefi_consulta/8-2024/8eb6d184\"]}}', '2024-09-17 19:43:58'),
+(5, '[\n  {\n    \"InstitucionClave\": \"Sefi Estratégicos, S.A.P.I. de C.V., SOFOM, E.N.R.\",\n    \"Sector\": \"Sociedades Financieras de Objeto Múltiple E.N.R.\",\n    \"ConsultasTrim\": 1,\n    \"NumConsultas\": 1,\n    \"ConsultasFolio\": \"Sefi_consulta/8-2024/e4f96629\",\n    \"ConsultasEstatusCon\": 1,\n    \"ConsultasFecAten\": null,\n    \"EstadosId\": 1,\n    \"ConsultasFecRecepcion\": \"01/01/2024\",\n    \"MediosId\": 1,\n    \"Producto\": \"026911791256\",\n    \"CausaId\": \"0162\",\n    \"ConsultasCP\": null,\n    \"ConsultasMpioId\": null,\n    \"ConsultasLocId\": null,\n    \"ConsultasColId\": null,\n    \"ConsultascatnivelatenId\": null,\n    \"ConsultasPori\": \"NO\"\n  }\n]', '2024-09-17 22:38:07', NULL, '{\"message\":\"Ninguno de los registros enviados fue adicionado hasta que se haga la corrección total de los folios.\",\"errors\":{\"Sefi_consulta/8-2024/e4f96629\":[\"El campo Municipio o Alcaldía es obligatorio. En el folio Sefi_consulta/8-2024/e4f96629.\",\"El Producto y la Causa no tienen relación o no está vigente. En el folio Sefi_consulta/8-2024/e4f96629\"]}}', '2024-09-17 22:38:12');
 
 -- --------------------------------------------------------
 
@@ -1292,7 +1296,7 @@ INSERT INTO `consultas_data` (`id`, `data_json`, `f_creacion`, `enviada`, `respu
 CREATE TABLE `entidades_federativas` (
   `clave` int(11) DEFAULT NULL,
   `descripcion` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `entidades_federativas`
@@ -1343,7 +1347,7 @@ CREATE TABLE `info_sofom` (
   `denominacion` varchar(500) DEFAULT NULL,
   `sector` varchar(500) DEFAULT NULL,
   `f_actualizacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `info_sofom`
@@ -1362,7 +1366,7 @@ CREATE TABLE `productos` (
   `productId` varchar(20) DEFAULT NULL,
   `product` varchar(100) DEFAULT NULL,
   `institucion` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `productos`
@@ -1405,7 +1409,7 @@ CREATE TABLE `quejas_data` (
   `enviada` tinyint(1) DEFAULT 0,
   `respuesta_api` longtext DEFAULT NULL,
   `last_update` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `quejas_data`
@@ -1454,7 +1458,7 @@ CREATE TABLE `reclamacion_data` (
   `enviada` tinyint(4) DEFAULT NULL,
   `respuesta_api` longtext DEFAULT NULL,
   `last_update` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `reclamacion_data`
@@ -1500,7 +1504,7 @@ CREATE TABLE `redeco_logs` (
   `origen` varchar(50) DEFAULT NULL,
   `response` longtext DEFAULT NULL,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `redeco_logs`
@@ -1770,7 +1774,7 @@ CREATE TABLE `reune_logs` (
   `origen` varchar(50) DEFAULT NULL,
   `response` longtext DEFAULT NULL,
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `reune_logs`
@@ -1817,7 +1821,7 @@ INSERT INTO `reune_logs` (`id`, `origen`, `response`, `fecha_creacion`) VALUES
 CREATE TABLE `tipo_usuario` (
   `id_tu` int(11) NOT NULL,
   `tu_origen` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `tipo_usuario`
@@ -1838,7 +1842,7 @@ CREATE TABLE `tokens_redeco_reune_superuser` (
   `institucion` varchar(200) DEFAULT NULL,
   `token` varchar(100) DEFAULT NULL,
   `f_creacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `tokens_redeco_reune_superuser`
@@ -1864,7 +1868,7 @@ CREATE TABLE `user` (
   `json_usuario` longtext DEFAULT NULL,
   `last_update` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `origen` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `user`
@@ -1964,7 +1968,7 @@ ALTER TABLE `config_redeco`
 -- AUTO_INCREMENT de la tabla `consultas_data`
 --
 ALTER TABLE `consultas_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `info_sofom`
