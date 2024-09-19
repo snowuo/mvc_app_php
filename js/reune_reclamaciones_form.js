@@ -459,6 +459,22 @@ document.getElementById('form_rec').addEventListener('submit',function(event) {
     jsonString = JSON.stringify(ingresar_a_arreglo,null,2)
 
     console.log(jsonString)
+
+    //save_form_reclamacion
+
+    fetch('index.php?action=save_form_reclamacion',{
+        method: 'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body:jsonString
+       })
+       .then(response => response.text())
+       .then(data => {alert(data);window.location.href = 'index.php?action=reune_reclamaciones';})
+       .catch(error => {console.error('Error',error);
+
+       });    
+
 })
 
 function convertDateFormat(dateString) {

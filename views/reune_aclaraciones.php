@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-LA">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Aclaraciones</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -31,7 +31,7 @@
                     <td id="<?php echo htmlspecialchars($queja['id'])?>"><?php echo $queja['respuesta_api']?></td>
                     <td id="<?php echo htmlspecialchars($queja['id'])?>"><?php echo htmlspecialchars($queja['f_creacion'])?></td>
                     <td id="<?php echo htmlspecialchars($queja['id'])?>"><?php if (!$queja['enviada']) { ?>
-                                                                                            <a href="index.php?action=curl&id=<?php echo $queja['id']; ?>" class="btn btn-primary">Enviar</a>
+                                                                                            <a href="index.php?action=curl_aclaraciones&id=<?php echo $queja['id']; ?>" class="btn btn-primary">Enviar</a>
                                                                                 <?php }else{echo "Ya fue enviada";} ?>
                                                                                             </tr>
             <?php endforeach;  ?>

@@ -423,7 +423,7 @@ document.getElementById('form_aclaraciones').addEventListener('submit',function(
         jsonString = JSON.stringify(ingresar_a_arreglo,null,2)
         console.log(jsonString)
         //fetch para la api
-    /*
+    
         fetch('index.php?action=save_form_aclaracion',{
             method: 'POST',
             headers:{
@@ -432,10 +432,10 @@ document.getElementById('form_aclaraciones').addEventListener('submit',function(
             body:jsonString
            })
            .then(response => response.text())
-           .then(data => {alert(data);window.location.href = 'index.php?action=reune_consultas';})
+           .then(data => {alert(data);window.location.href = 'index.php?action=reune_aclaraciones';})
            .catch(error => {console.error('Error',error);
     
-           }); */   
+           }); 
 })
 
 

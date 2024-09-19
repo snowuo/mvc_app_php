@@ -146,9 +146,8 @@ class controller{
                     $error = curl_error($curl);
                     curl_close($curl);
                     // Registrar los datos enviados y el error
-                    error_log("Error en la solicitud cURL: $error");
+                    error_log("Error en la solicitud cURL (Para mas informacion consultar el error_log): $error");
                     error_log("Datos enviados: $data_queja");
-                    die("Error en la solicitud cURL: $error");
                 }
                 
                 curl_close($curl);
@@ -192,7 +191,7 @@ class controller{
             // Registrar los datos enviados y el error
             error_log("Error en la solicitud cURL (consultas) : $error");
             error_log("Datos enviados: $data_json");
-            die("Error en la solicitud cURL: $error");
+            die("Error en la solicitud cURL (Para mas informacion consultar el error_log): $error ");
         }
         
         curl_close($curl);
@@ -201,7 +200,7 @@ class controller{
             $this->model->update_reune_consultas_respuestadelaapi($id,$response);
             echo "Error http: $httpCode \n";
             echo "Causa del error:  $response \n";
-            header('location: index.php?action=reune&mensaje='.$httpCode.'+'.$response);  
+            //header('location: index.php?action=reune&mensaje='.$httpCode.'+'.$response);  
             error_log("consultas Codigo de respuesta HTTP: $httpCode, Respuesta: $response");
             
         }else{

@@ -342,18 +342,9 @@
 //Pruebas a partir de aqui --------------- borrar hasta el default
 
                 case 'prueba_redeco':
-                    try {
-                        $datos = $controller->get_queja_data(1);
-                        foreach ($datos as $dato) {
-                           echo "<div class='row'>
-                                    <div class='col'>".htmlspecialchars($dato['key'])."</div>
-                                    <div class='col'>".htmlspecialchars($dato['value'])."</div>
-                                 </div>";
-                            
-                        }
-                    } catch (\Throwable $th) {
-                        error_log('Error en la prueba: '.$th);
-                    }
+                    $token = $controller->get_token('2');
+                    echo $token;
+                        
                    
                 break;
 
