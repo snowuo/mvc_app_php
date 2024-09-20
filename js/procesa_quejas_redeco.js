@@ -19,7 +19,7 @@ modalButtons.forEach(button => {
     // Ejemplo de actualización de contenido del modal
     const modalTitle = document.getElementById('modalTitle');
     const modalBody = document.getElementById('modalBody');
-    const url = `${baseURLlocal}/mvc_app_php/index.php?action=consulta_queja&folio=${id}`;
+    const url = `${baseURLlocal}/index.php?action=consulta_queja&folio=${id}`;
 // URL de la consulta
 
 // El folio que deseas enviar
