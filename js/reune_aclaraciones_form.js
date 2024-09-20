@@ -512,14 +512,44 @@ document.getElementById('AclaracionTipoPersona').addEventListener('change',funct
 function actualiza_tipo_persona() {
     $tipopersona = document.getElementById('AclaracionTipoPersona').value;
     $AclaracionEdad = document.getElementById('AclaracionEdad');
+    $AclaracionSexo = document.getElementById('AclaracionSexo');
     if ($tipopersona === '2') {
         $AclaracionEdad.readOnly = true;
         $AclaracionEdad.type = 'text';
         $AclaracionEdad.placeholder = 'No se utiliza.'
         $AclaracionEdad.value = '';
+        $AclaracionSexo.innerHTML = ''
+        // Nuevas opciones a agregar
+            var newOptions = [
+            { value: '', text: 'No se utiliza' }
+            ];
+
+            // Crear y agregar nuevas opciones
+            newOptions.forEach(function(option) {
+            var opt = document.createElement('option');
+            opt.value = option.value;
+            opt.textContent = option.text;
+            $AclaracionSexo.appendChild(opt);
+            });
+
     } else {
         $AclaracionEdad.readOnly = false;
         $AclaracionEdad.type = 'number';
-        $AclaracionEdad.placeholder = 'Introduce la edad'
+        $AclaracionEdad.placeholder = 'Introduce la edad';
+        $AclaracionSexo.innerHTML = ''
+        // Nuevas opciones a agregar
+            var newOptions = [
+            { value: 'H', text: 'Hombre' },
+            { value: 'M', text: 'Mujer' }
+            ];
+
+            // Crear y agregar nuevas opciones
+            newOptions.forEach(function(option) {
+            var opt = document.createElement('option');
+            opt.value = option.value;
+            opt.textContent = option.text;
+            $AclaracionSexo.appendChild(opt);
+            });
+        
     }
 }
