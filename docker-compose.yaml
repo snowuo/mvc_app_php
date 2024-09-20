@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  php-apache:
+    build: 
+      context: .   # Indica que el Dockerfile está en el directorio actual
+      dockerfile: Dockerfile
+    container_name: server
+    ports:
+      - "8080:80"
+    volumes:
+      - /root/htdoc/mvc_app_php:/var/www/html
+    networks:
+      - server
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    ports:
+      - "3000:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "Secretpassword"
+    volumes:
+      - /root/htdocs/db:/var/lib/mysql
+    networks:
+      - server
+
+networks:
+  server:
+    driver: bridge
