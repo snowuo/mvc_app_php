@@ -3,7 +3,7 @@ version: '3.8'
 services:
   php-apache:
     build: 
-      context: .   # Indica que el Dockerfile está en el directorio actual
+      context: .   
       dockerfile: Dockerfile
     container_name: server
     ports:
@@ -19,7 +19,8 @@ services:
     ports:
       - "3000:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: "Secretpassword"
+      MYSQL_ROOT_PASSWORD: "Secretpassword"   # Contraseña para el usuario root
+      MYSQL_DATABASE: "php_app"               # Crea automáticamente la base de datos php_app
     volumes:
       - /root/htdocs/db:/var/lib/mysql
     networks:
