@@ -245,7 +245,7 @@ class controller{
             $this->model->update_reune_reclamacion_respuestadelaapi($id,$response);
             echo "Error http: $httpCode \n";
             echo "Causa del error:  $response \n";
-            header('location: index.php?action=reune&mensaje='.$httpCode.'+'.$response);  
+            //header('location: index.php?action=reune&mensaje='.$httpCode.'+'.$response);  
             error_log("reclamaciones Codigo de respuesta HTTP: $httpCode, Respuesta: $response");
             
         }else{
@@ -289,7 +289,7 @@ class controller{
             $this->model->update_reune_aclaracion_respuestadelaapi($id,$response);
             echo "Error http: $httpCode \n";
             echo "Causa del error:  $response \n";
-            header('location: index.php?action=reune&mensaje='.$httpCode.'+'.$response);  
+            //header('location: index.php?action=reune&mensaje='.$httpCode.'+'.$response);  
             error_log("Aclaraciones Codigo de respuesta HTTP: $httpCode, Respuesta: $response");
             
         }else{

@@ -1,5 +1,7 @@
+
 POST https://api-reune-pruebas.condusef.gob.mx/reune/consultas/general
 
 Content-Type: application/json 
 Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIyYmJiZjc4OC1kZmI3LTRmZGEtOTU3ZC1kNGQyYmMxNWM3MDEiLCJ1c2VybmFtZSI6IlNlZmlSZXVuZSIsImluc3RpdHVjaW9uaWQiOiI0OUE4QzJERi01OTQyLTRFMTQtOUQzNi1FRDMwNzBENCIsImluc3RpdHVjaW9uQ2xhdmUiOjEzNDYwLCJkZW5vbWluYWNpb25fc29jaWFsIjoiU2VmaSBFc3RyYXTDqWdpY29zLCBTLkEuUC5JLiBkZSBDLlYuLCBTT0ZPTSwgRS5OLlIuIiwic2VjdG9yaWQiOjY5LCJzZWN0b3IiOiJTT0NJRURBREVTIEZJTkFOQ0lFUkFTIERFIE9CSkVUTyBNVUxUSVBMRSBFTlIiLCJzeXN0ZW0iOiJSRVVORSIsImlhdCI6MTcyNTkyNTYxMCwiZXhwIjoxNzI4NTE3NjEwfQ.tU73cnd6mZhB6ZJ5-PSZGlEuB-oeeyOarp_FZNjcO8I
 body:[ { "InstitucionClave": "Sefi Estratégicos, S.A.P.I. de C.V., SOFOM, E.N.R.", "Sector": "Sociedades Financieras de Objeto Múltiple E.N.R.", "ConsultasTrim": 1, "NumConsultas": 1, "ConsultasFolio": "Sefi_consulta/8-2024/060c618b", "ConsultasEstatusCon": 1, "ConsultasFecAten": null, "EstadosId": 1, "ConsultasFecRecepcion": "01/01/2024", "MediosId": 1, "Producto": "026911791256", "CausaId": "0162", "ConsultasCP": null, "ConsultasMpioId": null, "ConsultasLocId": null, "ConsultasColId": null, "ConsultascatnivelatenId": null, "ConsultasPori": "NO" } ]
+POST https://api-reune-pruebas.condusef.gob.mx/reune/consultas/obtener?type=consultaGeneral
