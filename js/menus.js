@@ -1,3 +1,4 @@
+const baseURLlocal = window.location.origin;
 
 document.addEventListener('DOMContentLoaded', function() {
     actualiza_catalogo_nivat();
@@ -419,7 +420,7 @@ document.getElementById('form_queja').addEventListener('submit', function(event)
 
                    //insertar el envío por formulario 
 
-                   fetch('index.php?action=save-form',{
+                   fetch(`${baseURLlocal}/mvc_app_php/index.php?action=save-form`,{
                     method: 'POST',
                     headers:{
                         'Content-Type':'application/json'
@@ -427,7 +428,7 @@ document.getElementById('form_queja').addEventListener('submit', function(event)
                     body:jsonString
                    })
                    .then(response => response.text())
-                   .then(data => {alert(data);window.location.href = 'index.php?action=redeco';})
+                   .then(data => {alert(data);window.location.href = `${baseURLlocal}/mvc_app_php/index.php?action=redeco`;})
                    .catch(error => {console.error('Error',error);
 
                    });

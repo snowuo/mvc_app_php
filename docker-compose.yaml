@@ -9,7 +9,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - /root/htdoc/mvc_app_php:/var/www/html
+      - /root/htdocs/mvc_app_php:/var/www/html
     networks:
       - server
 
