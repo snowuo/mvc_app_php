@@ -1,3 +1,4 @@
+const baseURLlocal = window.location.origin;
 function openModal_denominacion() {
     var modal_denominacion = new bootstrap.Modal(document.getElementById('modal_denominacion'));
     modal_denominacion.show();
@@ -13,7 +14,7 @@ function openModal_denominacion() {
     const formObj = Object.fromEntries(formData.entries());
     const formBody = new URLSearchParams(formObj).toString();
 
-    fetch('index.php?action=actualiza_denominacion', {
+    fetch(`${baseURLlocal}/index.php?action=actualiza_denominacion`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -55,7 +56,7 @@ function openModal_denominacion() {
     const formObj = Object.fromEntries(formData.entries());
     const formBody = new URLSearchParams(formObj).toString();
 
-    fetch('index.php?action=actualiza_sector', {
+    fetch(`${baseURLlocal}/index.php?action=actualiza_sector`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',

@@ -1,3 +1,4 @@
+const baseURLlocal = window.location.origin;
 $mensaje = `Consideraciones:
 
 Al seleccionar el trimestre a reportar, el campo "Fecha de consulta" se actualizará al valor del primer dia de ese trimestre, Hay que seleccionar la fecha en que se recibió la consulta.
@@ -177,7 +178,7 @@ function actualzia_ConsultasCP() {
 
 function menu_causas() {
     $producto = document.getElementById('Producto').value;
-    $url = `http://localhost/mvc_app_php/index.php?action=causas&producto=${$producto}`;
+    $url = `${baseURLlocal}/index.php?action=causas&producto=${$producto}`;
     prueba = document.getElementById('prueba');
         
     fetch($url)
@@ -316,7 +317,7 @@ document.getElementById('form_consultas').addEventListener('submit',function(eve
     jsonString = JSON.stringify(ingresar_a_arreglo,null,2)
     //fetch para la api
 
-    fetch('index.php?action=save_form_consulta',{
+    fetch(`${baseURLlocal}/index.php?action=save_form_consulta`,{
         method: 'POST',
         headers:{
             'Content-Type':'application/json'
@@ -324,7 +325,7 @@ document.getElementById('form_consultas').addEventListener('submit',function(eve
         body:jsonString
        })
        .then(response => response.text())
-       .then(data => {alert(data);window.location.href = 'index.php?action=reune_consultas';})
+       .then(data => {alert(data);window.location.href = `${baseURLlocal}/index.php?action=reune_consultas`;})
        .catch(error => {console.error('Error',error);
 
        });    

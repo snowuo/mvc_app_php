@@ -1,3 +1,4 @@
+const baseURLlocal = window.location.origin;
 document.addEventListener('DOMContentLoaded', function() {
     menu_causas();
     Crear_Folio();
@@ -278,7 +279,7 @@ function actualiza_estado() {
 console.log('Reclamaciones');
 function menu_causas() {
     $producto = document.getElementById('RecProductoServicio').value;
-    $url = `http://localhost/mvc_app_php/index.php?action=causas&producto=${$producto}`;        
+    $url = `${baseURLlocal}/index.php?action=causas&producto=${$producto}`;        
  
     fetch($url)
     .then(response=>{
@@ -462,7 +463,7 @@ document.getElementById('form_rec').addEventListener('submit',function(event) {
 
     //save_form_reclamacion
 
-    fetch('index.php?action=save_form_reclamacion',{
+    fetch(`${baseURLlocal}/index.php?action=save_form_reclamacion`,{
         method: 'POST',
         headers:{
             'Content-Type':'application/json'
@@ -470,7 +471,7 @@ document.getElementById('form_rec').addEventListener('submit',function(event) {
         body:jsonString
        })
        .then(response => response.text())
-       .then(data => {alert(data);window.location.href = 'index.php?action=reune_reclamaciones';})
+       .then(data => {alert(data);window.location.href = `${baseURLlocal}/index.php?action=reune_reclamaciones`;})
        .catch(error => {console.error('Error',error);
 
        });    

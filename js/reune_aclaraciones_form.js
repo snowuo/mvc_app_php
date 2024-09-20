@@ -1,4 +1,4 @@
-
+const baseURLlocal = window.location.origin;
 
 document.addEventListener('DOMContentLoaded', function() {
     menu_causas();
@@ -109,7 +109,7 @@ function actualiza_estado() {
 
 function menu_causas() {
     $producto = document.getElementById('AclaracionProductoServicio').value;
-    $url = `http://localhost/mvc_app_php/index.php?action=causas&producto=${$producto}`;        
+    $url = `${baseURLlocal}/index.php?action=causas&producto=${$producto}`;        
  
     fetch($url)
     .then(response=>{
@@ -424,7 +424,7 @@ document.getElementById('form_aclaraciones').addEventListener('submit',function(
         console.log(jsonString)
         //fetch para la api
     
-        fetch('index.php?action=save_form_aclaracion',{
+        fetch(`${baseURLlocal}/index.php?action=save_form_aclaracion`,{
             method: 'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -432,7 +432,7 @@ document.getElementById('form_aclaraciones').addEventListener('submit',function(
             body:jsonString
            })
            .then(response => response.text())
-           .then(data => {alert(data);window.location.href = 'index.php?action=reune_aclaraciones';})
+           .then(data => {alert(data);window.location.href = `${baseURLlocal}/index.php?action=reune_aclaraciones`;})
            .catch(error => {console.error('Error',error);
     
            }); 
