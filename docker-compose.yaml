@@ -19,8 +19,10 @@ services:
     ports:
       - "3000:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: "Secretpassword"   # Contraseña para el usuario root
-      MYSQL_DATABASE: "php_app"               # Crea automáticamente la base de datos php_app
+      MYSQL_ROOT_PASSWORD: "Secretpassword"      # Contraseña para el usuario root
+      MYSQL_DATABASE: "php_app"                  # Base de datos que se creará
+      MYSQL_USER: "php_app"                     # Usuario adicional que se creará
+      MYSQL_PASSWORD: "php_app"             # Contraseña para el usuario adicional
     volumes:
       - /root/htdocs/db:/var/lib/mysql
     networks:
