@@ -1,4 +1,13 @@
-const baseURLlocal = window.location.origin;
+const baseURL = window.location.origin;
+const projectFolder = window.location.pathname.split('/')[1]; // Detecta la carpeta del proyecto
+const isLocalEnv = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
+let baseURLlocal;
+if (isLocalEnv) {
+    baseURLlocal = `${baseURL}/${projectFolder}`;
+} else {
+    baseURLlocal = baseURL; // Producción no necesita el nombre de la carpeta
+}
 function openModal_denominacion() {
     var modal_denominacion = new bootstrap.Modal(document.getElementById('modal_denominacion'));
     modal_denominacion.show();
