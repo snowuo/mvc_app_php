@@ -35,7 +35,7 @@
                     <td id="<?php echo htmlspecialchars($queja['id'])?>"><?php 
                     
                     
-                    $data = json_decode($queja['data_json'], true);
+                    $data = json_decode($queja['descripcion_queja'], true);
                         if (!empty($data)){
                             echo "<div class='container'>";
                             echo "<div class='row'><div class='col'><h4>Contenido:</h4></div></div>";
@@ -45,43 +45,43 @@
                               
                                 echo "<tr>";
                                 if (isset($item['AclaracionTrimestre'])) {
-                                    echo "<td>Trimestre :" . htmlspecialchars($item['AclaracionTrimestre']) . "</td>";
+                                    echo "<td>Trimestre : " . htmlspecialchars($item['AclaracionTrimestre']) . "</td>";
                                 }else{echo "<td></td>";}        
                                 if (isset($item['AclaracionFolioAtencion'])) {
-                                    echo "<td>Folio :" . htmlspecialchars($item['AclaracionFolioAtencion']) . "</td>";
+                                    echo "<td>Folio : " . htmlspecialchars($item['AclaracionFolioAtencion']) . "</td>";
                                 }else{echo "<td></td>";}
                                 if (isset($item['AclaracionFechaAclaracion'])) {
-                                    echo "<td>Fecha Recepción :" . htmlspecialchars($item['AclaracionFechaAclaracion']) . "</td>";
+                                    echo "<td>Fecha Recepción : " . htmlspecialchars($item['AclaracionFechaAclaracion']) . "</td>";
                                 }else{echo "<td></td>";}
                                 echo "</tr><tr>";
                                 if (isset($item['AclaracionMedioRecepcionCanal'])) {
-                                    echo "<td>Medio :" . htmlspecialchars($item['AclaracionMedioRecepcionCanal']) . "</td>";
+                                    echo "<td>Medio : " . htmlspecialchars($item['AclaracionMedioRecepcionCanal']) . "</td>";
                                 }else{echo "<td></td>";}
                                 if (isset($item['AclaracionProductoServicio'])) {
-                                    echo "<td>Producto :" . htmlspecialchars($item['AclaracionProductoServicio']) . "</td>";
+                                    echo "<td>Producto : " . htmlspecialchars($item['AclaracionProductoServicio']) . "</td>";
                                 }else{echo "<td></td>";}
                                 if (isset($item['AclaracionCausaMotivo'])) {
-                                    echo "<td>Causa :" . htmlspecialchars($item['AclaracionCausaMotivo']) . "</td>";
+                                    echo "<td>Causa : " . htmlspecialchars($item['AclaracionCausaMotivo']) . "</td>";
                                 }else{echo "<td></td>";}
                                 echo "</tr><tr>";                                        
                                 if (isset($item['AclaracionEstadoConPend'])) {
-                                    echo "<td>Estatus :" . htmlspecialchars($item['AclaracionEstadoConPend']) . "</td>";
+                                    echo "<td>Estatus : " . htmlspecialchars($item['AclaracionEstadoConPend']) . "</td>";
                                 }else{echo "<td></td>";}
                                 if (isset($item['AclaracionTipoPersona'])) {
-                                    echo "<td>Tipo de persona:" . htmlspecialchars($item['AclaracionTipoPersona']) . "</td>";
+                                    echo "<td>Tipo de persona: " . htmlspecialchars($item['AclaracionTipoPersona']) . "</td>";
                                 }else{echo "<td></td>";}
                                 if (isset($item['AclaracionCodigoPostal'])) {
-                                    echo "<td>C.P. :" . htmlspecialchars($item['AclaracionCodigoPostal']) . "</td>";
+                                    echo "<td>C.P. : " . htmlspecialchars($item['AclaracionCodigoPostal']) . "</td>";
                                 }else{echo "<td></td>";}
                                 echo "</tr><tr>";
                                 if (isset($item['AclaracionEntidadFederativa'])) {
-                                    echo "<td>Estados :" . htmlspecialchars($item['AclaracionEntidadFederativa']) . "</td>";
+                                    echo "<td>Estados : " . htmlspecialchars($item['AclaracionEntidadFederativa']) . "</td>";
                                 }else{echo "<td></td>";}
                                 if (isset($item['AclaracionColonia'])) {
-                                    echo "<td>Col. ID :" . htmlspecialchars($item['AclaracionColonia']) . "</td>";
+                                    echo "<td>Col. ID : " . htmlspecialchars($item['AclaracionColonia']) . "</td>";
                                 }else{echo "<td></td>";}
                                 if (isset($item['AclaracionMunicipioAlcaldia'])) {
-                                    echo "<td>Mun. ID :" . htmlspecialchars($item['AclaracionMunicipioAlcaldia']) . "</td>";
+                                    echo "<td>Mun. ID : " . htmlspecialchars($item['AclaracionMunicipioAlcaldia']) . "</td>";
                                 }else{echo "<td></td>";}
                                 echo "</tr>";
 

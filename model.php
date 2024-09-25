@@ -14,6 +14,7 @@
             
             // Asegurarse de que las consultas usen el conjunto de caracteres correcto
             $this->db->exec("SET NAMES utf8mb4");
+            //$this->db->exec("SET time_zone = 'America/Monterrey'");
         }
 
         public function log_in($username,$password){
@@ -48,44 +49,47 @@
             $stmt = $this->db->query('SELECT * FROM catalogo_medios_rec');
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
-        public function set_queja($queja){
+        public function set_queja($queja,$descripcion_queja){
             try{
-                $stmt = $this->db->prepare("INSERT INTO quejas_data (data_queja) VALUES (:queja)");        
-                $stmt->execute([':queja' => $queja]);
+                $stmt = $this->db->prepare("INSERT INTO quejas_data (data_queja, descripcion_queja) VALUES (:queja, :descripcion_queja)");        
+                $stmt->execute([':queja' => $queja,
+                                   ':descripcion_queja' =>  $descripcion_queja]);
             }catch(PDOException $e) {
                 // En caso de error en la conexión o consulta, mostrar el mensaje de error
-                echo "La conexión falló: " . $e->getMessage();
+                echo "La conexión falló set_queja: " . $e->getMessage();
                 die();
             }
         }
-        public function set_aclaracion($aclaracion){
+        public function set_aclaracion($aclaracion,$descripcion){
             try{
-                $stmt = $this->db->prepare("INSERT INTO aclaracion_data (data_json) VALUES (:aclaracion)");        
-                $stmt->execute([':aclaracion' => $aclaracion]);
+                $stmt = $this->db->prepare("INSERT INTO aclaracion_data (data_json,descripcion_queja) VALUES (:aclaracion,:descripcion_queja)");        
+                $stmt->execute([':aclaracion' => $aclaracion,
+                                ':descripcion_queja'=>$descripcion]);
             }catch(PDOException $e) {
                 // En caso de error en la conexión o consulta, mostrar el mensaje de error
-                echo "La conexión falló: " . $e->getMessage();
+                echo "La conexión falló set_aclaracion: " . $e->getMessage();
                 die();
             }
         }
-        public function set_consultas($consultas){
+        public function set_consultas($consultas,$descripcion){
             try{
-                $stmt = $this->db->prepare("INSERT INTO consultas_data (data_json) VALUES (:consultas)");        
-                $stmt->execute([':consultas' => $consultas]);
+                $stmt = $this->db->prepare("INSERT INTO consultas_data (data_json,descripcion_queja) VALUES (:consultas,:descripcion_queja)");        
+                $stmt->execute([':consultas' => $consultas,
+                                ':descripcion_queja'=>$descripcion]);
             }catch(PDOException $e) {
                 // En caso de error en la conexión o consulta, mostrar el mensaje de error
-                echo "La conexión falló: " . $e->getMessage();
+                echo "La conexión falló set_consultas: " . $e->getMessage();
                 die();
             }
         }
 
-        public function set_reclamacion($reclamacion){
+        public function set_reclamacion($reclamacion,$descripcion){
             try{
-                $stmt = $this->db->prepare("INSERT INTO reclamacion_data (data_json) VALUES (:reclamacion)");        
-                $stmt->execute([':reclamacion' => $reclamacion]);
+                $stmt = $this->db->prepare("INSERT INTO reclamacion_data (data_json,descripcion_queja) VALUES (:reclamacion,:descripcion_queja)");        
+                $stmt->execute([':reclamacion' => $reclamacion,':descripcion_queja'=>$descripcion]);
             }catch(PDOException $e) {
                 // En caso de error en la conexión o consulta, mostrar el mensaje de error
-                echo "La conexión falló: " . $e->getMessage();
+                echo "La conexión falló set_reclamacion: " . $e->getMessage();
                 die();
             }
         }
@@ -103,7 +107,7 @@
 
         public function get_listado_aclaraciones(){
             try {    
-                $stmt = $this->db->query('SELECT * FROM aclaracion_data');
+                $stmt = $this->db->query('SELECT * FROM aclaracion_data order by id desc');
                 return $stmt->fetchAll(PDO::FETCH_ASSOC);
             } catch(PDOException $e) {
                 // En caso de error en la conexión o consulta, mostrar el mensaje de error
@@ -114,7 +118,7 @@
 
         public function get_listado_consultas(){
             try {    
-                $stmt = $this->db->query('SELECT * FROM consultas_data');
+                $stmt = $this->db->query('SELECT * FROM consultas_data order by id desc');
                 return $stmt->fetchAll(PDO::FETCH_ASSOC);
             } catch(PDOException $e) {
                 // En caso de error en la conexión o consulta, mostrar el mensaje de error
@@ -124,7 +128,7 @@
         }
         public function get_listado_reclamaciones(){
             try {    
-                $stmt = $this->db->query('SELECT * FROM reclamacion_data');
+                $stmt = $this->db->query('SELECT * FROM reclamacion_data order by id desc');
                 return $stmt->fetchAll(PDO::FETCH_ASSOC);
             } catch(PDOException $e) {
                 // En caso de error en la conexión o consulta, mostrar el mensaje de error

@@ -34,7 +34,7 @@
                     <td id="<?php echo htmlspecialchars($queja['id_quejas'])?>"><?php                  
                     
                     //empieza
-                    $data = json_decode($queja['data_queja'], true);
+                    $data = json_decode($queja['descripcion_queja'], true);
 
 // Verificamos si hay datos
                         if (!empty($data)) {
@@ -51,31 +51,31 @@
                             // Recorrer cada elemento del array
                             foreach ($data as $item) {
                                 echo "<tr>";
-                                echo "<td>No Mes :" . htmlspecialchars($item['QuejasNoMes']) . "</td>";        
-                                echo "<td>Folio :" . htmlspecialchars($item['QuejasFolio']) . "</td>";
-                                echo "<td>Fecha Recepción :" . htmlspecialchars($item['QuejasFecRecepcion']) . "</td>";
+                                echo "<td>No Mes : " . htmlspecialchars($item['QuejasNoMes']) . "</td>";        
+                                echo "<td>Folio : " . htmlspecialchars($item['QuejasFolio']) . "</td>";
+                                echo "<td>Fecha Recepción : " . htmlspecialchars($item['QuejasFecRecepcion']) . "</td>";
                                 echo "</tr><tr>";
-                                echo "<td>Medio :" . htmlspecialchars($item['QuejasMedio']) . "</td>";
-                                echo "<td>Nivel AT :" . htmlspecialchars($item['QuejasNivelAT']) . "</td>";
-                                echo "<td>Producto :" . htmlspecialchars($item['QuejasProducto']) . "</td>";
+                                echo "<td>Medio : " . htmlspecialchars($item['QuejasMedio']) . "</td>";
+                                echo "<td>Nivel AT : " . htmlspecialchars($item['QuejasNivelAT']) . "</td>";
+                                echo "<td>Producto : " . htmlspecialchars($item['QuejasProducto']) . "</td>";
                                 echo "</tr><tr>";
-                                echo "<td>Causa :" . htmlspecialchars($item['QuejasCausa']) . "</td>";        
-                                echo "<td>Estatus :" . htmlspecialchars($item['QuejasEstatus']) . "</td>";
-                                echo "<td>C.P. :" . htmlspecialchars($item['QuejasCP']) . "</td>";
+                                echo "<td>Causa : " . htmlspecialchars($item['QuejasCausa']) . "</td>";        
+                                echo "<td>Estatus : " . htmlspecialchars($item['QuejasEstatus']) . "</td>";
+                                echo "<td>C.P. : " . htmlspecialchars($item['QuejasCP']) . "</td>";
                                 echo "</tr><tr>";
-                                echo "<td>Col. ID :" . htmlspecialchars($item['QuejasColId']) . "</td>";
-                                echo "<td>Loc. ID :" . htmlspecialchars($item['QuejasLocId']) . "</td>";
-                                echo "<td>Mun. ID :" . htmlspecialchars($item['QuejasMunId']) . "</td>";
+                                echo "<td>Col. ID : " . htmlspecialchars($item['QuejasColId']) . "</td>";
+                                echo "<td>Loc. ID : " . htmlspecialchars($item['QuejasLocId']) . "</td>";
+                                echo "<td>Mun. ID : " . htmlspecialchars($item['QuejasMunId']) . "</td>";
                                 echo "</tr><tr>";
-                                echo "<td>Estados :" . htmlspecialchars($item['QuejasEstados']) . "</td>";
-                                echo "<td>Tipo Persona :" . htmlspecialchars($item['QuejasTipoPersona']) . "</td>";
-                                echo "<td>Fecha Resolución :" . htmlspecialchars($item['QuejasFecResolucion'] ?? 'N/A') . "</td>";
+                                echo "<td>Estados : " . htmlspecialchars($item['QuejasEstados']) . "</td>";
+                                echo "<td>Tipo Persona : " . htmlspecialchars($item['QuejasTipoPersona']) . "</td>";
+                                echo "<td>Fecha Resolución : " . htmlspecialchars($item['QuejasFecResolucion'] ?? 'N/A') . "</td>";
                                 echo "</tr><tr>";
-                                echo "<td>Fecha Notificación :" . htmlspecialchars($item['QuejasFecNotificacion'] ?? 'N/A') . "</td>";
-                                echo "<td>Respuesta :" . htmlspecialchars($item['QuejasRespuesta'] ?? 'N/A') . "</td>";
-                                echo "<td>Número Penal :" . htmlspecialchars($item['QuejasNumPenal'] ?? 'N/A') . "</td>";
+                                echo "<td>Fecha Notificación : " . htmlspecialchars($item['QuejasFecNotificacion'] ?? 'N/A') . "</td>";
+                                echo "<td>Respuesta : " . htmlspecialchars($item['QuejasRespuesta'] ?? 'N/A') . "</td>";
+                                echo "<td>Número Penal : " . htmlspecialchars($item['QuejasNumPenal'] ?? 'N/A') . "</td>";
                                 echo "</tr><tr>";
-                                echo "<td>Penalización :" . htmlspecialchars($item['QuejasPenalizacion']) . "</td>";
+                                echo "<td>Penalización : " . htmlspecialchars($item['QuejasPenalizacion']) . "</td>";
                                 echo "<td></td><td></td>";
                                 echo "</tr>";
                             }

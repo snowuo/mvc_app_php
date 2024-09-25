@@ -1,4 +1,13 @@
-const baseURLlocal = window.location.origin;
+const baseURL = window.location.origin;
+const projectFolder = window.location.pathname.split('/')[1]; // Detecta la carpeta del proyecto
+const isLocalEnv = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
+let baseURLlocal;
+if (isLocalEnv) {
+    baseURLlocal = `${baseURL}/${projectFolder}`;
+} else {
+    baseURLlocal = baseURL; // Producción no necesita el nombre de la carpeta
+}
 document.addEventListener('DOMContentLoaded', function() {
     menu_causas();
     Crear_Folio();
@@ -386,6 +395,7 @@ document.getElementById('form_rec').addEventListener('submit',function(event) {
     let form = event.target;    
     let formData = new FormData(form);   
     let formObject = {};
+    let jsonSelectTextos = {};
     const alfanumerico = [
         "RecDenominacion",
         "RecSector",
@@ -428,7 +438,16 @@ document.getElementById('form_rec').addEventListener('submit',function(event) {
     const qr=['RecSexo'];
     
     formData.forEach((value, key) => {
-        console.log(value,key)
+        let element = document.querySelector(`[name="${key}"]`);
+
+        if (element.tagName === 'SELECT') {
+            // Si es un select, guardamos el texto en otro JSON
+            jsonSelectTextos[key] = element.options[element.selectedIndex].text;
+        } else {
+            // Guardamos los valores normales en el JSON principal
+            jsonSelectTextos[key] = value;
+        }
+
 
         if (qr.includes(key)) {
             if (value === "") {
@@ -457,9 +476,14 @@ document.getElementById('form_rec').addEventListener('submit',function(event) {
 
     ingresar_a_arreglo = []
     ingresar_a_arreglo.push(formObject)
-    jsonString = JSON.stringify(ingresar_a_arreglo,null,2)
-
-    console.log(jsonString)
+    textos_select=[]
+    textos_select.push(jsonSelectTextos)
+    //jsonString = JSON.stringify(ingresar_a_arreglo,null,2)
+    let datosCombinados = {
+        datosFormulario: ingresar_a_arreglo,
+        textosSelect: textos_select
+    };
+    datos_enviar= JSON.stringify(datosCombinados,)
 
     //save_form_reclamacion
 
@@ -468,7 +492,7 @@ document.getElementById('form_rec').addEventListener('submit',function(event) {
         headers:{
             'Content-Type':'application/json'
         },
-        body:jsonString
+        body:datos_enviar
        })
        .then(response => response.text())
        .then(data => {alert(data);window.location.href = `${baseURLlocal}/index.php?action=reune_reclamaciones`;})

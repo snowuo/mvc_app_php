@@ -375,6 +375,7 @@ document.getElementById('form_queja').addEventListener('submit', function(event)
                 let form = event.target;
                 let formData = new FormData(form);
                 let formObject = {};
+                let jsonSelectTextos = {};
             
                 // Definir los nombres de los campos que deben ser numéricos
                 let numericFields = ['QuejasNoMes','QuejasNum', 'QuejasMedio', 'QuejasNivelAT', 'QuejasEstatus', 'QuejasCP', 'QuejasColId', 'QuejasLocId', 'QuejasMunId', 'QuejasEstados', 'QuejasTipoPersona', 'QuejasPenalizacion'];
@@ -386,6 +387,18 @@ document.getElementById('form_queja').addEventListener('submit', function(event)
                 let qrt = ['QuejasSexo']
             
                 formData.forEach((value, key) => {
+                    let element = document.querySelector(`[name="${key}"]`);
+
+                        if (element.tagName === 'SELECT') {
+                            // Si es un select, guardamos el texto en otro JSON
+                            jsonSelectTextos[key] = element.options[element.selectedIndex].text;
+                        } else {
+                            // Guardamos los valores normales en el JSON principal
+                            jsonSelectTextos[key] = value;
+                        }
+
+
+
                     // Verificar si el campo debe ser numérico
                     if (qrt.includes(key)){
                         if (value === "0") {
@@ -423,9 +436,17 @@ document.getElementById('form_queja').addEventListener('submit', function(event)
                 
                 
                 paso2 = []
+                textos_select=[]
                 paso2.push(formObject)
-                jsonString = JSON.stringify(paso2,null,2)
+                textos_select.push(jsonSelectTextos)
+                //jsonString = JSON.stringify(paso2,null,2)
+                let datosCombinados = {
+                    datosFormulario: paso2,
+                    textosSelect: textos_select
+                };
 
+                datos_enviar= JSON.stringify(datosCombinados,)
+                
 
                    //insertar el envío por formulario 
 
@@ -434,7 +455,7 @@ document.getElementById('form_queja').addEventListener('submit', function(event)
                     headers:{
                         'Content-Type':'application/json'
                     },
-                    body:jsonString
+                    body:datos_enviar
                    })
                    .then(response => response.text())
                    .then(data => {alert(data);window.location.href = `${baseURLlocal}/index.php?action=redeco`;})

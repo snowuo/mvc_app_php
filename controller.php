@@ -45,20 +45,147 @@ class controller{
         exit();
     }
 
-    public function set_queja($queja){
-        $this->model->set_queja($queja);
+    public function set_queja($queja) {
+        // Decodificar JSON
+        $queja_array = json_decode($queja, true);
+        
+        // Verificar si hubo un error en la decodificación
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            // Manejar el error de decodificación
+            throw new Exception('Error al decodificar JSON: ' . json_last_error_msg());
+        }
+    
+        // Verificar que las claves existen en el array
+        if (isset($queja_array['datosFormulario']) && isset($queja_array['textosSelect'])) {
+            // Codificar las partes del array sin escapar caracteres Unicode
+            $queja_data_json = json_encode($queja_array['datosFormulario'], JSON_UNESCAPED_UNICODE);
+            $descripcion_data_json = json_encode($queja_array['textosSelect'], JSON_UNESCAPED_UNICODE);
+            
+            // Reemplazar las barras invertidas en las fechas
+            $queja_data_json = str_replace('\/', '/', $queja_data_json);
+            $descripcion_data_json = str_replace('\/', '/', $descripcion_data_json);
+            
+            // Verificar si hubo un error en la codificación
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                // Manejar el error de codificación
+                throw new Exception('Error al codificar JSON: ' . json_last_error_msg());
+            }
+            
+            // Llamar al método del modelo
+            $this->model->set_queja($queja_data_json, $descripcion_data_json);
+        } else {
+            // Manejar el caso en que las claves no existen
+            throw new Exception('Claves faltantes en el array JSON.');
+        }
     }
+    
+    
+    
 
     public function set_consultas($consulta){
-        $this->model->set_consultas($consulta);
+         // Decodificar JSON
+         $queja_array = json_decode($consulta, true);
+        
+         // Verificar si hubo un error en la decodificación
+         if (json_last_error() !== JSON_ERROR_NONE) {
+             // Manejar el error de decodificación
+             throw new Exception('Error al decodificar JSON: ' . json_last_error_msg());
+         }
+     
+         // Verificar que las claves existen en el array
+         if (isset($queja_array['datosFormulario']) && isset($queja_array['textosSelect'])) {
+             // Codificar las partes del array sin escapar caracteres Unicode
+             $queja_data_json = json_encode($queja_array['datosFormulario'], JSON_UNESCAPED_UNICODE);
+             $descripcion_data_json = json_encode($queja_array['textosSelect'], JSON_UNESCAPED_UNICODE);
+             
+             // Reemplazar las barras invertidas en las fechas
+             $queja_data_json = str_replace('\/', '/', $queja_data_json);
+             $descripcion_data_json = str_replace('\/', '/', $descripcion_data_json);
+             
+             // Verificar si hubo un error en la codificación
+             if (json_last_error() !== JSON_ERROR_NONE) {
+                 // Manejar el error de codificación
+                 throw new Exception('Error al codificar JSON(consultas): ' . json_last_error_msg());
+             }
+             
+             // Llamar al método del modelo
+             $this->model->set_consultas($queja_data_json, $descripcion_data_json);
+         } else {
+             // Manejar el caso en que las claves no existen
+             throw new Exception('Claves faltantes en el array JSON.');
+         }        
     }
 
     public function set_aclaracion($aclaracion){
-        $this->model->set_aclaracion($aclaracion);
+                 // Decodificar JSON
+                 $queja_array = json_decode($aclaracion, true);
+        
+                 // Verificar si hubo un error en la decodificación
+                 if (json_last_error() !== JSON_ERROR_NONE) {
+                     // Manejar el error de decodificación
+                     throw new Exception('Error al decodificar JSON: ' . json_last_error_msg());
+                 }
+             
+                 // Verificar que las claves existen en el array
+                 if (isset($queja_array['datosFormulario']) && isset($queja_array['textosSelect'])) {
+                     // Codificar las partes del array sin escapar caracteres Unicode
+                     $queja_data_json = json_encode($queja_array['datosFormulario'], JSON_UNESCAPED_UNICODE);
+                     $descripcion_data_json = json_encode($queja_array['textosSelect'], JSON_UNESCAPED_UNICODE);
+                     
+                     // Reemplazar las barras invertidas en las fechas
+                     $queja_data_json = str_replace('\/', '/', $queja_data_json);
+                     $descripcion_data_json = str_replace('\/', '/', $descripcion_data_json);
+                     
+                     // Verificar si hubo un error en la codificación
+                     if (json_last_error() !== JSON_ERROR_NONE) {
+                         // Manejar el error de codificación
+                         throw new Exception('Error al codificar JSON(aclaracion): ' . json_last_error_msg());
+                     }
+                     
+                     // Llamar al método del modelo
+                     $this->model->set_aclaracion($queja_data_json, $descripcion_data_json);
+                 } else {
+                     // Manejar el caso en que las claves no existen
+                     throw new Exception('Claves faltantes en el array JSON.');
+                 } 
+        
+        //$this->model->set_aclaracion($aclaracion);
     }
 
     public function set_reclamacion($reclamacion){
-        $this->model->set_reclamacion($reclamacion);
+                 // Decodificar JSON
+                 $queja_array = json_decode($reclamacion, true);
+        
+                 // Verificar si hubo un error en la decodificación
+                 if (json_last_error() !== JSON_ERROR_NONE) {
+                     // Manejar el error de decodificación
+                     throw new Exception('Error al decodificar JSON: ' . json_last_error_msg());
+                 }
+             
+                 // Verificar que las claves existen en el array
+                 if (isset($queja_array['datosFormulario']) && isset($queja_array['textosSelect'])) {
+                     // Codificar las partes del array sin escapar caracteres Unicode
+                     $queja_data_json = json_encode($queja_array['datosFormulario'], JSON_UNESCAPED_UNICODE);
+                     $descripcion_data_json = json_encode($queja_array['textosSelect'], JSON_UNESCAPED_UNICODE);
+                     
+                     // Reemplazar las barras invertidas en las fechas
+                     $queja_data_json = str_replace('\/', '/', $queja_data_json);
+                     $descripcion_data_json = str_replace('\/', '/', $descripcion_data_json);
+                     
+                     // Verificar si hubo un error en la codificación
+                     if (json_last_error() !== JSON_ERROR_NONE) {
+                         // Manejar el error de codificación
+                         throw new Exception('Error al codificar JSON(reclamaciones): ' . json_last_error_msg());
+                     }
+                     
+                     // Llamar al método del modelo
+                     $this->model->set_reclamacion($queja_data_json, $descripcion_data_json);
+                 } else {
+                     // Manejar el caso en que las claves no existen
+                     throw new Exception('Claves faltantes en el array JSON.');
+                 } 
+        
+        //$this->model->set_reclamacion($reclamacion);
     }
 
     public function get_listado_quejas(){

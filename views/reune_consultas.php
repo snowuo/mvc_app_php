@@ -34,7 +34,7 @@
                 <tr>                
                     <td id="<?php echo htmlspecialchars($queja['id'])?>"><?php echo htmlspecialchars($queja['id'])?></td>
                     <td id="<?php echo htmlspecialchars($queja['id'])?>"><?php 
-                        $data = json_decode($queja['data_json'], true);
+                        $data = json_decode($queja['descripcion_queja'], true);
                         if (!empty($data)){
                             echo "<div class='container'>";
                             echo "<div class='row'><div class='col'><h4>Contenido:</h4></div></div>";
@@ -48,22 +48,22 @@
                             // Recorrer cada elemento del array
                             foreach ($data as $item) {
                                 echo "<tr>";
-                                echo "<td>Trimestre :" . htmlspecialchars($item['ConsultasTrim']) . "</td>";        
-                                echo "<td>Folio :" . htmlspecialchars($item['ConsultasFolio']) . "</td>";
-                                echo "<td>Fecha Recepción :" . htmlspecialchars($item['ConsultasFecAten']) . "</td>";
+                                echo "<td>Trimestre : " . htmlspecialchars($item['ConsultasTrim']) . "</td>";        
+                                echo "<td>Folio : " . htmlspecialchars($item['ConsultasFolio']) . "</td>";
+                                echo "<td>Fecha Recepción : " . htmlspecialchars($item['ConsultasFecAten']) . "</td>";
                                 echo "</tr><tr>";
-                                echo "<td>Medio :" . htmlspecialchars($item['MediosId']) . "</td>";                                
-                                echo "<td>Producto :" . htmlspecialchars($item['Producto']) . "</td>";
-                                echo "<td>Causa :" . htmlspecialchars($item['CausaId']) . "</td>";
+                                echo "<td>Medio : " . htmlspecialchars($item['MediosId']) . "</td>";                                
+                                echo "<td>Producto : " . htmlspecialchars($item['Producto']) . "</td>";
+                                echo "<td>Causa : " . htmlspecialchars($item['CausaId']) . "</td>";
                                 echo "</tr><tr>";
                                         
-                                echo "<td>Estatus :" . htmlspecialchars($item['ConsultasEstatusCon']) . "</td>";
-                                echo "<td>Estados :" . htmlspecialchars($item['EstadosId']) . "</td>";
-                                echo "<td>C.P. :" . htmlspecialchars($item['ConsultasCP']) . "</td>";
+                                echo "<td>Estatus : " . htmlspecialchars($item['ConsultasEstatusCon']) . "</td>";
+                                echo "<td>Estados : " . htmlspecialchars($item['EstadosId']) . "</td>";
+                                echo "<td>C.P. : " . htmlspecialchars($item['ConsultasCP']) . "</td>";
                                 echo "</tr><tr>";
-                                echo "<td>Col. ID :" . htmlspecialchars($item['ConsultasColId']) . "</td>";
-                                echo "<td>Loc. ID :" . htmlspecialchars($item['ConsultasLocId']) . "</td>";
-                                echo "<td>Mun. ID :" . htmlspecialchars($item['ConsultasMpioId']) . "</td>";
+                                echo "<td>Col. ID : " . htmlspecialchars($item['ConsultasColId']) . "</td>";
+                                echo "<td>Loc. ID : " . htmlspecialchars($item['ConsultasLocId']) . "</td>";
+                                echo "<td>Mun. ID : " . htmlspecialchars($item['ConsultasMpioId']) . "</td>";
                                 
                                 
                                 echo "</tr>";

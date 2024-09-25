@@ -258,12 +258,6 @@ function actualzia_ConsultasCP() {
             $ConsultasColId.appendChild(opt);
             });
 
-
-
-
-
-
-
         $dspConsultasLocId.value = "";
         $dspConsultasMpioId.value = "";
     }    
@@ -393,6 +387,7 @@ document.getElementById('form_aclaraciones').addEventListener('submit',function(
     let formData = new FormData(form);
     //console.log('formData: ',formData);
     let formObject = {};
+    let jsonSelectTextos = {};
     
     let numericFields = ['AclaracionTrimestre','AclaracionNumero','AclaracionEstadoConPend','AclaracionMedioRecepcionCanal','AclaracionEntidadFederativa',
                         'AclaracionCodigoPostal','AclaracionMunicipioAlcaldia','AclaracionLocalidad','AclaracionColonia','AclaracionMontoReclamado','AclaracionTipoPersona',
@@ -401,6 +396,16 @@ document.getElementById('form_aclaraciones').addEventListener('submit',function(
     let qr =['AclaracionFolioCondusef']
 
     formData.forEach((value, key) => {
+        let element = document.querySelector(`[name="${key}"]`);
+
+                        if (element.tagName === 'SELECT') {
+                            // Si es un select, guardamos el texto en otro JSON
+                            jsonSelectTextos[key] = element.options[element.selectedIndex].text;
+                        } else {
+                            // Guardamos los valores normales en el JSON principal
+                            jsonSelectTextos[key] = value;
+                        }
+
         //console.log(value,key)
         if (dateFields.includes(key)) {
             if (value === "") {
@@ -427,10 +432,17 @@ document.getElementById('form_aclaraciones').addEventListener('submit',function(
         }
     })
 
-        ingresar_a_arreglo = []
-        ingresar_a_arreglo.push(formObject)
-        jsonString = JSON.stringify(ingresar_a_arreglo,null,2)
-        console.log(jsonString)
+    ingresar_a_arreglo = []
+    ingresar_a_arreglo.push(formObject)
+    textos_select=[]
+    textos_select.push(jsonSelectTextos)
+    //jsonString = JSON.stringify(ingresar_a_arreglo,null,2)
+    let datosCombinados = {
+        datosFormulario: ingresar_a_arreglo,
+        textosSelect: textos_select
+    };
+        datos_enviar= JSON.stringify(datosCombinados,)
+
         //fetch para la api
     
         fetch(`${baseURLlocal}/index.php?action=save_form_aclaracion`,{
@@ -438,7 +450,7 @@ document.getElementById('form_aclaraciones').addEventListener('submit',function(
             headers:{
                 'Content-Type':'application/json'
             },
-            body:jsonString
+            body:datos_enviar
            })
            .then(response => response.text())
            .then(data => {alert(data);window.location.href = `${baseURLlocal}/index.php?action=reune_aclaraciones`;})

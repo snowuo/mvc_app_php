@@ -296,12 +296,25 @@ document.getElementById('form_consultas').addEventListener('submit',function(eve
     let formData = new FormData(form);
     //console.log('formData: ',formData);
     let formObject = {};
+    let jsonSelectTextos = {};
     let numericFields = ['ConsultasTrim','ConsultasColId','NumConsultas','ConsultasEstatusCon','EstadosId','MediosId','ConsultasCP','ConsultasMpioId','ConsultasLocId','ConsultascatnivelatenId']
     let dateFields = ['ConsultasFecAten','ConsultasFecRecepcion']
     //let qr = ['ConsultasColId']
 
     formData.forEach((value, key) => {
-        console.log(value,key)
+
+        let element = document.querySelector(`[name="${key}"]`);
+
+        if (element.tagName === 'SELECT') {
+            // Si es un select, guardamos el texto en otro JSON
+            jsonSelectTextos[key] = element.options[element.selectedIndex].text;
+        } else {
+            // Guardamos los valores normales en el JSON principal
+            jsonSelectTextos[key] = value;
+        }
+
+        
+        
         if (dateFields.includes(key)) {
             if (value === "") {
                 formObject[key] = null
@@ -320,18 +333,24 @@ document.getElementById('form_consultas').addEventListener('submit',function(eve
             formObject[key] = value;
         }       
     })
-
     ingresar_a_arreglo = []
     ingresar_a_arreglo.push(formObject)
-    jsonString = JSON.stringify(ingresar_a_arreglo,null,2)
-    //fetch para la api
+    textos_select=[]
+    textos_select.push(jsonSelectTextos)
+    //jsonString = JSON.stringify(ingresar_a_arreglo,null,2)
+    let datosCombinados = {
+        datosFormulario: ingresar_a_arreglo,
+        textosSelect: textos_select
+    };
+    datos_enviar= JSON.stringify(datosCombinados,)
+    console.log(datos_enviar)
 
     fetch(`${baseURLlocal}/index.php?action=save_form_consulta`,{
         method: 'POST',
         headers:{
             'Content-Type':'application/json'
         },
-        body:jsonString
+        body:datos_enviar
        })
        .then(response => response.text())
        .then(data => {alert(data);window.location.href = `${baseURLlocal}/index.php?action=reune_consultas`;})

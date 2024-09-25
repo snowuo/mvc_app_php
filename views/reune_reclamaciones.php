@@ -34,7 +34,7 @@
                 <tr>                
                     <td id="<?php echo htmlspecialchars($queja['id'])?>"><?php echo htmlspecialchars($queja['id'])?></td>
                     <td id="<?php echo htmlspecialchars($queja['id'])?>"><?php 
-                                            $data = json_decode($queja['data_json'], true);
+                                            $data = json_decode($queja['descripcion_queja'], true);
                                             if (!empty($data)){
                                                 echo "<div class='container'>";
                                                 echo "<div class='row'><div class='col'><h4>Contenido:</h4></div></div>";
@@ -44,43 +44,43 @@
                                                   
                                                     echo "<tr>";
                                                     if (isset($item['RecTrimestre'])) {
-                                                        echo "<td>Trimestre :" . htmlspecialchars($item['RecTrimestre']) . "</td>";
+                                                        echo "<td>Trimestre : " . htmlspecialchars($item['RecTrimestre']) . "</td>";
                                                     }else{echo "<td></td>";}        
                                                     if (isset($item['RecFolioAtencion'])) {
-                                                        echo "<td>Folio :" . htmlspecialchars($item['RecFolioAtencion']) . "</td>";
+                                                        echo "<td>Folio : " . htmlspecialchars($item['RecFolioAtencion']) . "</td>";
                                                     }else{echo "<td></td>";}
                                                     if (isset($item['RecFechaReclamacion'])) {
-                                                        echo "<td>Fecha Recepción :" . htmlspecialchars($item['RecFechaReclamacion']) . "</td>";
+                                                        echo "<td>Fecha Recepción : " . htmlspecialchars($item['RecFechaReclamacion']) . "</td>";
                                                     }else{echo "<td></td>";}
                                                     echo "</tr><tr>";
                                                     if (isset($item['RecMedioRecepcionCanal'])) {
-                                                        echo "<td>Medio :" . htmlspecialchars($item['RecMedioRecepcionCanal']) . "</td>";
+                                                        echo "<td>Medio : " . htmlspecialchars($item['RecMedioRecepcionCanal']) . "</td>";
                                                     }else{echo "<td></td>";}
                                                     if (isset($item['RecProductoServicio'])) {
-                                                        echo "<td>Producto :" . htmlspecialchars($item['RecProductoServicio']) . "</td>";
+                                                        echo "<td>Producto : " . htmlspecialchars($item['RecProductoServicio']) . "</td>";
                                                     }else{echo "<td></td>";}
                                                     if (isset($item['RecCausaMotivo'])) {
-                                                        echo "<td>Causa :" . htmlspecialchars($item['RecCausaMotivo']) . "</td>";
+                                                        echo "<td>Causa : " . htmlspecialchars($item['RecCausaMotivo']) . "</td>";
                                                     }else{echo "<td></td>";}
                                                     echo "</tr><tr>";                                        
                                                     if (isset($item['RecEstadoConPend'])) {
-                                                        echo "<td>Estatus :" . htmlspecialchars($item['RecEstadoConPend']) . "</td>";
+                                                        echo "<td>Estatus : " . htmlspecialchars($item['RecEstadoConPend']) . "</td>";
                                                     }else{echo "<td></td>";}
                                                     if (isset($item['RecTipoPersona'])) {
-                                                        echo "<td>Tipo de persona:" . htmlspecialchars($item['RecTipoPersona']) . "</td>";
+                                                        echo "<td>Tipo de persona: " . htmlspecialchars($item['RecTipoPersona']) . "</td>";
                                                     }else{echo "<td></td>";}
                                                     if (isset($item['RecCodigoPostal'])) {
-                                                        echo "<td>C.P. :" . htmlspecialchars($item['RecCodigoPostal']) . "</td>";
+                                                        echo "<td>C.P. : " . htmlspecialchars($item['RecCodigoPostal']) . "</td>";
                                                     }else{echo "<td></td>";}
                                                     echo "</tr><tr>";
                                                     if (isset($item['RecEntidadFederativa'])) {
-                                                        echo "<td>Estados :" . htmlspecialchars($item['RecEntidadFederativa']) . "</td>";
+                                                        echo "<td>Estados : " . htmlspecialchars($item['RecEntidadFederativa']) . "</td>";
                                                     }else{echo "<td></td>";}
                                                     if (isset($item['RecColonia'])) {
-                                                        echo "<td>Col. ID :" . htmlspecialchars($item['RecColonia']) . "</td>";
+                                                        echo "<td>Col. ID : " . htmlspecialchars($item['RecColonia']) . "</td>";
                                                     }else{echo "<td></td>";}
                                                     if (isset($item['RecMunicipioAlcaldia'])) {
-                                                        echo "<td>Mun. ID :" . htmlspecialchars($item['RecMunicipioAlcaldia']) . "</td>";
+                                                        echo "<td>Mun. ID : " . htmlspecialchars($item['RecMunicipioAlcaldia']) . "</td>";
                                                     }else{echo "<td></td>";}
                                                     echo "</tr>";
                     
