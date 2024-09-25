@@ -9,7 +9,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - /root/htdocs/mvc_app_php:/var/www/html
+      - /etc/htdocs/mvc_app_php:/var/www/html
     networks:
       - server
 
@@ -24,7 +24,7 @@ services:
       MYSQL_USER: "php_app"                     # Usuario adicional que se creará
       MYSQL_PASSWORD: "php_app"             # Contraseña para el usuario adicional
     volumes:
-      - /root/htdocs/db:/var/lib/mysql
+      - /etc/htdocs/db:/var/lib/mysql
     networks:
       - server
 
