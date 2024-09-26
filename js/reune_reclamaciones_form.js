@@ -11,7 +11,7 @@ if (isLocalEnv) {
 document.addEventListener('DOMContentLoaded', function() {
     menu_causas();
     Crear_Folio();
-    actualiza_fechaRecepcion();
+    actualiza_fechaRecepcion();    
     actualiza_estado();
     actualzia_ConsultasCP();
     Estado_monetario()
@@ -232,10 +232,10 @@ function actualiza_estado() {
         actualiza_fecha_atencion();
     } else {
         //console.log('Estado pendiente');
-        $fecha_atencion.type = 'text';
+        /*$fecha_atencion.type = 'text';
         $fecha_atencion.placeholder = 'No se utiliza.';
         $fecha_atencion.value = "";
-        $fecha_atencion.readOnly = true;
+        $fecha_atencion.readOnly = true;*/
 
         $AclaracionFechaResolucion.type = 'text';
         $AclaracionFechaResolucion.placeholder = 'No se utiliza.';
@@ -519,6 +519,7 @@ function convertDateFormat(dateString) {
 function actualiza_fechaRecepcion() {
     $trimestre = document.getElementById('RecTrimestre').value;
     inputDate = document.getElementById('RecFechaReclamacion')
+    $fecha = document.getElementById('RecFechaAtencion');
     const currentYear = new Date().getFullYear();
 
     switch ($trimestre){ 
@@ -565,7 +566,12 @@ function actualiza_fechaRecepcion() {
 
             default:
                 break;
-        }  
+        } 
+                        $fecha.min = minDate
+                        $fecha.max = maxDate
+                        $fecha.value = minDate
+
+
 }
 
 

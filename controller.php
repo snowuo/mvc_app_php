@@ -295,6 +295,7 @@ class controller{
     public function set_api_curl_consultas($id){
         $endpoint = 'reune/consultas/general';
         $url_consulta = $this->reune_base_url.$endpoint;
+        $origen = "set_api_curl_consultas";
         $token = $_SESSION['token_reune'];         
         $json = $this->model->get_consultas_data($id);
         if(isset($json[0]['data_json'])){
@@ -311,6 +312,7 @@ class controller{
         curl_setopt($curl,CURLOPT_POST,true);
         curl_setopt($curl,CURLOPT_POSTFIELDS,$data_json);
         $response=curl_exec($curl);
+        $this->model->reune_set_log($origen, $response);
         $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         if ($response === false) {
             $error = curl_error($curl);
@@ -331,8 +333,17 @@ class controller{
             error_log("consultas Codigo de respuesta HTTP: $httpCode, Respuesta: $response");
             
         }else{
-            $this->model->update_enviada_consultas($id);
-            header('location: index.php?action=reune&mensaje=Se+registró+correctamente'); 
+
+
+            $respuesta = json_decode($response, true);
+            
+            if (array_key_exists('errores', $respuesta)) {
+                $this->model->update_reune_consultas_respuestadelaapi($id,$response);                                                              
+            } else {
+                $this->model->update_enviada_consultas($id);                             
+                
+            }
+            header('location: index.php?action=reune_consultas');                        
         }
 
     }
@@ -340,6 +351,7 @@ class controller{
     public function set_api_curl_reclamaciones($id){
         $endpoint = 'reune/reclamaciones/general';
         $url_consulta = $this->reune_base_url.$endpoint;
+        $origen ="set_api_curl_reclamaciones";
         $token = $_SESSION['token_reune'];         
         $json = $this->model->get_reclamacion_data($id);
         if(isset($json[0]['data_json'])){
@@ -356,6 +368,7 @@ class controller{
         curl_setopt($curl,CURLOPT_POST,true);
         curl_setopt($curl,CURLOPT_POSTFIELDS,$data_json);
         $response=curl_exec($curl);
+        $this->model->reune_set_log($origen, $response);
         $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         if ($response === false) {
             $error = curl_error($curl);
@@ -369,22 +382,35 @@ class controller{
         curl_close($curl);
         if ($httpCode >= 400) {
             // Registrar la respuesta y los datos enviados en caso de error
-            $this->model->update_reune_reclamacion_respuestadelaapi($id,$response);
+            $this->model->update_reune_reclamacion_respuestadelaapi($id, $response);
+            
             echo "Error http: $httpCode \n";
-            echo "Causa del error:  $response \n";
-            //header('location: index.php?action=reune&mensaje='.$httpCode.'+'.$response);  
+            echo "Causa del error: $response \n";
+        
+            // Escribe el error en el log
             error_log("reclamaciones Codigo de respuesta HTTP: $httpCode, Respuesta: $response");
             
-        }else{
-            $this->model->update_enviada_reclamacion($id);
-            header('location: index.php?action=reune&mensaje=Se+registró+correctamente'); 
+        } else {
+            $respuesta = json_decode($response, true);
+            
+            if (array_key_exists('errores', $respuesta)) {
+                $this->model->update_reune_reclamacion_respuestadelaapi($id, $response);                
+                                
+                
+            } else {
+                $this->model->update_enviada_reclamacion($id);                                
+                
+            }
+            header('location: index.php?action=reune_reclamaciones');
         }
+        
     }
          
     public function set_api_curl_aclaraciones($id){
         $endpoint = 'reune/aclaraciones/general';
         $url_consulta = $this->reune_base_url.$endpoint;
-        $token = $_SESSION['token_reune'];         
+        $token = $_SESSION['token_reune'];  
+        $origen = "set_api_curl_aclaraciones";       
         $json = $this->model->get_aclaracion_data($id);
         if(isset($json[0]['data_json'])){
             $data_json=$json[0]['data_json'];
@@ -400,6 +426,7 @@ class controller{
         curl_setopt($curl,CURLOPT_POST,true);
         curl_setopt($curl,CURLOPT_POSTFIELDS,$data_json);
         $response=curl_exec($curl);
+        $this->model->reune_set_log($origen, $response);
         $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         if ($response === false) {
             $error = curl_error($curl);
@@ -420,8 +447,18 @@ class controller{
             error_log("Aclaraciones Codigo de respuesta HTTP: $httpCode, Respuesta: $response");
             
         }else{
-            $this->model->update_enviada_aclaracion($id);
-            header('location: index.php?action=reune&mensaje=Se+registró+correctamente'); 
+            $respuesta = json_decode($response, true);
+            
+            if (array_key_exists('errores', $respuesta)) {
+                $this->model->update_reune_aclaracion_respuestadelaapi($id,$response);              
+                                
+                
+            } else {
+                $this->model->update_enviada_aclaracion($id);                               
+                
+            }
+            header('location: index.php?action=curl_aclaraciones');
+            
         }
 
     }
