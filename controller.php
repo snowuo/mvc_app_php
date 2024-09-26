@@ -457,7 +457,7 @@ class controller{
                 $this->model->update_enviada_aclaracion($id);                               
                 
             }
-            header('location: index.php?action=curl_aclaraciones');
+            header('location: index.php?action=reune_aclaraciones');
             
         }
 

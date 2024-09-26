@@ -65,12 +65,15 @@
                  $controller->set_api_curl_reclamaciones($id);
             break; 
             case 'curl_aclaraciones':
+                print_r($_GET);
                 if (isset($_GET['id']) && filter_var($_GET['id'], FILTER_VALIDATE_INT)) {
                     $id = $_GET['id'];
                     $controller->set_api_curl_aclaraciones($id);
                 } else {
                     // Manejar error o valor inválido
                     echo "ID inválido.";
+                    
+
                 }
             break;     
             case 'redeco':              
