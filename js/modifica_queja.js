@@ -8,7 +8,7 @@ if (isLocalEnv) {
 } else {
     baseURLlocal = baseURL; // Producción no necesita el nombre de la carpeta
 }
-console.log('id queja : ',id_queja_borrar)
+
 document.addEventListener('DOMContentLoaded', function() {
     actualiza_catalogo_nivat();
     actualiza_catalogo_Medio_rec();
@@ -396,9 +396,6 @@ document.getElementById('form_queja').addEventListener('submit', function(event)
                             // Guardamos los valores normales en el JSON principal
                             jsonSelectTextos[key] = value;
                         }
-
-
-
                     // Verificar si el campo debe ser numérico
                     if (qrt.includes(key)){
                         if (value === "0") {
