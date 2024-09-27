@@ -67,7 +67,16 @@
         <!--<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
       </div>
       <div class="modal-body" id="modalBody">
-        Cuerpo del Modal
+        <!--para la tabla en js-->
+        <div id="message" class="alert alert-warning" style="display: none;"></div>
+          <table class="table table-bordered" id="data-table" style="display: none;">
+            <thead>
+              <tr id="table-header"></tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+          </table>
+        </div>
+        <!--para la tabla en js-->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

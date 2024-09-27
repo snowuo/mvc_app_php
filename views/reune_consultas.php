@@ -76,12 +76,45 @@
                         
                         }                                     
                     ?></td>
-                    <td id="<?php echo htmlspecialchars($queja['id'])?>"><?php echo $queja['respuesta_api']?></td>
+                    <td id="<?php echo htmlspecialchars($queja['id'])?>">                        
+                    <?php if (!empty($queja['respuesta_api'])):?>
+                            <?php $data=json_decode($queja['respuesta_api'],true);
+                            $errors = $data['errores'];
+                            $message = $data['message'];?>
+                             <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Folio</th>
+                                            <th>Error</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($errors as $folio => $mensajes): ?>
+                                            <?php foreach ($mensajes as $mensaje): ?>
+                                                <tr>
+                                                    <td><?php echo htmlspecialchars($folio); ?></td>
+                                                    <td><?php echo htmlspecialchars($mensaje); ?></td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                                <div class="alert alert-warning mt-4">
+                                    <strong>Mensaje:</strong> <?php echo htmlspecialchars($message); ?>
+                                </div>
+                        <?php endif?> 
+                    </td>
                     <td id="<?php echo htmlspecialchars($queja['id'])?>"><?php echo htmlspecialchars($queja['f_creacion'])?></td>
-                    <td id="<?php echo htmlspecialchars($queja['id'])?>"><?php if (!$queja['enviada']) { ?>
-                                                                                            <a href="index.php?action=curl_consultas&id=<?php echo $queja['id']; ?>" class="btn btn-primary">Enviar</a>
-                                                                                <?php }else{echo "Ya fue enviada";} ?>
-                                                                                            </tr>
+                    <td id="<?php echo htmlspecialchars($queja['id'])?>"><?php if (!$queja['enviada']): ?>
+                                                                            <?php if(empty($queja['respuesta_api'])):?>
+                                                                                <a href="index.php?action=curl_consultas&id=<?php echo $queja['id']; ?>" class="btn btn-primary">Enviar</a>
+                                                                             <?php else: ?>
+                                                                                <a href="index.php?action=modifica_consulta&id=<?php echo $queja['id']; ?>" class="btn btn-warning">Modificar</a>
+                                                                            <?php endif; ?>
+                                                                        <?php else: ?>
+                                                                            <p class="btn btn-success">Enviada correctamente</p>  
+                                                                        <?php endif;?>
+                                                                        </td></tr>
             <?php endforeach;  ?>
             </tbody>
         </table>                  
