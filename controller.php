@@ -207,6 +207,26 @@ class controller{
     public function get_queja_data($id){
         return $this->model->get_queja_data($id);
     }
+
+    public function get_queja_descripcion($id){
+        return $this->model->get_queja_descripcion($id);
+    }
+
+    public function get_error_queja($id){
+        return $this->model->get_error_queja($id);
+    }
+
+    public function get_error_consulta($id){
+        return $this->model->get_error_consulta($id);
+    }
+
+    public function get_error_reclamacion($id){
+        return $this->model->get_error_reclamacion($id);
+    }
+
+    public function get_error_aclaracion($id){
+        return $this->model->get_error_aclaracion($id);
+    }
     public function update_enviada($id){
         $this->model->update_enviada($id);
     }
@@ -278,7 +298,15 @@ class controller{
                 }
                 
                 curl_close($curl);
-                if ($httpCode >= 400) {
+                if ($httpCode >= 500) {
+                    // Registrar la respuesta y los datos enviados en caso de error
+                    
+                    echo "Error http: $httpCode \n";
+                    echo "Causa del error:  $response \n";
+                    header('location: index.php?action=redeco&mensaje='.$httpCode.'+'.$response);  
+                    error_log("Buscas este: Codigo de respuesta HTTP: $httpCode, Respuesta: $response");
+                    
+                }else if ($httpCode >= 400) {
                     // Registrar la respuesta y los datos enviados en caso de error
                     $this->model->update_redeco_queja_respuestadelaapi($id,$response);
                     echo "Error http: $httpCode \n";
@@ -326,7 +354,7 @@ class controller{
         curl_close($curl);
         if ($httpCode >= 400) {
             // Registrar la respuesta y los datos enviados en caso de error
-            $this->model->update_reune_consultas_respuestadelaapi($id,$response);
+            //$this->model->update_reune_consultas_respuestadelaapi($id,$response);
             echo "Error http: $httpCode \n";
             echo "Causa del error:  $response \n";
             //header('location: index.php?action=reune&mensaje='.$httpCode.'+'.$response);  
@@ -382,7 +410,7 @@ class controller{
         curl_close($curl);
         if ($httpCode >= 400) {
             // Registrar la respuesta y los datos enviados en caso de error
-            $this->model->update_reune_reclamacion_respuestadelaapi($id, $response);
+           
             
             echo "Error http: $httpCode \n";
             echo "Causa del error: $response \n";
@@ -440,7 +468,7 @@ class controller{
         curl_close($curl);
         if ($httpCode >= 400) {
             // Registrar la respuesta y los datos enviados en caso de error
-            $this->model->update_reune_aclaracion_respuestadelaapi($id,$response);
+            
             echo "Error http: $httpCode \n";
             echo "Causa del error:  $response \n";
             //header('location: index.php?action=reune&mensaje='.$httpCode.'+'.$response);  
@@ -766,6 +794,22 @@ class controller{
     
     public function get_reune_base_url(){
         return $this->reune_base_url;
+    }
+
+    public function delete_queja($id){
+        return $this->model->delete_queja($id);
+    }
+
+    public function delete_aclaracion($id){
+        return $this->model->delete_aclaracion($id);
+    }
+
+    public function delete_consulta($id){
+        return $this->model->delete_consulta($id);
+    }
+
+    public function delete_reclamacion($id){
+        return $this->model->delete_reclamacion($id);
     }
 
 }

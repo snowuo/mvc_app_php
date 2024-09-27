@@ -161,6 +161,99 @@
             }
         }
 
+        public function get_queja_descripcion($id){
+            try {    
+                $stmt = $this->db->prepare('SELECT descripcion_queja FROM quejas_data WHERE id_quejas = :id');
+                $stmt->execute([':id' => $id]);
+                $response = $stmt->fetch(PDO::FETCH_ASSOC);
+                if($response){
+                    return $response;
+                }else{
+                    $respuesta = ['mensaje'=>"No se encontró la información solicitada"];
+                    $paquete = [];
+                    $paquete.push(json_encode($respuesta));
+                    return json_encode($paquete);
+                }
+
+            } catch(PDOException $e) {
+                // En caso de error en la conexión o consulta, mostrar el mensaje de error
+                echo "La conexión falló: " . $e->getMessage();
+                die();
+            }
+        }
+
+        public function get_error_queja($id){
+            try {    
+                $stmt = $this->db->prepare('SELECT respuesta_api FROM quejas_data WHERE id_quejas = :id');
+                $stmt->execute([':id' => $id]);
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);                
+                if ($result) {
+                    return $result['respuesta_api'];
+                } else {
+                    return null; // o lanzar una excepción o un mensaje de error
+                }
+
+            } catch(PDOException $e) {
+                // En caso de error en la conexión o consulta, mostrar el mensaje de error
+                echo "La conexión falló: " . $e->getMessage();
+                die();
+            }
+        }
+
+        public function get_error_consulta($id){
+            try {    
+                $stmt = $this->db->prepare('SELECT respuesta_api FROM consultas_data WHERE id = :id');
+                $stmt->execute([':id' => $id]);
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);                
+                if ($result) {
+                    return $result['respuesta_api'];
+                } else {
+                    return null; // o lanzar una excepción o un mensaje de error
+                }
+
+            } catch(PDOException $e) {
+                // En caso de error en la conexión o consulta, mostrar el mensaje de error
+                echo "La conexión falló: " . $e->getMessage();
+                die();
+            }
+        }
+
+        public function get_error_aclaracion($id){
+            try {    
+                $stmt = $this->db->prepare('SELECT respuesta_api FROM aclaracion_data WHERE id = :id');
+                $stmt->execute([':id' => $id]);
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);                
+                if ($result) {
+                    return $result['respuesta_api'];
+                } else {
+                    return null; // o lanzar una excepción o un mensaje de error
+                }
+
+            } catch(PDOException $e) {
+                // En caso de error en la conexión o consulta, mostrar el mensaje de error
+                echo "La conexión falló: " . $e->getMessage();
+                die();
+            }
+        }
+
+        public function get_error_reclamacion($id){
+            try {    
+                $stmt = $this->db->prepare('SELECT respuesta_api FROM reclamacion_data WHERE id = :id');
+                $stmt->execute([':id' => $id]);
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);                
+                if ($result) {
+                    return $result['respuesta_api'];
+                } else {
+                    return null; // o lanzar una excepción o un mensaje de error
+                }
+
+            } catch(PDOException $e) {
+                // En caso de error en la conexión o consulta, mostrar el mensaje de error
+                echo "La conexión falló: " . $e->getMessage();
+                die();
+            }
+        }
+
         public function get_aclaracion_data($id){
             try {    
                 $stmt = $this->db->prepare('SELECT data_json FROM aclaracion_data WHERE id = :id');
@@ -498,7 +591,70 @@ AND tipo_usuario IN (1, 2);");
             }
         }
 
-        
-    }
+        public function delete_queja($id){
+            //DELETE FROM `quejas_data` WHERE `id_quejas` = 1
+            try {
+                $stmt= $this->db->prepare("DELETE FROM quejas_data WHERE id_quejas = :id");
+                $stmt->execute([':id'=> $id]);
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);        
+               // return $result;/*        
+                if($result){
+                    return true;
+                }else{
+                    return false;
+                }
+            } catch (\Throwable $th) {
+                error_log($th->getMessage());
+            }
+        }
+
+        public function delete_aclaracion($id){
+            try {
+                $stmt= $this->db->prepare("DELETE FROM aclaracion_data WHERE id = :id");
+                $stmt->execute([':id'=> $id]);
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);        
+               // return $result;/*        
+                if($result){
+                    return true;
+                }else{
+                    return false;
+                }
+            } catch (\Throwable $th) {
+                error_log($th->getMessage());
+            }
+        }
+    
+        public function delete_consulta($id){
+            try {
+                $stmt= $this->db->prepare("DELETE FROM consultas_data WHERE id = :id");
+                $stmt->execute([':id'=> $id]);
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);        
+               // return $result;/*        
+                if($result){
+                    return true;
+                }else{
+                    return false;
+                }
+            } catch (\Throwable $th) {
+                error_log($th->getMessage());
+            }
+        }
+    
+        public function delete_reclamacion($id){
+            try {
+                $stmt= $this->db->prepare("DELETE FROM reclamacion_data WHERE id = :id");
+                $stmt->execute([':id'=> $id]);
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);        
+               // return $result;/*        
+                if($result){
+                    return true;
+                }else{
+                    return false;
+                }
+            } catch (\Throwable $th) {
+                error_log($th->getMessage());
+            }
+        }
+        }
     
 ?>

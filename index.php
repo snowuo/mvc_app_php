@@ -30,7 +30,7 @@
                 break;
             
             case 'alta_queja':
-                include 'views/form_quejas.php';            
+                include 'views/redeco2.php';            
                 break;
             case 'save-form':
                 echo 'La queja se guardó correctamente';
@@ -317,22 +317,65 @@
                 
             break;
 
-            case 'modifica_queja_redeco':
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    echo "se envió correctamente por post";
-                    echo $_POST['queja'];
-                }
+            case 'modifica_queja_redeco':                    
+                if (isset($_GET['id'])) {
+                    $data = json_decode($controller->get_error_queja($_GET['id']),true);
+                    $errors = $data['errors'];
+                    $message = $data['message'];
+                    $folio = array_keys($data['errors'])[0];
+                 } else {
+                    # code...
+                }                                                    
+            
                 include 'views/modifica_queja_redeco.php';
             break;
 
+            case 'modifica_consulta':
+                $catalogo = $controller->get_reune_catalogo_producto_consulta();
+                if (isset($_GET['id'])) {
+                    $data = json_decode($controller->get_error_consulta($_GET['id']),true);
+                    $errors = $data['errores'];
+                    $message = $data['message'];
+                    $folio = array_keys($data['errores'])[0];
+                 } else {                    
+                }                                                   
+            
+                include 'views/modifica_consulta.php';  
+                break;
+                
+            case 'modifica_reclamacion':
+                $catalogo = $controller->get_reune_catalogo_producto_reclamacion();
+                if (isset($_GET['id'])) {
+                    $data = json_decode($controller->get_error_reclamacion($_GET['id']),true);
+                    $errors = $data['errores'];
+                    $message = $data['message'];
+                    $folio = array_keys($data['errores'])[0];
+                 } else {                    
+                }                                                    
+            
+                include 'views/modifica_reclamacion.php';  
+                break;
+                
+            case 'modifica_aclaracion':
+                $catalogo = $controller->get_reune_catalogo_producto_aclaracion();
+                if (isset($_GET['id'])) {
+                    $data = json_decode($controller->get_error_aclaracion($_GET['id']),true);
+                    $errors = $data['errores'];
+                    $message = $data['message'];
+                    $folio = array_keys($data['errores'])[0];
+                 } else {                    
+                }                                                    
+            
+                include 'views/modifica_aclaracion.php';  
+                break;
             case 'consulta_queja':
                 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                     $folio =$_GET['folio'];
                     error_log("este es el folio recibido por get: ". $folio);
                     $id = $controller->get_id_redeco_queja_consulta($folio);
                     if ($id >0) {
-                        $info = $controller->get_queja_data($id);
-                        $respuesta = $info[0]['data_queja'];
+                        $info = $controller->get_queja_descripcion($id);
+                        $respuesta = $info['descripcion_queja'];
                         echo $respuesta;
                     } else {
                         $mensaje = array( 'mensaje' => 'El folio buscado no se encuentra en la base de datos');
@@ -346,13 +389,46 @@
                 case 'salir':
                     $controller->logout();
                 break;
-                       
+                case 'eliminar_redeco_queja':
+                    if (isset($_GET['id'])) {
+                       $controller->delete_queja($_GET['id']);
+                       echo "Se eliminó el registro anterior";
+                    } else {
+                        echo "Los datos no se enviaron por el metodo correcto (GET)";
+                    }                    
+                break;       
+                
+                case 'eliminar_aclaracion':
+                    if (isset($_GET['id'])) {
+                       $controller->delete_aclaracion($_GET['id']);
+                       echo "Se eliminó el registro anterior";
+                    } else {
+                        echo "Los datos no se enviaron por el metodo correcto (GET)";
+                    }                    
+                break;    
+                
+                case 'eliminar_consulta':
+                    if (isset($_GET['id'])) {
+                       $controller->delete_consulta($_GET['id']);
+                       echo "Se eliminó el registro anterior";
+                    } else {
+                        echo "Los datos no se enviaron por el metodo correcto (GET)";
+                    }                    
+                break; 
+                
+                case 'eliminar_reclamacion':
+                    if (isset($_GET['id'])) {
+                       $controller->delete_reclamacion($_GET['id']);
+                       echo "Se eliminó el registro anterior";
+                    } else {
+                        echo "Los datos no se enviaron por el metodo correcto (GET)";
+                    }                    
+                break; 
 //Pruebas a partir de aqui --------------- borrar hasta el default
 
                 case 'prueba_redeco':
                     $token = $controller->get_token('2');
-                    echo $token;
-                        
+                    echo $token;                     
                    
                 break;
 
