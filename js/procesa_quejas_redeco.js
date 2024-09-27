@@ -53,7 +53,48 @@ fetch(url, {
 })
 .then(data => {
   console.log('Respuesta:', data[0]); // Maneja la respuesta
-  modalBody.textContent = 'Este ' + JSON.stringify(data, null, 2)
+  //modalBody.textContent = JSON.stringify(data, null, 2)-->se comenta para probar llenando la tabla
+  const tableBody = document.getElementById('table-body');
+  const dataTable = document.getElementById('data-table');
+  const messageDiv = document.getElementById('message');
+
+  tableBody.innerHTML = "";
+  messageDiv.textContent = "";
+  dataTable.style.display = 'none';
+  messageDiv.style.display = 'none';
+
+  // Verificar si es un mensaje o un array de datos
+  if (Array.isArray(data)) {
+    // Si es un array, mostrar la tabla
+    dataTable.style.display = 'table';
+
+    // Obtener las claves dinámicamente
+    const keys = Object.keys(data[0]);
+
+    // Crear filas de la tabla para cada clave
+    keys.forEach(key => {
+      const tr = document.createElement('tr');
+
+      // Columna con la clave
+      const th = document.createElement('th');
+      th.textContent = key;
+      tr.appendChild(th);
+
+      // Columna con el valor
+      const td = document.createElement('td');
+      td.textContent = data[0][key] || 'No disponible';
+      tr.appendChild(td);
+
+      tableBody.appendChild(tr);
+    });
+  } else if (data.mensaje) {
+    // Si es un mensaje de error, mostrar el mensaje
+    messageDiv.style.display = 'block';
+    messageDiv.textContent = data.mensaje;
+  }
+  
+
+//se comenta para probar llenando la tabla
 })
 .catch(error => {
   
