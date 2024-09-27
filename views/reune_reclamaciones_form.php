@@ -18,6 +18,7 @@
                            <td class="text-center w-50">
                            <label for="RecDenominacion">Denominación:</label>
                            <input type="text" name="RecDenominacion" id="RecDenominacion" value = "<?php echo $denominacion?>" readonly>
+                           
                            </td>
                            <td class="text-center w-50">
                                <label for="RecSector">Sector:</label>

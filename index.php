@@ -103,7 +103,7 @@
             break;
             case 'reune_consultas_form':
                 $catalogo = $controller->get_reune_catalogo_producto_consulta();
-                include 'views/reune_consultas_form.php';
+                include 'views/reune_consultas_form2.php';
             break;
             case 'reune_reclamaciones':
                 $reclamaciones = $controller->get_listado_reclamaciones();
@@ -115,7 +115,7 @@
             break;
             case 'reune_reclamaciones_form':
                 $catalogo = $controller->get_reune_catalogo_producto_aclaracion();
-                include 'views/reune_reclamaciones_form.php';
+                include 'views/reune_reclamaciones_form2.php';
             break;
 
             case 'reune_aclaraciones':
